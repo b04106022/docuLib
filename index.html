@@ -54,6 +54,8 @@
                    //find all book tags, loop them and append to table body
                     $(xml).find('document').each(function() {
                         seq++;
+                        console.log($(this).find('Udef_keywords'));
+                        console.log($(this).find('Udef_keywords').text());
                         // Append new data to the tbody element.
                         $('#tableBody').append(
                             '<tr>' +
@@ -68,7 +70,7 @@
                                 '<td>' + $(this).find('geo_level1').text() + '</td> ' +
                                 '<td>' + $(this).find('doctype').text() + '</td> ' +
                                 '<td>' + $(this).find('Udef_keywords').text() + '</td> ' +
-                                '<td>' + $(this).find('Udef_source').text() + '</td> ' +
+                                '<td><a href="' + $(this).find('Udef_source').text() + '">原書目網址</a></td> ' +
                                 '<td>' + $(this).find('Paragraph').text() + '</td> ' +
                             '</tr>');
                     });
