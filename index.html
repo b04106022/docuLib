@@ -67,15 +67,15 @@
                                 '<td>' + seq + '</td> ' +
                                 '<td>' + $(this).find('title').text() + '</td> ' +
                                 '<td>' + $(this).find('author').text() + '</td> ' +
-                                '<td>' + $(this).find('compilation_name').text() + '</td> ' +
+                                '<td>' + $(this).find('compilation_name').innerHTML + '</td> ' +
                                 '<td>' + $(this).find('compilation_vol').text() + '</td> ' +
                                 '<td>' + $(this).find('Udef_compilation_page').text() + '</td> ' +
                                 '<td>' + $(this).find('Udef_publisher').text() + '</td> ' +
                                 '<td>' + $(this).find('time_orig_str').text() + '</td> ' +
                                 '<td>' + $(this).find('geo_level1').text() + '</td> ' +
                                 '<td>' + $(this).find('doctype').text() + '</td> ' +
-                                '<td>' + $(this).find('Udef_keywords').text() + '</td> ' +
-                                '<td><a href="' + $(this).find('Udef_source').text() + '">原書目網址</a></td> ' +
+                                '<td>' + keywords + '</td> ' +
+                                '<td><a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a></td> ' +
                                 '<td>' + $(this).find('Paragraph').text() + '</td> ' +
                             '</tr>');
                     });
