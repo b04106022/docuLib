@@ -55,12 +55,10 @@
                     $(xml).find('document').each(function() {
                         seq++;
                         let keywords = "";
-                        console.log($(this).find('Udef_keywords'));
-                        console.log($(this).find('Udef_keywords').text());
                         $(this).find('Udef_keywords').each(function(){
                             keywords = keywords + $(this).text() + ";";
                         });
-                        console.log(keywords);
+                        console.log($(this).find('compilation_name')[0].outerHTML);
                         // Append new data to the tbody element.
                         $('#tableBody').append(
                             '<tr>' +
