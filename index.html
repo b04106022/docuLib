@@ -22,8 +22,8 @@
           <th>Author</th>
           <th>Time</th>
           <th>Geo</th>
-          <th>Complication</th>
-          <th>Complication_vol</th>
+          <th>Compilation</th>
+          <th>compilation_vol</th>
           <th>Doctyoe</th>
         </tr>
       </thead>
@@ -51,13 +51,13 @@
                         // Append new data to the tbody element.
                         $('#tableBody').append(
                             '<tr>' +
-                                // '<td>' + $(this).find('filename').text() + '</td> ' +
+                                '<td>' + $(this).find('filename').text() + '</td> ' +
                                 '<td>' + $(this).find('title').text() + '</td> ' +
                                 '<td>' + $(this).find('author').text() + '</td> ' +
                                 '<td>' + $(this).find('time_orig_str').text() + '</td> ' +
                                 '<td>' + $(this).find('geo_level1').text() + '</td> ' +
-                                '<td>' + $(this).find('complication_name').text() + '</td> ' +
-                                '<td>' + $(this).find('complication_vol').text() + '</td> ' +
+                                '<td>' + $(this).find('compilation_name').text() + '</td> ' +
+                                '<td>' + $(this).find('compilation_vol').text() + '</td> ' +
                                 '<td>' + $(this).find('doctype').text() + '</td> ' +
                             '</tr>');
                     });
