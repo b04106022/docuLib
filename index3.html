@@ -44,6 +44,7 @@
 <script>
     let seq = 0;
     $(document).ready(function() {
+        $('#table').DataTable();
         //jQuery on button click Call
         $('#btn').click(function () {
             $('#tableBody').empty();       // Clear the table body.
@@ -61,29 +62,25 @@
                         $(this).find('Udef_keywords').each(function(){
                             keywords = keywords + $(this).text() + ";";
                         });
-                        console.log($(this).find('Udef_publisher'));
-                        console.log($(this).find('Udef_publisher')[0].outerHTML);
                         // Append new data to the tbody element.
-                        $('#tableBody').append(
-                            '<tr>' +
-                                '<td>' + seq + '</td> ' +
-                                '<td>' + $(this).find('title').text() + '</td> ' +
-                                '<td>' + $(this).find('author').text() + '</td> ' +
-                                '<td>' + $(this).find('compilation_name').text() + '</td> ' +
-                                '<td>' + $(this).find('compilation_vol').text() + '</td> ' +
-                                '<td>' + $(this).find('Udef_compilation_page').text() + '</td> ' +
-                                '<td>' + $(this).find('Udef_publisher')[0].innerHTML + '</td> ' +
-                                '<td>' + $(this).find('time_orig_str').text() + '</td> ' +
-                                '<td>' + $(this).find('geo_level1').text() + '</td> ' +
-                                '<td>' + $(this).find('doctype').text() + '</td> ' +
-                                '<td>' + keywords + '</td> ' +
-                                '<td><a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a></td> ' +
-                                '<td>' + $(this).find('Paragraph').text() + '</td> ' +
-                            '</tr>');
+                        table.row.add(
+                            seq, 
+                            $(this).find('title').text(), 
+                            $(this).find('author').text(),
+                            $(this).find('compilation_name').text(),
+                            $(this).find('compilation_vol').text(),
+                            $(this).find('Udef_compilation_page').text(),
+                            $(this).find('Udef_publisher')[0].innerHTML,
+                            $(this).find('time_orig_str').text(),
+                            $(this).find('geo_level1').text(),
+                            $(this).find('doctype').text(),
+                            keywords, 
+                            '<a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a>',
+                            $(this).find('Paragraph').text()
+                        ).draw();
                     });
                 }
             });
-            $('#table').DataTable();
         });
     });
     
