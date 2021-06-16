@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<ThdlPrototypeExport>
+<corpus name="0106">
+<metadata_field_settings>
+<author show_spotlight="Y" display_order="999">author</author>
+<geo_level1 show_spotlight="Y" display_order="999">geo_level1</geo_level1>
+<doctype show_spotlight="Y" display_order="999">doctype</doctype>
+<compilation_name show_spotlight="Y" display_order="999">compilation_name</compilation_name>
+</metadata_field_settings>
+<feature_analysis>
+<spotlight category="Udef_keywords" sub_category="-" display_order="1" title="metatags/keywords"/>
+<tag type="contentTagging" name="Udef_keywords" default_category="Udef_keywords" default_sub_category="-"/>
+</feature_analysis>
+</corpus>
+<documents><document filename="1">
+<corpus>0106</corpus>
+<title>20年來「佛經文學對中國小說影響」研究綜述=Summarization Study of Influence of Sutra Literature to China Novel in Twenty Years</title>
+<author>王立; 黃艷燕</author>
+<time_orig_str>2004</time_orig_str>
+<geo_level1>廣東, 中國 [Guangdong, China]</geo_level1>
+<doctype>期刊論文=Journal Article</doctype>
+<compilation_name>韶關學院學報=Journal of Shaoguan University</compilation_name>
+<compilation_vol>n.7</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>12 - 16</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="http://www.sgu.edu.cn/">韶關學院</a>
+</Udef_publisher>
+<Udef_source>http://buddhism.lib.ntu.edu.tw/DLMBS/search/search_detail.jsp?seq=367164&amp;comefrom=subjectbooklist</Udef_source>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教東傳對中國古代小說，尤其是宋前小說的影響，是全方位、多角度的，它涉及小說故事題材、情節結構、思想內容等方面，近二十年對佛教與小說關係的研究日益增多，研究對象也逐漸由整體研究發展到個案研究，有關宣佛小說的價值與定位也相應起了變化。
+The influence that Buddhism to china archaic novel, especially to the novel before the dynasty of song is all-around and from many angles, and deal with the theme of novel, polt and structure, thought and content , etc. Near twenty years the study about the relationship between Buddhism and China novel is manifolded. The object of research is developed from integer to individual. The worth and orientation about the novel that publicize Buddhism is changed.</Paragraph>
+<MetaTags NoIndex="1">
+<Udef_keywords>佛經文學=sutra literature</Udef_keywords>
+<Udef_keywords> 宣佛小說=the novel that publicize Buddhism</Udef_keywords>
+<Udef_keywords> 比較文學=comparative literature</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="2">
+<corpus>0106</corpus>
+<title>中國古小說與佛教因果觀念=Chinese Ancient Novel and Buddhist Creed of &quot;Wherefore And Therefore&quot;</title>
+<author>項裕榮 (著)=Xiang, Yu-rong (au.); 朱蘇權 (著)=Zhu, Su-quan (au.)</author>
+<time_orig_str>2006</time_orig_str>
+<geo_level1>廣州, 中國 [Guangzhou, China]</geo_level1>
+<doctype>期刊論文=Journal Article</doctype>
+<compilation_name>廣東技術師範學院學報=Journal of Guangdong Polytechnic Normal University</compilation_name>
+<compilation_vol>n.3</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>59 - 63</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">廣東技術師範學院</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+<Paragraph>中國古小說中以志怪一類對後代影響最巨。此種小說受到佛教因果觀念的影響非常明顯。一方面佛教因果使得古小說的結構上呈現出“因果分明”的完整性；另一方面，報恩、冥報、殺生、輪迴等四種內容的作品也與佛教因果觀關係密切。這些小說的成熟與發展水準，在內容與形式都為此後中國小說的發展提供了借鑑。
+Of Chinese Ancient novels it is the ZhiGuai Novels that exerts the most substantial influence upon subsequent novels. The Buddhist influence of its doctrine of &quot;wherefore and therefore&quot; upon this kind of novel shows itself so evidently. On one hand there is some structural integrity of &quot;wherefore and therefore&quot; in this kind of novel; on the other hand, there is some affinity between the creed of &quot;wherefore and therefore&quot; and such outputs as &quot;rewarding&quot;, &quot;Revenge after Death&quot;, &quot;Killing living beings&quot;, &quot;Samsara&quot;. The ripening and development of these kinds of novels offer examples for Chinese novels of later days both in subject and form.</Paragraph>
+<MetaTags NoIndex="1">
+<Udef_keywords>佛教=Buddhism</Udef_keywords>
+<Udef_keywords> 古小說=Ancient Novels</Udef_keywords>
+<Udef_keywords> 因果=wherefore and therefore</Udef_keywords>
+<Udef_keywords> 志怪小說=ZhiGuai Novels</Udef_keywords>
+<Udef_keywords> 魏晉小說=Novels in The WeiJin dynasty</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="3">
+<corpus>0106</corpus>
+<title>六朝佛教徒對志怪小說興起的作用</title>
+<author>朱恒夫</author>
+<time_orig_str>2001</time_orig_str>
+<geo_level1>廣州, 中國 [Guangzhou, China]</geo_level1>
+<doctype>期刊論文=Journal Article</doctype>
+<compilation_name>明清小說研究=The Journal of Ming-Qing Fiction Studies</compilation_name>
+<compilation_vol>n.1</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>108 - 124</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">江蘇省社會科學院文學研究所</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+<Paragraph>六朝志怪能形成蔚為大觀之態，與佛教有著密切的關系，早為學界共識。魯迅在＜中國小說史略＞第五篇＜六朝之鬼神志怪書＞對此關系作了首次闡述</Paragraph>
+<MetaTags NoIndex="1">
+<Udef_keywords>佛教</Udef_keywords>
+<Udef_keywords> 佛</Udef_keywords>
+<Udef_keywords> 小說</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="4">
+<corpus>0106</corpus>
+<title>佛教文化與南朝志怪小說</title>
+<author>張躍生</author>
+<time_orig_str>1998</time_orig_str>
+<geo_level1>武漢, 中國 [Wuhan, China]</geo_level1>
+<doctype>期刊論文=Journal Article</doctype>
+<compilation_name>華中理工大學學報（社會科學版）=Journal of Huazhong (Central China) University of Science and Technology (Edition of Social Science)</compilation_name>
+<compilation_vol>n.1</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>-</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">華中理工大學</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+<Paragraph>本文据《搜神后记》、《幽明录》、《宣验记》、《冥祥记》，析理了佛教文化与南朝志怪小说之交涉，及其对后世小说的影响。</Paragraph>
+<MetaTags NoIndex="1">
+<Udef_keywords>佛教</Udef_keywords>
+<Udef_keywords> 佛</Udef_keywords>
+<Udef_keywords> 小說</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="5">
+<corpus>0106</corpus>
+<title>佛教故事 -- 中國五朝志怪小說的一個敘事源頭</title>
+<author>張進; 普慧</author>
+<time_orig_str>2001</time_orig_str>
+<geo_level1>北京, 中國 [Beijing, China]</geo_level1>
+<doctype>期刊論文=Journal Article</doctype>
+<compilation_name>中國文化研究=Chinese Culture Research</compilation_name>
+<compilation_vol>n.1</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>110 - 114</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">北京語言文化大學</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+<MetaTags NoIndex="1">
+<Udef_keywords>佛教故事</Udef_keywords>
+<Udef_keywords> 佛教</Udef_keywords>
+<Udef_keywords> 佛</Udef_keywords>
+<Udef_keywords> 小說</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="6">
+<corpus>0106</corpus>
+<title>中古漢譯佛經敍事文學研究</title>
+<author>吳海勇</author>
+<time_orig_str>2004.07</time_orig_str>
+<geo_level1>北京, 中國 [Beijing, China]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>661</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">學苑出版社</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+<Paragraph>本文緒論針對當代佛教文學研究的不足所在，回顧近現代學術史，提出加強佛經翻譯文學整理的主張，論文主題便是對這種見解的時間。全書共分六章︰第一章從文學角度對中古漢譯佛經進行分類概說。第二章對佛經文學題材作專題研究。第三章主要揭示佛經文學的民間成份及其宗教特性。第四章敘事分析轉向佛經文學的形式研究。第五章探討佛經翻譯言論與中國古代文學理論的關系。第六章影響研究是中古譯經文學研究的自然歸結。</Paragraph>
+<MetaTags NoIndex="1">
+<Udef_keywords>譯經=The Translation of Sutra</Udef_keywords>
+<Udef_keywords> 佛教文學=Buddhist Literature</Udef_keywords>
+<Udef_keywords> 佛教</Udef_keywords>
+<Udef_keywords> 佛</Udef_keywords>
+</MetaTags>
+</doc_content>
+</document>
+<document filename="7">
+<corpus>0106</corpus>
+<title>中國小說史略</title>
+<author>魯迅</author>
+<time_orig_str>1998</time_orig_str>
+<geo_level1>上海, 中國 [Shanghai, China]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>260</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">上海古籍出版社</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+</doc_content>
+</document>
+<document filename="8">
+<corpus>0106</corpus>
+<title>中國哲學史</title>
+<author>馮友蘭</author>
+<time_orig_str>2008</time_orig_str>
+<geo_level1>臺北, 臺灣 [Taipei, Taiwan]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>1266</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">臺灣商務印書館</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+</doc_content>
+</document>
+<document filename="9">
+<corpus>0106</corpus>
+<title>六朝志怪小說研究</title>
+<author>周次吉</author>
+<time_orig_str>1986</time_orig_str>
+<geo_level1>臺北, 臺灣 [Taipei, Taiwan]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>162</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">文津出版社</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+</doc_content>
+</document>
+<document filename="10">
+<corpus>0106</corpus>
+<title>古小說鉤沉</title>
+<author>魯迅</author>
+<time_orig_str>1997</time_orig_str>
+<geo_level1>濟南, 中國 [Chinan, China]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>348</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">齊魯書社</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+</doc_content>
+</document>
+<document filename="11">
+<corpus>0106</corpus>
+<title>少室山房筆叢</title>
+<author>胡應麟</author>
+<time_orig_str>2001</time_orig_str>
+<geo_level1>上海, 中國 [Shanghai, China]</geo_level1>
+<doctype>書籍=Book</doctype>
+<compilation_name>-</compilation_name>
+<compilation_vol>-</compilation_vol>
+<xml_metadata>
+<Udef_compilation_page>498</Udef_compilation_page>
+<Udef_publisher>
+<a target="_blank" href="-">上海書店出版社</a>
+</Udef_publisher>
+<Udef_source>-</Udef_source>
+</xml_metadata>
+<doc_content>
+</doc_content>
+</document>
+</documents>
+</ThdlPrototypeExport>

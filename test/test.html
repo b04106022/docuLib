@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Read XML Data</title>
-    <!--Include Bootstrap CSS & jQuery-->
+    <title>Read XML Data Using jQuery Ajax and Load it in HTML table</title>
+    <!--Include Bootstrap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <!--Include jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -17,14 +21,11 @@
     <table class="table table-condensed table-hovered table-striped">
       <thead>
         <tr>
-          <th>Seq</th>
-          <th>Title</th>
           <th>Author</th>
-          <th>Time</th>
-          <th>Geo</th>
-          <th>Complication</th>
-          <th>Complication_vol</th>
-          <th>Doctyoe</th>
+          <th>Title</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody id="tableBody">
@@ -37,28 +38,33 @@
     $(document).ready(function() {
         //jQuery on button click Call
         $('#btn').click(function () {
+        
             $('#tableBody').empty();       // Clear the table body.
-            
             //ajax call to load XML and parse it
             $.ajax({
                 type: 'GET',
-                url: 'data.xml',           // The file path.
+                url: 'book.xml',           // The file path.
+                // url: 'https://qawithexperts.com/book.xml',           // The file path.
+                // url: 'https://res.cloudinary.com/dmsxwwfb5/raw/upload/v1591716537/book.xml',           // The file path.
                 dataType: 'xml',    
                 success: function(xml) {
+                    // console.log('DATA GET')
                    //find all book tags, loop them and append to table body
-                    $(xml).find('document').each(function() {
+                    $(xml).find('book').each(function() {
                         
                         // Append new data to the tbody element.
                         $('#tableBody').append(
                             '<tr>' +
-                                // '<td>' + $(this).find('filename').text() + '</td> ' +
-                                '<td>' + $(this).find('title').text() + '</td> ' +
-                                '<td>' + $(this).find('author').text() + '</td> ' +
-                                '<td>' + $(this).find('time_orig_str').text() + '</td> ' +
-                                '<td>' + $(this).find('geo_level1').text() + '</td> ' +
-                                '<td>' + $(this).find('complication_name').text() + '</td> ' +
-                                '<td>' + $(this).find('complication_vol').text() + '</td> ' +
-                                '<td>' + $(this).find('doctype').text() + '</td> ' +
+                                '<td>' +
+                                    $(this).find('author').text() + '</td> ' +
+                                '<td>' +
+                                    $(this).find('title').text() + '</td> ' +
+                                '<td>' +
+                                    $(this).find('genre').text() + '</td> ' +
+                                    '<td>' +
+                                    $(this).find('price').text() + '</td> ' +
+                                    '<td>' +
+                                    $(this).find('description').text() + '</td> ' +
                             '</tr>');
                     });
                 }
