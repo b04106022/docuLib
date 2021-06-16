@@ -17,7 +17,7 @@
     </p>
 
     <input type="button" value="Read XML" id="btn" />
-    <table class="table table-condensed table-hovered table-striped">
+    <table id="table" class="table table-condensed table-hovered table-striped">
       <thead>
         <tr>
           <th>Seq</th>
@@ -84,6 +84,8 @@
                 }
             });
         });
+        $('#table').DataTable();
     });
+    
 </script>
 </html>
