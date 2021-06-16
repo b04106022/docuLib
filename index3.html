@@ -63,7 +63,7 @@
                             keywords = keywords + $(this).text() + ";";
                         });
                         // Append new data to the tbody element.
-                        table.row.add(
+                        table.row.add([
                             seq, 
                             $(this).find('title').text(), 
                             $(this).find('author').text(),
@@ -76,7 +76,7 @@
                             $(this).find('doctype').text(),
                             keywords, 
                             '<a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a>',
-                            $(this).find('Paragraph').text()
+                            $(this).find('Paragraph').text()]
                         ).draw();
                     });
                 }
