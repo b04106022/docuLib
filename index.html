@@ -9,8 +9,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <style>
-        table{
-            margin-top: 3%;
+        input {
+            margin-bottom: 3%;
+        }
+        th {
+            position: sticky;
+            top: 0;
         }
     </style>
 </head>
@@ -25,19 +29,19 @@
     <table id="table" class="table table-condensed table-hovered table-striped">
       <thead>
         <tr>
-          <th width="4%">Seq</th>
-          <th width="9%">Title</th>
-          <th width="5%">Author</th>
-          <th width="8%">Compilation</th>
-          <th width="8%">Compilation_vol</th>
-          <th width="8%">Compilation_page</th>
-          <th width="7%">Publisher</th>
-          <th width="5%">Time</th>
-          <th width="7%">Geo</th>
-          <th width="7%">Doctyoe</th>
-          <th width="7%">Keywords</th>
-          <th width="5%">Source</th>
-          <th width="20%">Summary</th>
+          <th>Seq</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Compilation</th>
+          <th>Compilation_vol</th>
+          <th>Compilation_page</th>
+          <th>Publisher</th>
+          <th>Time</th>
+          <th>Geo</th>
+          <th>Doctyoe</th>
+          <th>Keywords</th>
+          <th>Source</th>
+          <th>Summary</th>
         </tr>
       </thead>
       <tbody id="tableBody">
@@ -48,7 +52,9 @@
 <script>
     let seq = 0;
     $(document).ready(function() {
-        let table = $('#table').DataTable();
+        let table = $('#table').DataTable({
+            "scrollX": true
+        });
 
         //jQuery on button click Call
         $('#btn').click(function () {
