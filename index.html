@@ -58,7 +58,7 @@
                         console.log($(this).find('Udef_keywords'));
                         console.log($(this).find('Udef_keywords').text());
                         $(this).find('Udef_keywords').each(function(){
-                            keywords = keywords + $(this).text();
+                            keywords = keywords + $(this).text() + ";";
                         });
                         console.log(keywords);
                         // Append new data to the tbody element.
