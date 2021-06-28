@@ -90,11 +90,8 @@
                         
                         const tbody = document.getElementById('tableBody');
                         tbody.addEventListener('dblclick', function(e){
-                            console.log(e.target.nodeName);
                             if(e.target.nodeName=='TD'){
-                                console.log(e.target);
                                 e.target.setAttribute('contenteditable', true);
-                                console.log(e.target);
                             }
                         })
                     });
