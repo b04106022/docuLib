@@ -89,9 +89,15 @@
                         ]).draw();
                         
                         const tbody = document.getElementById('tableBody');
-                        tbody.addEventListener('dblclick', function(e){
-                            if(e.target.nodeName=='TD'){
+                        let previousCell = null;
+                        tbody.addEventListener('click', function(e){
+                            if(!previousCell){
                                 e.target.setAttribute('contenteditable', true);
+                                previousCell = e.target;
+                            }else if(previousCell != e.target){
+                                previousCell.setAttribute('contenteditable', false);
+                                e.target.setAttribute('contenteditable', true);
+                                previousCell = e.target;
                             }
                         })
                     });
