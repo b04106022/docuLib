@@ -87,6 +87,18 @@
                             '<a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a>',
                             $(this).find('Paragraph').text()
                         ]).draw();
+                        
+                        const tbody = document.getElementById('tableBody');
+                        console.log(tbody);
+
+                        tbody.addEventListener('dblclick', function(e){
+                            console.log(e.target.nodeName);
+                            if(e.target.nodeName=='td'){
+                                console.log(e.target);
+                                e.target.setAttribute('contenteditable', true);
+                                console.log(e.target);
+                            }
+                        })
                     });
                 }
             });
