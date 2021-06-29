@@ -9,6 +9,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    <script src="js/dataTables.cellEdit.js"></script>
     <style>
         input {
             margin-bottom: 3%;
@@ -58,6 +59,7 @@
     let seq = 0;
     $(document).ready(function() {
         let table = $('#table').DataTable({
+            select: true,
             dom: '<lfrtip><"btnDiv"B>',
             buttons: [{
                 extend: 'csv',
@@ -101,45 +103,18 @@
                             $(this).find('Paragraph').text()
                         ]).draw();
                         
-                        const tbody = document.getElementById('tableBody');
-                        let previousCell = null;
-                        tbody.addEventListener('click', function(e){
-                            if(!previousCell){
-                                e.target.setAttribute('contenteditable', true);
-                                previousCell = e.target;
-                            }else if(previousCell != e.target){
-                                previousCell.setAttribute('contenteditable', false);
-                                e.target.setAttribute('contenteditable', true);
-                                previousCell = e.target;
-                            }
-                        })
+                        table.MakeCellsEditable({
+                            "onUpdate": myCallbackFunction
+                        });
+                        function myCallbackFunction(updatedCell, updatedRow, oldValue) {
+                            console.log("The new value for the cell is: " + updatedCell.data());
+                            console.log("The old value for that cell was: " + oldValue);
+                            console.log("The values for each cell in that row are: " + updatedRow.data());
+                        }
                     });
                 }
             });
         });
-    });
-    function exportTableToCSV(filename) {
-        var csv = [];
-        var rows = document.querySelectorAll("table tr");
-        for (var i = 0; i < rows.length; i++) {
-            var row = [], cols = rows[i].querySelectorAll("td, th");
-            for (var j = 0; j < cols.length; j++) 
-                row.push(cols[j].innerText);
-                csv.push(row.join(","));        
-            }
-        downloadCSV(csv.join("\n"), filename);
-    }
-    function downloadCSV(csv, filename) {
-        var csvFile;
-        var downloadLink;
-        csvFile = new Blob([csv], {type: "text/csv"});
-        downloadLink = document.createElement("a");
-        downloadLink.download = filename;
-        downloadLink.href = window.URL.createObjectURL(csvFile);
-        downloadLink.style.display = "none";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-    }
-    
+    });  
 </script>
 </html>
