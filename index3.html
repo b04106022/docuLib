@@ -47,10 +47,8 @@
           <th>出版日期</th>
           <th>出版地</th>
           <th>資料類型</th>
-          <th>語言</th>
           <th>關鍵字</th>
           <th>原書目網址</th>
-          <th>全文網址</th>
           <th>摘要</th>
         </tr>
       </thead>
@@ -80,16 +78,12 @@
             //ajax call to load XML and parse it
             $.ajax({
                 type: 'GET',
-                url: 'data2.xml',
+                url: 'data.xml',
                 dataType: 'xml',
                 success: function(xml) {
                    //find all document tags, loop them and append to table body
                     $(xml).find('document').each(function() {
                         seq++;
-                        let authors = "";
-                        $(this).find('Udef_author').each(function(){
-                            authors = authors + $(this).text() + ";";
-                        });
                         let keywords = "";
                         $(this).find('Udef_keywords').each(function(){
                             keywords = keywords + $(this).text() + ";";
@@ -98,18 +92,16 @@
                         table.row.add([
                             seq, 
                             $(this).find('title').text(), 
-                            authors,
+                            $(this).find('author').text(),
                             $(this).find('compilation_name').text(),
                             $(this).find('compilation_vol').text(),
                             $(this).find('Udef_compilation_page').text(),
                             $(this).find('Udef_publisher')[0].innerHTML,
                             $(this).find('time_orig_str').text(),
-                            $(this).find('Udef_publisher_location').text(),
+                            $(this).find('geo_level1').text(),
                             $(this).find('doctype').text(),
-                            $(this).find('docclass').text(),
                             keywords, 
-                            $(this).find('Udef_refSrc')[0].innerHTML,
-                            $(this).find('Udef_fulltextSrc')[0].innerHTML,
+                            '<a href="' + $(this).find('Udef_source').text() + '" target="_blank">原書目網址</a>',
                             $(this).find('Paragraph').text()
                         ]).draw();
                         
