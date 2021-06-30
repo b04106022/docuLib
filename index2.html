@@ -112,8 +112,8 @@
                             keywords, 
                             $(this).find('Udef_refSrc')[0].innerHTML,
                             $(this).find('Udef_fulltextSrc')[0].innerHTML,
-                            $(this).find('Udef_remark'),
-                            $(this).find('Udef_tablecontent'),
+                            $(this).find('Udef_remark').text(),
+                            $(this).find('Udef_tablecontent').text(),
                             $(this).find('Paragraph').text()
                         ]).draw();
                         
