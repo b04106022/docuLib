@@ -45,7 +45,8 @@ function renderData(){
             <td data-editable="true">${item.doc_content.MetaTags.Udef_author}</td>
             <td data-editable="true">${item.year_for_grouping}</td>
             <td data-editable="true">${item.compilation_name}</td>
-            <td data-editable="true">${item.doc_content.MetaTags.Udef_keywords}</td>
+            <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
+            <td><input type="number" min="1" max="5" step="1" value="3"></td>
             <td data-editable="true"></td>
             <td data-editable="true"></td>
             <td><button value="hiddenRow_${item.filename}">+</button></td>
