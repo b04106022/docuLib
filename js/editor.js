@@ -57,8 +57,8 @@ function renderData(){
             <td><button value="hiddenRow_${item.filename}">+</button></td>
             </tr>
             <tr class="hide" id="hiddenRow_${item.filename}">
-            <td colspan="9">
-                摘要：<br><textarea cols="145" rows="5">${item.doc_content.Paragraph}</textarea>
+            <td colspan="15">
+                摘要：<br><textarea cols="130" rows="5">${item.doc_content.Paragraph}</textarea>
             </td>
             </tr>`;
     })
