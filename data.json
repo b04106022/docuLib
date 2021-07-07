@@ -19,6 +19,7 @@
             "a": "http://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=120032", 
             "text": "原書目網址"
             },
+        "Udef_author" : "林保堯",
         "Udef_author1": {
             "a": "http://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=40644",
             "text": "林保堯"
@@ -35,9 +36,8 @@
         "Udef_seriesname": "",
         "Udef_seriessubsidiary": "",
         "Udef_seriesno": "",
-        "Udef_compilation_vol": "n8",
+        "Udef_compilation_vol_page": "n8, 295 - 318",
         "Udef_publish_date": "200403",
-        "Udef_compilation_page": "295 - 318",
         "Udef_publisher": {
             "a": "http://www.chibs.edu.tw/ch_html/index_ch00_01.html",
             "text": "中華佛學研究所=The Chung-Hwa Institute of Buddhist Studies"
@@ -98,6 +98,7 @@
             "a": "http://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=120033",
             "text": "原書目網址"
         },
+        "Udef_author" : "劉鳳君",
         "Udef_author1": {
             "a": "http://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=59548", 
             "text": "劉鳳君"
@@ -114,9 +115,8 @@
         "Udef_seriesname": "",
         "Udef_seriessubsidiary": "",
         "Udef_seriesno": "",
-        "Udef_compilation_vol": "n8",
+        "Udef_compilation_vol_page": "n8, 319 - 326",
         "Udef_publish_date": "200403",
-        "Udef_compilation_page": "319 - 326",
         "Udef_publisher": {
             "a": "http://www.chibs.edu.tw/ch_html/index_ch00_01.html",
             "text": "中華佛學研究所=The Chung-Hwa Institute of Buddhist Studies"
@@ -179,6 +179,7 @@
         "a": "http://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=120035",
         "text": "原書目網址"
       },
+      "Udef_author": "汪娟; 梁麗玲",
       "Udef_author1": {
         "a": "http://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=38210",
         "text": "汪娟"
@@ -198,9 +199,8 @@
       "Udef_seriesname": "",
       "Udef_seriessubsidiary": "",
       "Udef_seriesno": "",
-      "Udef_compilation_vol": "n25",
+      "Udef_compilation_vol_page": "n25, 211 - 226",
       "Udef_publish_date": "20040901",
-      "Udef_compilation_page": "211 - 226",
       "Udef_publisher": {
         "a": "http://www.nhu.edu.tw/~NHDH/",
         "text": "南華大學敦煌學研究中心"

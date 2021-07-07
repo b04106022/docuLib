@@ -40,43 +40,27 @@ function renderData(){
     let content="";
     data.forEach(function(item){
         // 核心欄位 & 使用者加值欄位
-        content += `
-            <tr>
-                <td><input type="checkbox" name='c' size="10"></td>
-                <td data-editable="true">${item.title}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_author}</td>
-                <td data-editable="true">${item.year_for_grouping}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td><input type="number" min="1" max="5" step="1" value="3"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td><button class="btn btn-light" value="hiddenRow_${item.filename}">+</button></td>
+        content += `<tr>
+            <td><input type="checkbox" name='c' size="10"></td>
+            <td data-editable="true">${item.title}</td>
+            <td data-editable="true">${item.doc_content.MetaTags.Udef_author}</td>
+            <td data-editable="true">${item.year_for_grouping}</td>
+            <td data-editable="true">${item.compilation_name}</td>
+            <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
+            <td data-editable="true"></td>
+            <td data-editable="true"></td>
+            <td data-editable="true"></td>
+            <td data-editable="true"></td>
+            <td data-editable="true"></td>
+            <td><input type="number" min="1" max="5" step="1" value="3"></td>
+            <td data-editable="true"></td>
+            <td data-editable="true"></td>
+            <td><button class="btn btn-light" value="hiddenRow_${item.filename}">+</button></td>
             </tr>
             <tr class="hide" id="hiddenRow_${item.filename}">
-                <td></td>
-                <td colspan="14">`;
+            <td></td>
+            <td colspan="14">`;
         // 共同欄位
-        content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol_page}'></p>`;
-        content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
-        content += `<p>出版日期：<input type="text" value='${item.time_orig_str}'></p>`;
-        content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
-        content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
-        content += `<p>資料類型：<input type="text" value='${item.doc_content.MetaTags.Udef_doctype}'</p>`;
-        content += `<p>語言：<input type="text" value='${item.doc_content.MetaTags.Udef_docclass}'</p>`;
-        if(item.doc_content.Paragraph!=""){
-            content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
-        }
-        else{
-            content += `<p>摘要：<br><textarea rows="4">無摘要</textarea></p>`;
-        }
-        // 共同欄位－網址
-        content += `<details><summary class="mb-3">網址</summary>`;
         if(item.xml_metadata.Udef_author1!=""){
             content += `<p>作者1網址：<input type="text" value='${item.xml_metadata.Udef_author1.a}'></p>`;
         }
@@ -96,13 +80,16 @@ function renderData(){
             content += `<p>作者6網址：<input type="text" value='${item.xml_metadata.Udef_author6.a}'></p>`;
         }
         content += `<p>出處題名網址：<input type="text" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
+        content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol_page}'></p>`;
+        content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
         content += `<p>出版者網址：<input type="text" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
-        if(item.xml_metadata.Udef_fulltextSrc.a!=""){
-            content += `<p>全文網址：<input type="text" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p></details>`;
-        }
-        else{
-            content += `<p>全文網址：<input type="text" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p></details>`;
-        }
+        content += `<p>出版日期：<input type="text" value='${item.time_orig_str}'></p>`;
+        content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
+        content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
+        content += `<p>資料類型：<input type="text" value='${item.doc_content.MetaTags.Udef_doctype}'</p>`;
+        content += `<p>語言：<input type="text" value='${item.doc_content.MetaTags.Udef_docclass}'</p>`;
+        content += `<p>全文網址：<input type="text" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
+        content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
         // 輔助欄位
 
         content += `</td></tr>`;

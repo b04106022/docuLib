@@ -1,0 +1,28 @@
+.hide {
+    display: none;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+} 
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+table p{
+    display: flex;
+}
+table p input[type='text'] {
+    flex: 1;
+    border: none;
+    background-color: #eee;
+}
+table p textarea {
+    flex: 1;
+    border: 1px #dddddd solid;
+    background-color: #eee;
+}
