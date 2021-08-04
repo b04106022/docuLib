@@ -76,7 +76,8 @@
         "Udef_doctype": "期刊論文=Journal Article",
         "Udef_docclass": "中文=Chinese"
       }
-    }
+    },
+    "folder": ["阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -155,7 +156,8 @@
             "Udef_doctype": "期刊論文=Journal Article",
             "Udef_docclass": "中文=Chinese"
         }
-    }
+    },
+    "folder": ["阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -242,7 +244,8 @@
         "Udef_doctype": "期刊論文=Journal Article",
         "Udef_docclass": "中文=Chinese"
       }
-    }
+    },
+    "folder": []
   }],
   [
     "阿閦佛"

@@ -1,10 +1,12 @@
 let data = [];
+let folder = [];
 let trArray = [];
 axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
         data = response.data[0];
         folder = response.data[1];
         renderData();
+        renderFolder();
 
         const tbody = document.querySelector('tbody');
         let previousCell = null;
@@ -163,8 +165,33 @@ function renderData(){
     tbody.innerHTML = content;
 }
 
+function renderFolder(){
+    console.log(folder);
+    const folderList = document.querySelector('#folderList');
+    let folderListContent = "";
+    folder.forEach(function(item){
+        folderListContent += '<a class="list-group-item list-group-item-action list-group-item-light p-3" onclick=""><i class="fas fa-folder fa-lg"></i> '+item+'</a>';
+    });
+    folderList.innerHTML = folderListContent;
+}
+
+const folderInput = document.querySelector('#folderInput');
 function addFolder(){
-    alert("請輸入名稱");
+    folderInput.classList.toggle('hide');
+}
+function checkFolder(){
+    const folderName = document.querySelector('#folderName');
+    if(folderName.value==''){
+        alert("請輸入資料夾名稱")
+    }else if(folder.includes(folderName.value)){
+        alert("資料夾 "+folderName.value+" 已存在")
+    }else{
+        folder.push(folderName.value);
+        alert(folderName.value + " 新建成功");
+        folderName.value='';
+        folderInput.classList.add('hide');
+        renderFolder();
+    }
 }
 
 function check_all(obj,cName){

@@ -17,9 +17,11 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">DocuLib Editor</div>
                 <div class="list-group list-group-flush" id="list">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"><i class="fas fa-folder fa-lg"></i> 全部書目(3)</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"><i class="fas fa-trash fa-lg"></i> 垃圾桶(0)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick=""><i class="fas fa-folder fa-lg"></i> 全部書目(3)</a>
+                    <div id="folderList"></div>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick=""><i class="fas fa-trash fa-lg"></i> 垃圾桶(0)</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="addFolder();"><i class="fas fa-folder-plus fa-lg"></i> 新增資料夾</a>
+                    <a id="folderInput" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="folderName" type="text" size=15 placeholder="請輸入資料夾名稱"> <button class="btn btn-light" onclick="checkFolder();">建立</button></a>
                 </div>
             </div>
             <!-- Page content wrapper-->
