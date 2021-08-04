@@ -2,7 +2,7 @@ let data = [];
 let trArray = [];
 axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
-        data = response.data;
+        data = response.data[0];
         renderData();
 
         const tbody = document.querySelector('tbody');
