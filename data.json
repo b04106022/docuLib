@@ -77,7 +77,7 @@
         "Udef_docclass": "中文=Chinese"
       }
     },
-    "folder": ["阿閦佛"]
+    "folder": ["all", "阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -157,7 +157,7 @@
             "Udef_docclass": "中文=Chinese"
         }
     },
-    "folder": ["阿閦佛"]
+    "folder": ["all", "阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -245,7 +245,7 @@
         "Udef_docclass": "中文=Chinese"
       }
     },
-    "folder": []
+    "folder": ["all"]
   }],
   [
     "阿閦佛"

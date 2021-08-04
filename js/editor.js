@@ -5,7 +5,7 @@ axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
         data = response.data[0];
         folder = response.data[1];
-        renderData();
+        renderData('all');
         renderFolder();
 
         const tbody = document.querySelector('tbody');
@@ -33,134 +33,136 @@ axios.get('https://b04106022.github.io/docuLib/data.json')
     })
     
 
-function renderData(){
+function renderData(foldername){
     const tbody = document.querySelector('tbody');
     let content="";
     data.forEach(function(item){
-        trArray.push(item.filename);
-        // 核心欄位 & 使用者加值欄位
-        content += `
-            <tr id="${item.filename}">
-                <td><input type="checkbox" name='c' value="${item.filename}"></td>
-                <td data-editable="true">${item.title}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_author}</td>
-                <td data-editable="true">${item.year_for_grouping}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
-                <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td data-editable="true"></td>
-                <td>
-                    <select>
-                        <option>未閱讀</option>
-                        <option>閱讀中</option>
-                        <option>已閱讀</option>
-                    <select>
-                </td>
-                <td data-editable="true"><input type="checkbox" name='important' value="important"></td>
-                <td data-editable="true"></td>
-                <td><button class="btn btn-light" value="hiddenRow_${item.filename}">+</button></td>
-            </tr>
-            <tr class="hide" id="hiddenRow_${item.filename}">
-                <td></td>
-                <td colspan="14">`;
-        // 共同欄位
-        content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol_page}'></p>`;
-        content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
-        content += `<p>出版日期：<input type="text" value='${item.time_orig_str}'></p>`;
-        content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
-        content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
-        content += `<p>資料類型：<input type="text" value='${item.doc_content.MetaTags.Udef_doctype}'</p>`;
-        content += `<p>語言：<input type="text" value='${item.doc_content.MetaTags.Udef_docclass}'</p>`;
-        if(item.doc_content.Paragraph!=""){
-            content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
-        }
-        else{
-            content += `<p>摘要：<br><textarea rows="4">無摘要</textarea></p>`;
-        }
-        if(item.xml_metadata.Udef_tablecontent!=""){
-            content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
-        }
-        else{
-            content += `<p>目次：<br><textarea rows="4">無目次</textarea></p>`;
-        }
-        // 共同欄位－網址
-        content += `<details><summary class="mb-3">網址</summary>`;
-        if(item.xml_metadata.Udef_author1!=""){
-            content += `<p>作者1網址：<input type="text" id="author1_a_${item.filename}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
-        }
-        if(item.xml_metadata.Udef_author2!=""){
-            content += `<p>作者2網址：<input type="text" id="author2_a_${item.filename}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
-        }
-        if(item.xml_metadata.Udef_author3!=""){
-            content += `<p>作者3網址：<input type="text" id="author3_a_${item.filename}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
-        }
-        if(item.xml_metadata.Udef_author4!=""){
-            content += `<p>作者4網址：<input type="text" id="author4_a_${item.filename}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
-        }
-        if(item.xml_metadata.Udef_author5!=""){
-            content += `<p>作者5網址：<input type="text" id="author5_a_${item.filename}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
-        }
-        if(item.xml_metadata.Udef_author6!=""){
-            content += `<p>作者6網址：<input type="text" id="author6_a_${item.filename}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
-        }
-        content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${item.filename}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
-        content += `<p>出版者網址：<input type="text" id="publisher_a_${item.filename}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
-        if(item.xml_metadata.Udef_fulltextSrc.a!=""){
-            content += `<p>全文網址：<input type="text" id="fulltextSrc_a_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
-        }
-        else{
-            content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
-        }
-        if(item.xml_metadata.Udef_doi!=""){
-            content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='${item.xml_metadata.Udef_doi}'></p></details>`;
-        }
-        else{
-            content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='無DOI'></p></details>`;
-        }
-        // 輔助欄位
-        if(item.xml_metadata.Udef_seriesname!="" || item.xml_metadata.Udef_seriessubsidiary!="" || item.xml_metadata.Udef_seriesno!="" || item.xml_metadata.Udef_remark!="" || item.xml_metadata.Udef_remarkcontent!="" || item.xml_metadata.Udef_edition!="" || item.xml_metadata.Udef_category!="" || item.xml_metadata.Udef_period!="" || item.xml_metadata.Udef_area!="" || item.xml_metadata.Udef_place!="" || item.xml_metadata.Udef_institution!="" || item.xml_metadata.Udef_department!="" || item.xml_metadata.Udef_publicationyear!="" || item.xml_metadata.Udef_degree!=""){
-            content += `<details><summary class="mb-3">輔助欄位</summary>`;
-            // 叢書
-            if(item.xml_metadata.Udef_seriesname!=""){
-                content += `<p>叢書名：<input type="text" id="seriesname_${item.filename}" value='${item.xml_metadata.Udef_seriesname}'></p>`;
-            }if(item.xml_metadata.Udef_seriessubsidiary!=""){
-                content += `<p>附屬叢書：<input type="text" id="seriessubsidiary_${item.filename}" value='${item.xml_metadata.Udef_seriessubsidiary}'></p>`;
-            }if(item.xml_metadata.Udef_seriesno!=""){
-                content += `<p>叢書號：<input type="text" id="seriesno_${item.filename}" value='${item.xml_metadata.Udef_seriesno}'></p>`;
+        if(item.folder.includes(foldername)){
+            trArray.push(item.filename);
+            // 核心欄位 & 使用者加值欄位
+            content += `
+                <tr id="${item.filename}">
+                    <td><input type="checkbox" name='c' value="${item.filename}"></td>
+                    <td data-editable="true">${item.title}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_author}</td>
+                    <td data-editable="true">${item.year_for_grouping}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
+                    <td data-editable="true"></td>
+                    <td data-editable="true"></td>
+                    <td data-editable="true"></td>
+                    <td data-editable="true"></td>
+                    <td>
+                        <select>
+                            <option>未閱讀</option>
+                            <option>閱讀中</option>
+                            <option>已閱讀</option>
+                        <select>
+                    </td>
+                    <td data-editable="true"><input type="checkbox" name='important' value="important"></td>
+                    <td data-editable="true"></td>
+                    <td><button class="btn btn-light" value="hiddenRow_${item.filename}">+</button></td>
+                </tr>
+                <tr class="hide" id="hiddenRow_${item.filename}">
+                    <td></td>
+                    <td colspan="14">`;
+            // 共同欄位
+            content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol_page}'></p>`;
+            content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
+            content += `<p>出版日期：<input type="text" value='${item.time_orig_str}'></p>`;
+            content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
+            content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
+            content += `<p>資料類型：<input type="text" value='${item.doc_content.MetaTags.Udef_doctype}'</p>`;
+            content += `<p>語言：<input type="text" value='${item.doc_content.MetaTags.Udef_docclass}'</p>`;
+            if(item.doc_content.Paragraph!=""){
+                content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
             }
-            // 藝術資料庫
-            if(item.xml_metadata.Udef_category!=""){
-                content += `<p>研究類別：<input type="text" id="category_${item.filename}" value='${item.xml_metadata.Udef_category}'></p>`;
-            }if(item.xml_metadata.Udef_period!=""){
-                content += `<p>研究時代：<input type="text" id="period_${item.filename}" value='${item.xml_metadata.Udef_period}'></p>`;
-            }if(item.xml_metadata.Udef_area!=""){
-                content += `<p>研究地區：<input type="text" id="area_${item.filename}" value='${item.xml_metadata.Udef_area}'></p>`;
-            }if(item.xml_metadata.Udef_place!=""){
-                content += `<p>研究地點：<input type="text" id="place_${item.filename}" value='${item.xml_metadata.Udef_place}'></p>`;
+            else{
+                content += `<p>摘要：<br><textarea rows="4">無摘要</textarea></p>`;
             }
-            // 碩博士論文
-            if(item.xml_metadata.Udef_institution!=""){
-                content += `<p>校院名稱：<input type="text" id="institution_${item.filename}" value='${item.xml_metadata.Udef_institution}'></p>`;
-            }if(item.xml_metadata.Udef_department!=""){
-                content += `<p>系所名稱：<input type="text" id="department_${item.filename}" value='${item.xml_metadata.Udef_department}'></p>`;
-            }if(item.xml_metadata.Udef_publicationyear!=""){
-                content += `<p>畢業年度：<input type="text" id="publicationyear_${item.filename}" value='${item.xml_metadata.Udef_publicationyear}'></p>`;
-            }if(item.xml_metadata.Udef_degree!=""){
-                content += `<p>學位類別：<input type="text"id="degree_${item.filename}" value='${item.xml_metadata.Udef_degree}'></p>`;
+            if(item.xml_metadata.Udef_tablecontent!=""){
+                content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
             }
-            // 內容
-            if(item.xml_metadata.Udef_edition!=""){
-                content += `<p>版本項：<input type="text" id="edition_${item.filename}" value='${item.xml_metadata.Udef_edition}'></p>`;
-            }if(item.xml_metadata.Udef_remark!=""){
-                content += `<p>附註項：<input type="text" id="remark_${item.filename}" value='${item.xml_metadata.Udef_remark}'></p>`;
-            }if(item.xml_metadata.Udef_remarkcontent!=""){
-                content += `<p>內容註：<input type="text" id="remarkcontent_${item.filename}" value='${item.xml_metadata.Udef_remarkcontent}'></p>`;
+            else{
+                content += `<p>目次：<br><textarea rows="4">無目次</textarea></p>`;
             }
-            content += `</details>`;
+            // 共同欄位－網址
+            content += `<details><summary class="mb-3">網址</summary>`;
+            if(item.xml_metadata.Udef_author1!=""){
+                content += `<p>作者1網址：<input type="text" id="author1_a_${item.filename}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
+            }
+            if(item.xml_metadata.Udef_author2!=""){
+                content += `<p>作者2網址：<input type="text" id="author2_a_${item.filename}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
+            }
+            if(item.xml_metadata.Udef_author3!=""){
+                content += `<p>作者3網址：<input type="text" id="author3_a_${item.filename}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
+            }
+            if(item.xml_metadata.Udef_author4!=""){
+                content += `<p>作者4網址：<input type="text" id="author4_a_${item.filename}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
+            }
+            if(item.xml_metadata.Udef_author5!=""){
+                content += `<p>作者5網址：<input type="text" id="author5_a_${item.filename}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
+            }
+            if(item.xml_metadata.Udef_author6!=""){
+                content += `<p>作者6網址：<input type="text" id="author6_a_${item.filename}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
+            }
+            content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${item.filename}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
+            content += `<p>出版者網址：<input type="text" id="publisher_a_${item.filename}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
+            if(item.xml_metadata.Udef_fulltextSrc.a!=""){
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_a_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
+            }
+            else{
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
+            }
+            if(item.xml_metadata.Udef_doi!=""){
+                content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='${item.xml_metadata.Udef_doi}'></p></details>`;
+            }
+            else{
+                content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='無DOI'></p></details>`;
+            }
+            // 輔助欄位
+            if(item.xml_metadata.Udef_seriesname!="" || item.xml_metadata.Udef_seriessubsidiary!="" || item.xml_metadata.Udef_seriesno!="" || item.xml_metadata.Udef_remark!="" || item.xml_metadata.Udef_remarkcontent!="" || item.xml_metadata.Udef_edition!="" || item.xml_metadata.Udef_category!="" || item.xml_metadata.Udef_period!="" || item.xml_metadata.Udef_area!="" || item.xml_metadata.Udef_place!="" || item.xml_metadata.Udef_institution!="" || item.xml_metadata.Udef_department!="" || item.xml_metadata.Udef_publicationyear!="" || item.xml_metadata.Udef_degree!=""){
+                content += `<details><summary class="mb-3">輔助欄位</summary>`;
+                // 叢書
+                if(item.xml_metadata.Udef_seriesname!=""){
+                    content += `<p>叢書名：<input type="text" id="seriesname_${item.filename}" value='${item.xml_metadata.Udef_seriesname}'></p>`;
+                }if(item.xml_metadata.Udef_seriessubsidiary!=""){
+                    content += `<p>附屬叢書：<input type="text" id="seriessubsidiary_${item.filename}" value='${item.xml_metadata.Udef_seriessubsidiary}'></p>`;
+                }if(item.xml_metadata.Udef_seriesno!=""){
+                    content += `<p>叢書號：<input type="text" id="seriesno_${item.filename}" value='${item.xml_metadata.Udef_seriesno}'></p>`;
+                }
+                // 藝術資料庫
+                if(item.xml_metadata.Udef_category!=""){
+                    content += `<p>研究類別：<input type="text" id="category_${item.filename}" value='${item.xml_metadata.Udef_category}'></p>`;
+                }if(item.xml_metadata.Udef_period!=""){
+                    content += `<p>研究時代：<input type="text" id="period_${item.filename}" value='${item.xml_metadata.Udef_period}'></p>`;
+                }if(item.xml_metadata.Udef_area!=""){
+                    content += `<p>研究地區：<input type="text" id="area_${item.filename}" value='${item.xml_metadata.Udef_area}'></p>`;
+                }if(item.xml_metadata.Udef_place!=""){
+                    content += `<p>研究地點：<input type="text" id="place_${item.filename}" value='${item.xml_metadata.Udef_place}'></p>`;
+                }
+                // 碩博士論文
+                if(item.xml_metadata.Udef_institution!=""){
+                    content += `<p>校院名稱：<input type="text" id="institution_${item.filename}" value='${item.xml_metadata.Udef_institution}'></p>`;
+                }if(item.xml_metadata.Udef_department!=""){
+                    content += `<p>系所名稱：<input type="text" id="department_${item.filename}" value='${item.xml_metadata.Udef_department}'></p>`;
+                }if(item.xml_metadata.Udef_publicationyear!=""){
+                    content += `<p>畢業年度：<input type="text" id="publicationyear_${item.filename}" value='${item.xml_metadata.Udef_publicationyear}'></p>`;
+                }if(item.xml_metadata.Udef_degree!=""){
+                    content += `<p>學位類別：<input type="text"id="degree_${item.filename}" value='${item.xml_metadata.Udef_degree}'></p>`;
+                }
+                // 內容
+                if(item.xml_metadata.Udef_edition!=""){
+                    content += `<p>版本項：<input type="text" id="edition_${item.filename}" value='${item.xml_metadata.Udef_edition}'></p>`;
+                }if(item.xml_metadata.Udef_remark!=""){
+                    content += `<p>附註項：<input type="text" id="remark_${item.filename}" value='${item.xml_metadata.Udef_remark}'></p>`;
+                }if(item.xml_metadata.Udef_remarkcontent!=""){
+                    content += `<p>內容註：<input type="text" id="remarkcontent_${item.filename}" value='${item.xml_metadata.Udef_remarkcontent}'></p>`;
+                }
+                content += `</details>`;
+            }
+            content += `</td></tr>`;
         }
-        content += `</td></tr>`;
     })
     tbody.innerHTML = content;
 }
@@ -170,9 +172,13 @@ function renderFolder(){
     const folderList = document.querySelector('#folderList');
     let folderListContent = "";
     folder.forEach(function(item){
-        folderListContent += '<a class="list-group-item list-group-item-action list-group-item-light p-3" onclick=""><i class="fas fa-folder fa-lg"></i> '+item+'</a>';
+        folderListContent += '<a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="filterDate(\''+item+'\')"><i class="fas fa-folder fa-lg"></i> '+item+'()</a>';
     });
     folderList.innerHTML = folderListContent;
+}
+
+function filterDate(folderName){
+    
 }
 
 const folderInput = document.querySelector('#folderInput');
@@ -193,6 +199,9 @@ function checkFolder(){
         renderFolder();
     }
 }
+// function countNumber(folderName){
+//     return 3;
+// }
 
 function check_all(obj,cName){
     let checkboxs = document.getElementsByName(cName);
