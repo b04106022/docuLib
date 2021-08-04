@@ -29,12 +29,6 @@ axios.get('https://b04106022.github.io/docuLib/data.json')
         console.log(error);
     })
     
-function check_all(obj,cName){
-    let checkboxs = document.getElementsByName(cName);
-    for(let i=0; i<checkboxs.length; i++){
-        checkboxs[i].checked = obj.checked;
-    }
-}
 
 function renderData(){
     const tbody = document.querySelector('tbody');
@@ -168,6 +162,28 @@ function renderData(){
     tbody.innerHTML = content;
 }
 
+function addFolder(){
+    alert("請輸入名稱");
+}
+
+function check_all(obj,cName){
+    let checkboxs = document.getElementsByName(cName);
+    for(let i=0; i<checkboxs.length; i++){
+        checkboxs[i].checked = obj.checked;
+    }
+}
+
+function getCheckedboxArray(){
+    let checkedboxArray = [];
+    let checkboxs = document.getElementsByName('c');
+    for(let i=0; i<checkboxs.length; i++){
+        if(checkboxs[i].checked){
+            checkedboxArray.push(checkboxs[i].value);
+        }
+    }
+    return checkedboxArray;
+}
+
 function saveToJson(){
     trArray.forEach(function(item){
         let tr1 = document.getElementById(item);
@@ -278,17 +294,6 @@ function saveToJson(){
             }
         })
     })
-}
-
-function getCheckedboxArray(){
-    let checkedboxArray = [];
-    let checkboxs = document.getElementsByName('c');
-    for(let i=0; i<checkboxs.length; i++){
-        if(checkboxs[i].checked){
-            checkedboxArray.push(checkboxs[i].value);
-        }
-    }
-    return checkedboxArray;
 }
 
 function jsonToCsv(){
