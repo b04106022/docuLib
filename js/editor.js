@@ -3,6 +3,7 @@ let trArray = [];
 axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
         data = response.data[0];
+        folder = response.data[1];
         renderData();
 
         const tbody = document.querySelector('tbody');
