@@ -10,6 +10,14 @@
         <link href="css/tableStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- jQuery-contextMenu -->
+        <script src="js/contextmenu"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -17,13 +25,14 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">DocuLib Editor</div>
                 <div class="list-group list-group-flush" id="list">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="filterDate('all');"><i class="fas fa-folder fa-lg"></i> 全部書目()</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('all');"><i class="fas fa-folder fa-lg"></i> 全部書目()</a>
                     <div id="folderList"></div>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="filterDate('trash');"><i class="fas fa-trash fa-lg"></i> 垃圾桶()</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('trash');"><i class="fas fa-trash fa-lg"></i> 垃圾桶()</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="addFolder();"><i class="fas fa-folder-plus fa-lg"></i> 新增資料夾</a>
                     <a id="folderInput" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="folderName" type="text" size=15 placeholder="請輸入資料夾名稱"> <button class="btn btn-light" onclick="checkFolder();">建立</button></a>
                 </div>
             </div>
+
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
@@ -49,7 +58,7 @@
                     <table class="mt-2">
                         <thead>
                           <tr>
-                            <th><input type="checkbox" name="all" onclick="check_all(this,'c')" /></th>
+                            <th><input id="selectAll" type="checkbox" name="all" onclick="check_all(this,'c')" /></th>
                             <th>文獻題名</th>
                             <th>作者</th>
                             <th>出版年</th>

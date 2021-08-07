@@ -31,11 +31,51 @@ axios.get('https://b04106022.github.io/docuLib/data.json')
     .catch(function (error) {
         console.log(error);
     })
-    
+
+// Right Click Sidebar - contextMenu
+$(function() {
+    $.contextMenu({
+        selector: '.context-menu-one', 
+        items: {
+            "edit": {name: "Edit", icon: "edit", 
+                callback: function() {
+                    let oldFolder = $(this).text().split('(')[0].trim();
+                    document.querySelector('#edit'+oldFolder).classList.toggle('hide')
+                }
+            },
+            "delete": {name: "Delete", icon: "delete", 
+                callback: function() {
+                    let delFolder = $(this).text().split('(')[0].trim();
+                    renderData(delFolder);
+                    if(trArray.length>0){
+                        if(confirm(delFolder+"內存有書目，請確定是否刪除")){
+                            folder.splice(folder.indexOf(delFolder), 1);
+                            trArray.forEach(function(item){
+                                data.forEach(function(dataItem){
+                                    if(dataItem.filename==item){
+                                        dataItem.folder=["trash"];
+                                    }
+                                })
+                            });
+                        }
+                    }else{
+                        folder.splice(folder.indexOf(delFolder), 1);
+                    }
+                    renderFolder();
+                    renderData('all');
+                    alert(delFolder+"已刪除，回到全部書目列表");
+                }
+            }  
+        }
+    });
+});
 
 function renderData(foldername){
     const tbody = document.querySelector('tbody');
+    const selectAll = document.querySelector('#selectAll');
+    selectAll.checked=false;
     let content="";
+    trArray = [];
     data.forEach(function(item){
         if(item.folder.includes(foldername)){
             trArray.push(item.filename);
@@ -168,17 +208,13 @@ function renderData(foldername){
 }
 
 function renderFolder(){
-    console.log(folder);
     const folderList = document.querySelector('#folderList');
     let folderListContent = "";
-    folder.forEach(function(item){
-        folderListContent += '<a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="filterDate(\''+item+'\')"><i class="fas fa-folder fa-lg"></i> '+item+'()</a>';
+    folder.forEach(function(folderName){
+        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}()</a>
+        <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"><button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;
-}
-
-function filterDate(folderName){
-    
 }
 
 const folderInput = document.querySelector('#folderInput');
@@ -199,9 +235,30 @@ function checkFolder(){
         renderFolder();
     }
 }
-// function countNumber(folderName){
-//     return 3;
-// }
+function checkEditFolder(oldName){
+    const newName = document.getElementById('new'+oldName);
+    const editFolder = document.getElementById('edit'+oldName);
+    if(newName.value==''){
+        alert("請輸入資料夾名稱")
+    }else if(folder.includes(newName.value)){
+        alert("資料夾 "+newName.value+" 已存在")
+    }else{
+        folder[folder.indexOf(oldName)] = newName.value;
+        renderData(oldName);
+        trArray.forEach(function(item){
+            data.forEach(function(dataItem){
+                if(dataItem.filename==item){
+                    dataItem.folder[dataItem.folder.indexOf(oldName)] = newName.value;
+                }
+            })
+        });
+        alert("資料夾 "+newName.value + "修改成功");
+        renderData(newName.value);
+        renderFolder();
+        newName.value='';
+        editFolder.classList.add('hide');
+    }
+}
 
 function check_all(obj,cName){
     let checkboxs = document.getElementsByName(cName);
@@ -331,6 +388,13 @@ function saveToJson(){
             }
         })
     })
+    // let json = [data, folder];
+    // let link = document.createElement('a');
+    // let blob = new Blob([JSON.stringify(json)], {type:""});
+    // let url = URL.createObjectURL(blob);
+    // link.href = url;
+    // link.setAttribute('download', 'matadata.json');
+    // link.click();
 }
 
 function jsonToCsv(){
