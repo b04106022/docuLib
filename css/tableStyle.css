@@ -1,6 +1,9 @@
 .hide {
     display: none;
 }
+.ml-12{
+    margin-left: 12px;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

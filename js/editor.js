@@ -1,6 +1,7 @@
 let data = [];
 let folder = [];
 let trArray = [];
+let currentFolder = "";
 axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
         data = response.data[0];
@@ -51,11 +52,7 @@ $(function() {
                         if(confirm(delFolder+"內存有書目，請確定是否刪除")){
                             folder.splice(folder.indexOf(delFolder), 1);
                             trArray.forEach(function(item){
-                                data.forEach(function(dataItem){
-                                    if(dataItem.filename==item){
-                                        dataItem.folder=["trash"];
-                                    }
-                                })
+                                data[item].folder = ["trash"];
                             });
                         }
                     }else{
@@ -71,18 +68,33 @@ $(function() {
 });
 
 function renderData(foldername){
+    const folderID = document.querySelector('#folderID');
+    folderID.textContent = foldername;    
+    
     const tbody = document.querySelector('tbody');
     const selectAll = document.querySelector('#selectAll');
     selectAll.checked=false;
-    let content="";
+    let content = "";
     trArray = [];
-    data.forEach(function(item){
+    data.forEach(function(item, index){
         if(item.folder.includes(foldername)){
-            trArray.push(item.filename);
+            trArray.push(index);
+            let folderOption = "";
+            folder.forEach(function(folderItem){
+                let selected = "";
+                let trashSelected = "";
+                if(item.folder[1]==folderItem){
+                    selected = "selected"
+                }else{
+                    trashSelected = "selected";
+                }
+                folderOption += `<option value='${folderItem}' ${selected}>${folderItem}</option>`;
+                folderOption += `<option value='trash' ${trashSelected}>trash</option>`
+            })
             // 核心欄位 & 使用者加值欄位
             content += `
-                <tr id="${item.filename}">
-                    <td><input type="checkbox" name='c' value="${item.filename}"></td>
+                <tr id="${index}">
+                    <td><input type="checkbox" name='c' value="${index}"></td>
                     <td data-editable="true">${item.title}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_author}</td>
                     <td data-editable="true">${item.year_for_grouping}</td>
@@ -92,18 +104,23 @@ function renderData(foldername){
                     <td data-editable="true"></td>
                     <td data-editable="true"></td>
                     <td data-editable="true"></td>
+                    <td data-editable="true"><input type="checkbox" name='important' value="important"></td>
                     <td>
                         <select>
-                            <option>未閱讀</option>
-                            <option>閱讀中</option>
-                            <option>已閱讀</option>
+                            <option value='未閱讀'>未閱讀</option>
+                            <option value='閱讀中'>閱讀中</option>
+                            <option value='已閱讀'>已閱讀</option>
                         <select>
                     </td>
-                    <td data-editable="true"><input type="checkbox" name='important' value="important"></td>
+                    <td>
+                        <select>
+                            ${folderOption}
+                        <select>
+                    </td>
                     <td data-editable="true"></td>
-                    <td><button class="btn btn-light" value="hiddenRow_${item.filename}">+</button></td>
+                    <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
                 </tr>
-                <tr class="hide" id="hiddenRow_${item.filename}">
+                <tr class="hide" id="hiddenRow_${index}">
                     <td></td>
                     <td colspan="14">`;
             // 共同欄位
@@ -129,75 +146,75 @@ function renderData(foldername){
             // 共同欄位－網址
             content += `<details><summary class="mb-3">網址</summary>`;
             if(item.xml_metadata.Udef_author1!=""){
-                content += `<p>作者1網址：<input type="text" id="author1_a_${item.filename}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
+                content += `<p>作者1網址：<input type="text" id="author1_a_${index}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
             }
             if(item.xml_metadata.Udef_author2!=""){
-                content += `<p>作者2網址：<input type="text" id="author2_a_${item.filename}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
+                content += `<p>作者2網址：<input type="text" id="author2_a_${index}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
             }
             if(item.xml_metadata.Udef_author3!=""){
-                content += `<p>作者3網址：<input type="text" id="author3_a_${item.filename}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
+                content += `<p>作者3網址：<input type="text" id="author3_a_${index}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
             }
             if(item.xml_metadata.Udef_author4!=""){
-                content += `<p>作者4網址：<input type="text" id="author4_a_${item.filename}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
+                content += `<p>作者4網址：<input type="text" id="author4_a_${index}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
             }
             if(item.xml_metadata.Udef_author5!=""){
-                content += `<p>作者5網址：<input type="text" id="author5_a_${item.filename}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
+                content += `<p>作者5網址：<input type="text" id="author5_a_${index}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
             }
             if(item.xml_metadata.Udef_author6!=""){
-                content += `<p>作者6網址：<input type="text" id="author6_a_${item.filename}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
+                content += `<p>作者6網址：<input type="text" id="author6_a_${index}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
             }
-            content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${item.filename}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
-            content += `<p>出版者網址：<input type="text" id="publisher_a_${item.filename}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
+            content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${index}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
+            content += `<p>出版者網址：<input type="text" id="publisher_a_${index}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
             if(item.xml_metadata.Udef_fulltextSrc.a!=""){
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_a_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_a_${index}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
             }
             else{
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${item.filename}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${index}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
             }
             if(item.xml_metadata.Udef_doi!=""){
-                content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='${item.xml_metadata.Udef_doi}'></p></details>`;
+                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi}'></p></details>`;
             }
             else{
-                content += `<p>DOI：<input type="text" id="doi_${item.filename}" value='無DOI'></p></details>`;
+                content += `<p>DOI：<input type="text" id="doi_${index}" value='無DOI'></p></details>`;
             }
             // 輔助欄位
             if(item.xml_metadata.Udef_seriesname!="" || item.xml_metadata.Udef_seriessubsidiary!="" || item.xml_metadata.Udef_seriesno!="" || item.xml_metadata.Udef_remark!="" || item.xml_metadata.Udef_remarkcontent!="" || item.xml_metadata.Udef_edition!="" || item.xml_metadata.Udef_category!="" || item.xml_metadata.Udef_period!="" || item.xml_metadata.Udef_area!="" || item.xml_metadata.Udef_place!="" || item.xml_metadata.Udef_institution!="" || item.xml_metadata.Udef_department!="" || item.xml_metadata.Udef_publicationyear!="" || item.xml_metadata.Udef_degree!=""){
                 content += `<details><summary class="mb-3">輔助欄位</summary>`;
                 // 叢書
                 if(item.xml_metadata.Udef_seriesname!=""){
-                    content += `<p>叢書名：<input type="text" id="seriesname_${item.filename}" value='${item.xml_metadata.Udef_seriesname}'></p>`;
+                    content += `<p>叢書名：<input type="text" id="seriesname_${index}" value='${item.xml_metadata.Udef_seriesname}'></p>`;
                 }if(item.xml_metadata.Udef_seriessubsidiary!=""){
-                    content += `<p>附屬叢書：<input type="text" id="seriessubsidiary_${item.filename}" value='${item.xml_metadata.Udef_seriessubsidiary}'></p>`;
+                    content += `<p>附屬叢書：<input type="text" id="seriessubsidiary_${index}" value='${item.xml_metadata.Udef_seriessubsidiary}'></p>`;
                 }if(item.xml_metadata.Udef_seriesno!=""){
-                    content += `<p>叢書號：<input type="text" id="seriesno_${item.filename}" value='${item.xml_metadata.Udef_seriesno}'></p>`;
+                    content += `<p>叢書號：<input type="text" id="seriesno_${index}" value='${item.xml_metadata.Udef_seriesno}'></p>`;
                 }
                 // 藝術資料庫
                 if(item.xml_metadata.Udef_category!=""){
-                    content += `<p>研究類別：<input type="text" id="category_${item.filename}" value='${item.xml_metadata.Udef_category}'></p>`;
+                    content += `<p>研究類別：<input type="text" id="category_${index}" value='${item.xml_metadata.Udef_category}'></p>`;
                 }if(item.xml_metadata.Udef_period!=""){
-                    content += `<p>研究時代：<input type="text" id="period_${item.filename}" value='${item.xml_metadata.Udef_period}'></p>`;
+                    content += `<p>研究時代：<input type="text" id="period_${index}" value='${item.xml_metadata.Udef_period}'></p>`;
                 }if(item.xml_metadata.Udef_area!=""){
-                    content += `<p>研究地區：<input type="text" id="area_${item.filename}" value='${item.xml_metadata.Udef_area}'></p>`;
+                    content += `<p>研究地區：<input type="text" id="area_${index}" value='${item.xml_metadata.Udef_area}'></p>`;
                 }if(item.xml_metadata.Udef_place!=""){
-                    content += `<p>研究地點：<input type="text" id="place_${item.filename}" value='${item.xml_metadata.Udef_place}'></p>`;
+                    content += `<p>研究地點：<input type="text" id="place_${index}" value='${item.xml_metadata.Udef_place}'></p>`;
                 }
                 // 碩博士論文
                 if(item.xml_metadata.Udef_institution!=""){
-                    content += `<p>校院名稱：<input type="text" id="institution_${item.filename}" value='${item.xml_metadata.Udef_institution}'></p>`;
+                    content += `<p>校院名稱：<input type="text" id="institution_${index}" value='${item.xml_metadata.Udef_institution}'></p>`;
                 }if(item.xml_metadata.Udef_department!=""){
-                    content += `<p>系所名稱：<input type="text" id="department_${item.filename}" value='${item.xml_metadata.Udef_department}'></p>`;
+                    content += `<p>系所名稱：<input type="text" id="department_${index}" value='${item.xml_metadata.Udef_department}'></p>`;
                 }if(item.xml_metadata.Udef_publicationyear!=""){
-                    content += `<p>畢業年度：<input type="text" id="publicationyear_${item.filename}" value='${item.xml_metadata.Udef_publicationyear}'></p>`;
+                    content += `<p>畢業年度：<input type="text" id="publicationyear_${index}" value='${item.xml_metadata.Udef_publicationyear}'></p>`;
                 }if(item.xml_metadata.Udef_degree!=""){
-                    content += `<p>學位類別：<input type="text"id="degree_${item.filename}" value='${item.xml_metadata.Udef_degree}'></p>`;
+                    content += `<p>學位類別：<input type="text"id="degree_${index}" value='${item.xml_metadata.Udef_degree}'></p>`;
                 }
                 // 內容
                 if(item.xml_metadata.Udef_edition!=""){
-                    content += `<p>版本項：<input type="text" id="edition_${item.filename}" value='${item.xml_metadata.Udef_edition}'></p>`;
+                    content += `<p>版本項：<input type="text" id="edition_${index}" value='${item.xml_metadata.Udef_edition}'></p>`;
                 }if(item.xml_metadata.Udef_remark!=""){
-                    content += `<p>附註項：<input type="text" id="remark_${item.filename}" value='${item.xml_metadata.Udef_remark}'></p>`;
+                    content += `<p>附註項：<input type="text" id="remark_${index}" value='${item.xml_metadata.Udef_remark}'></p>`;
                 }if(item.xml_metadata.Udef_remarkcontent!=""){
-                    content += `<p>內容註：<input type="text" id="remarkcontent_${item.filename}" value='${item.xml_metadata.Udef_remarkcontent}'></p>`;
+                    content += `<p>內容註：<input type="text" id="remarkcontent_${index}" value='${item.xml_metadata.Udef_remarkcontent}'></p>`;
                 }
                 content += `</details>`;
             }
@@ -205,6 +222,7 @@ function renderData(foldername){
         }
     })
     tbody.innerHTML = content;
+    currentFolder = foldername;
 }
 
 function renderFolder(){
@@ -216,6 +234,37 @@ function renderFolder(){
     });
     folderList.innerHTML = folderListContent;
 }
+
+function deleteData(){
+    saveToJson();
+    let checkedboxArray = getCheckedboxArray();
+    if(currentFolder=="trash"){
+        if(confirm("刪除後將無法復原，請確定是否刪除")){
+            checkedboxArray.reverse().forEach(function(item){
+                data.splice(item, 1);
+                alert('刪除成功');
+            })
+        }
+    }else{
+        if(checkedboxArray.length>0){
+            checkedboxArray.forEach(function(item){
+                data[item].folder = ['trash'];
+            })
+        }
+    }
+    renderData(currentFolder);
+}
+function copyData(){
+    saveToJson();
+    let checkedboxArray = getCheckedboxArray()
+    if(checkedboxArray.length>0){
+        checkedboxArray.forEach(function(item){
+            data.push(data[item])
+        })
+    }
+    renderData(currentFolder)
+}
+
 
 const folderInput = document.querySelector('#folderInput');
 function addFolder(){
@@ -233,6 +282,7 @@ function checkFolder(){
         folderName.value='';
         folderInput.classList.add('hide');
         renderFolder();
+        renderData(currentFolder);
     }
 }
 function checkEditFolder(oldName){
@@ -246,14 +296,10 @@ function checkEditFolder(oldName){
         folder[folder.indexOf(oldName)] = newName.value;
         renderData(oldName);
         trArray.forEach(function(item){
-            data.forEach(function(dataItem){
-                if(dataItem.filename==item){
-                    dataItem.folder[dataItem.folder.indexOf(oldName)] = newName.value;
-                }
-            })
+            data[item].folder[data[item].folder.indexOf(oldName)] = newName.value;
         });
-        alert("資料夾 "+newName.value + "修改成功");
-        renderData(newName.value);
+        alert("資料夾 "+newName.value+" 修改成功");
+        renderData(currentFolder);
         renderFolder();
         newName.value='';
         editFolder.classList.add('hide');
@@ -279,114 +325,110 @@ function getCheckedboxArray(){
 }
 
 function saveToJson(){
-    trArray.forEach(function(item){
+    trArray.forEach(function(item, index){
         let tr1 = document.getElementById(item);
         let tr2 = document.getElementById("hiddenRow_"+item);
-        data.forEach(function(dataItem){
-            if(dataItem.filename==item){
-                // 核心欄位
-                dataItem.title = tr1.children[1].textContent;
-                dataItem.xml_metadata.Udef_author = tr1.children[2].textContent;
-                dataItem.year_for_grouping = tr1.children[3].textContent;
-                dataItem.xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
-                dataItem.xml_metadata.Udef_keywords = tr1.children[5].textContent;
-                // 使用者加值欄位
-                // dataItem.filename = tr1.children[6].textContent;
-                // dataItem.filename = tr1.children[7].textContent;
-                // dataItem.filename = tr1.children[8].textContent;
-                // dataItem.filename = tr1.children[9].textContent;
-                // dataItem.filename = tr1.children[10].textContent;
-                // dataItem.filename = tr1.chridren[11].firstChild.value
-                // dataItem.filename = tr1.children[12].textContent;
-                // dataItem.filename = tr1.children[13].textContent;
-                // 共同欄位
-                dataItem.xml_metadata.Udef_compilation_vol_page = tr2.children[1].children[0].firstElementChild.value;
-                dataItem.xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
-                dataItem.time_orig_str = tr2.children[1].children[2].firstElementChild.value;
-                dataItem.xml_metadata.Udef_publisher_location = tr2.children[1].children[3].firstElementChild.value;
-                dataItem.xml_metadata.Udef_Udef_book_code = tr2.children[1].children[4].firstElementChild.value;
-                dataItem.doc_content.MetaTags.Udef_doctype = tr2.children[1].children[5].firstElementChild.value;
-                dataItem.doc_content.MetaTags.Udef_docclass = tr2.children[1].children[6].firstElementChild.value;
-                dataItem.doc_content.Paragraph = tr2.children[1].children[7].lastElementChild.value;
-                dataItem.xml_metadata.Udef_tablecontent = tr2.children[1].children[8].lastElementChild.value;
-                // 共同欄位－網址
-                if(document.getElementById("author1_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author1.a = document.getElementById("author1_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("author2_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author2.a = document.getElementById("author2_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("author3_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author3.a = document.getElementById("author3_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("author4_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author4.a = document.getElementById("author4_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("author5_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author5.a = document.getElementById("author5_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("author6_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_author6.a = document.getElementById("author6_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("compilation_name_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_compilation_name.a = document.getElementById("compilation_name_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("publisher_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_publisher.a = document.getElementById("publisher_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("fulltextSrc_a_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_a_"+dataItem.filename).value;
-                }
-                if(document.getElementById("fulltextSrc_text_"+dataItem.filename)!=null){
-                    // 預設填入網址
-                    if(document.getElementById("fulltextSrc_text_"+dataItem.filename).value=="無全文"){
-                        dataItem.xml_metadata.Udef_fulltextSrc.a = "";
-                        dataItem.xml_metadata.Udef_fulltextSrc.text = "無全文";
-                    }else{
-                        dataItem.xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_text_"+dataItem.filename).value;
-                    }
-                }
-                // 輔助欄位
-                // 叢書
-                if(document.getElementById("seriesname_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_seriesname = document.getElementById("seriesname_"+dataItem.filename).value;
-                }if(document.getElementById("seriessubsidiary_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_seriessubsidiary = document.getElementById("seriessubsidiary_"+dataItem.filename).value;
-                }if(document.getElementById("seriesno_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_seriesno = document.getElementById("seriesno_"+dataItem.filename).value;
-                }
-                // 藝術資料庫
-                if(document.getElementById("category_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_category = document.getElementById("category_"+dataItem.filename).value;
-                }if(document.getElementById("period_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_period = document.getElementById("period_"+dataItem.filename).value;
-                }if(document.getElementById("area_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_area = document.getElementById("area_"+dataItem.filename).value;
-                }if(document.getElementById("place_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_place = document.getElementById("place_"+dataItem.filename).value;
-                }
-                // 碩博士論文
-                if(document.getElementById("institution_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_institution = document.getElementById("institution_"+dataItem.filename).value;
-                }if(document.getElementById("department_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_department = document.getElementById("department_"+dataItem.filename).value;
-                }if(document.getElementById("publicationyear_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_publicationyear = document.getElementById("publicationyear_"+dataItem.filename).value;
-                }if(document.getElementById("degree_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_degree = document.getElementById("degree_"+dataItem.filename).value;
-                }if(document.getElementById("doi_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_doi = document.getElementById("doi_"+dataItem.filename).value;
-                }
-                // 內容
-                if(document.getElementById("edition_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_edition = document.getElementById("edition_"+dataItem.filename).value;
-                }if(document.getElementById("remark_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_remark = document.getElementById("remark_"+dataItem.filename).value;
-                }if(document.getElementById("remarkcontent_"+dataItem.filename)!=null){
-                    dataItem.xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+dataItem.filename).value;
-                }
+        // 核心欄位
+        data[index].title = tr1.children[1].textContent;
+        data[index].xml_metadata.Udef_author = tr1.children[2].textContent;
+        data[index].year_for_grouping = tr1.children[3].textContent;
+        data[index].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
+        data[index].xml_metadata.Udef_keywords = tr1.children[5].textContent;
+        // 使用者加值欄位
+        // data[index] = tr1.children[6].textContent;
+        // data[index] = tr1.children[7].textContent;
+        // data[index] = tr1.children[8].textContent;
+        // data[index] = tr1.children[9].textContent;
+        // data[index] = tr1.children[10].textContent;
+        // data[index] = tr1.chridren[11].firstChild.value
+        // data[index] = tr1.children[12].textContent;
+        // data[index] = tr1.children[13].textContent;
+        // 共同欄位
+        data[index].xml_metadata.Udef_compilation_vol_page = tr2.children[1].children[0].firstElementChild.value;
+        data[index].xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
+        data[index].time_orig_str = tr2.children[1].children[2].firstElementChild.value;
+        data[index].xml_metadata.Udef_publisher_location = tr2.children[1].children[3].firstElementChild.value;
+        data[index].xml_metadata.Udef_Udef_book_code = tr2.children[1].children[4].firstElementChild.value;
+        data[index].doc_content.MetaTags.Udef_doctype = tr2.children[1].children[5].firstElementChild.value;
+        data[index].doc_content.MetaTags.Udef_docclass = tr2.children[1].children[6].firstElementChild.value;
+        data[index].doc_content.Paragraph = tr2.children[1].children[7].lastElementChild.value;
+        data[index].xml_metadata.Udef_tablecontent = tr2.children[1].children[8].lastElementChild.value;
+        // 共同欄位－網址
+        if(document.getElementById("author1_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author1.a = document.getElementById("author1_a_"+index).value;
+        }
+        if(document.getElementById("author2_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author2.a = document.getElementById("author2_a_"+index).value;
+        }
+        if(document.getElementById("author3_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author3.a = document.getElementById("author3_a_"+index).value;
+        }
+        if(document.getElementById("author4_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author4.a = document.getElementById("author4_a_"+index).value;
+        }
+        if(document.getElementById("author5_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author5.a = document.getElementById("author5_a_"+index).value;
+        }
+        if(document.getElementById("author6_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author6.a = document.getElementById("author6_a_"+index).value;
+        }
+        if(document.getElementById("compilation_name_a_"+index)!=null){
+            data[index].xml_metadata.Udef_compilation_name.a = document.getElementById("compilation_name_a_"+index).value;
+        }
+        if(document.getElementById("publisher_a_"+index)!=null){
+            data[index].xml_metadata.Udef_publisher.a = document.getElementById("publisher_a_"+index).value;
+        }
+        if(document.getElementById("fulltextSrc_a_"+index)!=null){
+            data[index].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_a_"+index).value;
+        }
+        if(document.getElementById("fulltextSrc_text_"+index)!=null){
+            // 預設填入網址
+            if(document.getElementById("fulltextSrc_text_"+index).value=="無全文"){
+                data[index].xml_metadata.Udef_fulltextSrc.a = "";
+                data[index].xml_metadata.Udef_fulltextSrc.text = "無全文";
+            }else{
+                data[index].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_text_"+index).value;
             }
-        })
+        }
+        // 輔助欄位
+        // 叢書
+        if(document.getElementById("seriesname_"+index)!=null){
+            data[index].xml_metadata.Udef_seriesname = document.getElementById("seriesname_"+index).value;
+        }if(document.getElementById("seriessubsidiary_"+index)!=null){
+            data[index].xml_metadata.Udef_seriessubsidiary = document.getElementById("seriessubsidiary_"+index).value;
+        }if(document.getElementById("seriesno_"+index)!=null){
+            data[index].xml_metadata.Udef_seriesno = document.getElementById("seriesno_"+index).value;
+        }
+        // 藝術資料庫
+        if(document.getElementById("category_"+index)!=null){
+            data[index].xml_metadata.Udef_category = document.getElementById("category_"+index).value;
+        }if(document.getElementById("period_"+index)!=null){
+            data[index].xml_metadata.Udef_period = document.getElementById("period_"+index).value;
+        }if(document.getElementById("area_"+index)!=null){
+            data[index].xml_metadata.Udef_area = document.getElementById("area_"+index).value;
+        }if(document.getElementById("place_"+index)!=null){
+            data[index].xml_metadata.Udef_place = document.getElementById("place_"+index).value;
+        }
+        // 碩博士論文
+        if(document.getElementById("institution_"+index)!=null){
+            data[index].xml_metadata.Udef_institution = document.getElementById("institution_"+index).value;
+        }if(document.getElementById("department_"+index)!=null){
+            data[index].xml_metadata.Udef_department = document.getElementById("department_"+index).value;
+        }if(document.getElementById("publicationyear_"+index)!=null){
+            data[index].xml_metadata.Udef_publicationyear = document.getElementById("publicationyear_"+index).value;
+        }if(document.getElementById("degree_"+index)!=null){
+            data[index].xml_metadata.Udef_degree = document.getElementById("degree_"+index).value;
+        }if(document.getElementById("doi_"+index)!=null){
+            data[index].xml_metadata.Udef_doi = document.getElementById("doi_"+index).value;
+        }
+        // 內容
+        if(document.getElementById("edition_"+index)!=null){
+            data[index].xml_metadata.Udef_edition = document.getElementById("edition_"+index).value;
+        }if(document.getElementById("remark_"+index)!=null){
+            data[index].xml_metadata.Udef_remark = document.getElementById("remark_"+index).value;
+        }if(document.getElementById("remarkcontent_"+index)!=null){
+            data[index].xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+index).value;
+        }
     })
     // let json = [data, folder];
     // let link = document.createElement('a');
@@ -407,26 +449,22 @@ function jsonToCsv(){
     let csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類一,主題分類二,主題分類三,主題詞,Social Tagging,重要度,筆記,評註,卷期 / 頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,DOI,版本項,附註項,內容項\r\n`;
     checkedboxArray.forEach(function(item){
         // content
-        data.forEach(function(dataItem){
-            if(dataItem.filename==item){
-                let row = [dataItem.title, dataItem.xml_metadata.Udef_author, dataItem.year_for_grouping, dataItem.xml_metadata.Udef_compilation_name.text, dataItem.xml_metadata.Udef_keywords, 
+        let row = [data[item].title, data[item].xml_metadata.Udef_author, data[item].year_for_grouping, data[item].xml_metadata.Udef_compilation_name.text, data[item].xml_metadata.Udef_keywords, 
                     "", "", "", "", "", "", "", "", 
-                    dataItem.xml_metadata.Udef_compilation_vol_page, dataItem.xml_metadata.Udef_publisher.text, dataItem.time_orig_str, dataItem.xml_metadata.Udef_publisher_location, dataItem.xml_metadata.Udef_Udef_book_code, dataItem.doc_content.MetaTags.Udef_doctype, dataItem.doc_content.MetaTags.Udef_docclass, dataItem.doc_content.Paragraph, dataItem.xml_metadata.Udef_tablecontent, 
-                    dataItem.xml_metadata.Udef_author1.a, dataItem.xml_metadata.Udef_author2.a, dataItem.xml_metadata.Udef_author3.a, dataItem.xml_metadata.Udef_author4.a, dataItem.xml_metadata.Udef_author5.a, dataItem.xml_metadata.Udef_author6.a, dataItem.xml_metadata.Udef_compilation_name.a, dataItem.xml_metadata.Udef_publisher.a, dataItem.xml_metadata.Udef_fulltextSrc.a,
-                    dataItem.xml_metadata.Udef_seriesname, dataItem.xml_metadata.Udef_seriessubsidiary, dataItem.xml_metadata.Udef_seriesno, dataItem.xml_metadata.Udef_category, dataItem.xml_metadata.Udef_period, dataItem.xml_metadata.Udef_area, dataItem.xml_metadata.Udef_place, dataItem.xml_metadata.Udef_institution, dataItem.xml_metadata.Udef_department, dataItem.xml_metadata.Udef_publicationyear, dataItem.xml_metadata.Udef_degree, dataItem.xml_metadata.Udef_doi, dataItem.xml_metadata.Udef_edition, dataItem.xml_metadata.Udef_remark, dataItem.xml_metadata.Udef_remarkcontent];
-                row.forEach(function(cell){
-                    if(cell!=undefined){
-                        cell = cell.replaceAll(',', ' ');
-                        cell = cell.replaceAll('\n', ' ');
-                    }
-                    else{
-                        cell = "";
-                    }
-                    csvContent += cell + ",";
-                })
-                csvContent += "\r\n";
+                    data[item].xml_metadata.Udef_compilation_vol_page, data[item].xml_metadata.Udef_publisher.text, data[item].time_orig_str, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].doc_content.MetaTags.Udef_doctype, data[item].doc_content.MetaTags.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
+                    data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a,
+                    data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_doi, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent];
+        row.forEach(function(cell){
+            if(cell!=undefined){
+                cell = cell.replaceAll(',', ' ');
+                cell = cell.replaceAll('\n', ' ');
             }
+            else{
+                cell = "";
+            }
+            csvContent += cell + ",";
         })
+        csvContent += "\r\n";
     })
     let link = document.createElement('a');
     // "\ufeff" 解決中文亂碼
@@ -471,242 +509,238 @@ function jsonToDocuXML(){
 </corpus>
 <documents>`;
     checkedboxArray.forEach(function(item){
-        data.forEach(function(dataItem){
-            if(dataItem.filename==item){
-                // corpus name need to be edited
-                xmlContent += `
-<document filename="${dataItem.filename}">
+        // corpus name need to be edited
+        xmlContent += `
+<document filename="${data[item].filename}">
 <corpus>佛圖資料2</corpus>
-<title>${dataItem.title}</title>
-<compilation_name>${dataItem.compilation_name}</compilation_name>
-<compilation_vol>${dataItem.compilation_vol}</compilation_vol>
-<time_orig_str>${dataItem.time_orig_str}</time_orig_str>
-<year_for_grouping>${dataItem.year_for_grouping}</year_for_grouping>
-<geo_level1>${dataItem.geo_level1}</geo_level1>
-<geo_level2>${dataItem.geo_level2}</geo_level2>
-<geo_level3>${dataItem.geo_level3}</geo_level3>
-<doctype>${dataItem.doctype}</doctype>
-<docclass>${dataItem.docclass}</docclass>
-<book_code>${dataItem.book_code}</book_code>
-<doc_source>${dataItem.doc_source}</doc_source>
+<title>${data[item].title}</title>
+<compilation_name>${data[item].compilation_name}</compilation_name>
+<compilation_vol>${data[item].compilation_vol}</compilation_vol>
+<time_orig_str>${data[item].time_orig_str}</time_orig_str>
+<year_for_grouping>${data[item].year_for_grouping}</year_for_grouping>
+<geo_level1>${data[item].geo_level1}</geo_level1>
+<geo_level2>${data[item].geo_level2}</geo_level2>
+<geo_level3>${data[item].geo_level3}</geo_level3>
+<doctype>${data[item].doctype}</doctype>
+<docclass>${data[item].docclass}</docclass>
+<book_code>${data[item].book_code}</book_code>
+<doc_source>${data[item].doc_source}</doc_source>
 <xml_metadata>
-<Udef_author>${dataItem.xml_metadata.Udef_author}</Udef_author>
-<Udef_doctypes>${dataItem.xml_metadata.Udef_doctypes}</Udef_doctypes>
-<Udef_biliography_language>${dataItem.xml_metadata.Udef_biliography_language}</Udef_biliography_language>`;
-                // Udef_author1 - Udef_author6
-                if(dataItem.xml_metadata.Udef_author1!=""){
-                    if(dataItem.xml_metadata.Udef_author1.a!=""){
-                        xmlContent += `
-<Udef_author1>
-<a href="${dataItem.xml_metadata.Udef_author1.a}" target="_blank">${dataItem.xml_metadata.Udef_author1.text}</a>
-</Udef_author1>`;}
-                    else{
-                        xmlContent += `
-<Udef_author1>${dataItem.xml_metadata.Udef_author1.text}</Udef_author1>`;}}
-                if(dataItem.xml_metadata.Udef_author2!=""){
-                    if(dataItem.xml_metadata.Udef_author2.a!=""){
-                        xmlContent += `
-<Udef_author2>
-<a href="${dataItem.xml_metadata.Udef_author2.a}" target="_blank">${dataItem.xml_metadata.Udef_author2.text}</a>
-</Udef_author2>`;}
-                    else{
-                        xmlContent += `
-<Udef_author2>${dataItem.xml_metadata.Udef_author2.text}</Udef_author2>`;}}
-                if(dataItem.xml_metadata.Udef_author3!=""){
-                    if(dataItem.xml_metadata.Udef_author3.a!=""){
-                        xmlContent += `
-<Udef_author3>
-<a href="${dataItem.xml_metadata.Udef_author3.a}" target="_blank">${dataItem.xml_metadata.Udef_author3.text}</a>
-</Udef_author3>`;}
-                    else{
-                        xmlContent += `
-<Udef_author3>${dataItem.xml_metadata.Udef_author3.text}</Udef_author3>`;}}
-                if(dataItem.xml_metadata.Udef_author4!=""){
-                    if(dataItem.xml_metadata.Udef_author4.a!=""){
-                        xmlContent += `
-<Udef_author4>
-<a href="${dataItem.xml_metadata.Udef_author4.a}" target="_blank">${dataItem.xml_metadata.Udef_author4.text}</a>
-</Udef_author4>`;}
-                    else{
-                        xmlContent += `
-<Udef_author4>${dataItem.xml_metadata.Udef_author4.text}</Udef_author4>`;}}
-                if(dataItem.xml_metadata.Udef_author5!=""){
-                    if(dataItem.xml_metadata.Udef_author5.a!=""){
-                        xmlContent += `
-<Udef_author5>
-<a href="${dataItem.xml_metadata.Udef_author5.a}" target="_blank">${dataItem.xml_metadata.Udef_author5.text}</a>
-</Udef_author5>`;}
-                    else{
-                        xmlContent += `
-<Udef_author5>${dataItem.xml_metadata.Udef_author5.text}</Udef_author5>`;}}
-                if(dataItem.xml_metadata.Udef_author6!=""){
-                    if(dataItem.xml_metadata.Udef_author6.a!=""){
-                        xmlContent += `
-<Udef_author6>
-<a href="${dataItem.xml_metadata.Udef_author6.a}" target="_blank">${dataItem.xml_metadata.Udef_author6.text}</a>
-</Udef_author6>`;}
-                    else{
-                        xmlContent += `
-<Udef_author6>${dataItem.xml_metadata.Udef_author6.text}</Udef_author6>`;}}
-                // compilation
-                if(dataItem.xml_metadata.Udef_compilation_name.a!=""){
-                    xmlContent += `
-<Udef_compilation_name>
-<a href="${dataItem.xml_metadata.Udef_compilation_name.a}" target="_blank">${dataItem.xml_metadata.Udef_compilation_name.text}</a>
-</Udef_compilation_name>`;}
-                else{
-                    xmlContent += `
-<Udef_compilation_name>${dataItem.xml_metadata.Udef_compilation_name.text}</Udef_compilation_name>`;}
-                if(dataItem.xml_metadata.Udef_compilation_vol_page!=""){
-                    xmlContent += `
-<Udef_compilation_vol_page>${dataItem.xml_metadata.Udef_compilation_vol_page}</Udef_compilation_vol_page>`;}
-                // publisher
-                if(dataItem.xml_metadata.Udef_publisher.a!=""){
-                    xmlContent += `
-<Udef_publisher>
-<a href="${dataItem.xml_metadata.Udef_publisher.a}" target="_blank">${dataItem.xml_metadata.Udef_publisher.text}</a>
-</Udef_publisher>`;}
-                else{
-                    xmlContent += `
-<Udef_publisher>${dataItem.xml_metadata.Udef_publisher.text}</Udef_publisher>`;}
-                if(dataItem.xml_metadata.Udef_publish_date!=""){
-                    xmlContent += `
-<Udef_publish_date>${dataItem.xml_metadata.Udef_publish_date}</Udef_publish_date>`;}
-                if(dataItem.xml_metadata.Udef_publisher_location!=""){
-                    xmlContent += `
-<Udef_publisher_location>${dataItem.xml_metadata.Udef_publisher_location}</Udef_publisher_location>`;}
-                if(dataItem.xml_metadata.Udef_book_code!=""){
-                    xmlContent += `
-<Udef_book_code>${dataItem.xml_metadata.Udef_book_code}</Udef_book_code>`;}
-                // content
-                if(dataItem.xml_metadata.Udef_edition!=""){
-                    xmlContent += `
-<Udef_edition>${dataItem.xml_metadata.Udef_edition}</Udef_edition>`;}
-                if(dataItem.xml_metadata.Udef_remark!=""){
-                    xmlContent += `
-<Udef_remark>${dataItem.xml_metadata.Udef_remark}</Udef_remark>`;}
-                if(dataItem.xml_metadata.Udef_remarkcontent!=""){
-                    xmlContent += `
-<Udef_remarkcontent>${dataItem.xml_metadata.Udef_remarkcontent}</Udef_remarkcontent>`;}
-                if(dataItem.xml_metadata.Udef_tablecontent!=""){
-                    xmlContent += `
-<Udef_tablecontent>${dataItem.xml_metadata.Udef_tablecontent}</Udef_tablecontent>`;}
-                if(dataItem.xml_metadata.Udef_keywords!=""){
-                    xmlContent += `
-<Udef_keywords>${dataItem.xml_metadata.Udef_keywords}</Udef_keywords>`;}
-                // URL
-                if(dataItem.xml_metadata.Udef_fulltextSrc.a!=""){
-                    xmlContent += `
-<Udef_fulltextSrc>
-<a href="${dataItem.xml_metadata.Udef_fulltextSrc.a}" target="_blank">全文網址</a>
-</Udef_fulltextSrc>`;}
-                else{
-                    xmlContent += `
-<Udef_fulltextSrc>無全文</Udef_fulltextSrc>`;}
-                if(dataItem.xml_metadata.Udef_doi!="無DOI"){
-                    xmlContent += `
-<Udef_doi>
-<a href="${dataItem.xml_metadata.Udef_doi}" target="_blank">DOI</a>
-</Udef_doi>`;}
-                    xmlContent += `
-<Udef_refSrc>
-<a href="${dataItem.xml_metadata.Udef_refSrc.a}" target="_blank">原書目網址</a>
-</Udef_refSrc>`;
-                // 叢書
-                if(dataItem.xml_metadata.Udef_seriesname!=""){
-                    xmlContent += `
-<Udef_seriesname>${dataItem.xml_metadata.Udef_seriesname}</Udef_seriesname>`;}
-                if(dataItem.xml_metadata.Udef_seriessubsidiary!=""){
-                    xmlContent += `
-<Udef_seriessubsidiary>${dataItem.xml_metadata.Udef_remark}</Udef_seriessubsidiary>`;}
-                if(dataItem.xml_metadata.Udef_seriesno!=""){
-                    xmlContent += `
-<Udef_seriesno>${dataItem.xml_metadata.Udef_seriesno}</Udef_seriesno>`;}
-                // 藝術資料庫
-                if(dataItem.xml_metadata.Udef_category!=""){
-                    xmlContent += `
-<Udef_category>${dataItem.xml_metadata.Udef_category}</Udef_category>`;}
-                if(dataItem.xml_metadata.Udef_period!=""){
-                    xmlContent += `
-<Udef_period>${dataItem.xml_metadata.Udef_period}</Udef_period>`;}
-                if(dataItem.xml_metadata.Udef_area!=""){
-                    xmlContent += `
-<Udef_area>${dataItem.xml_metadata.Udef_area}</Udef_area>`;}
-                if(dataItem.xml_metadata.Udef_place!=""){
-                    xmlContent += `
-<Udef_place>${dataItem.xml_metadata.Udef_place}</Udef_place>`;}
-                // 碩博士論文
-                if(dataItem.xml_metadata.Udef_institution!=""){
-                    xmlContent += `
-<Udef_institution>${dataItem.xml_metadata.Udef_institution}</Udef_institution>`;}
-                if(dataItem.xml_metadata.Udef_department!=""){
-                    xmlContent += `
-<Udef_department>${dataItem.xml_metadata.Udef_department}</Udef_department>`;}
-                if(dataItem.xml_metadata.Udef_publicationyear!=""){
-                    xmlContent += `
-<Udef_publicationyear>${dataItem.xml_metadata.Udef_publicationyear}</Udef_publicationyear>`;}
-                if(dataItem.xml_metadata.Udef_degree!=""){
-                    xmlContent += `
-<Udef_degree>${dataItem.xml_metadata.Udef_degree}</Udef_degree>`;}
+<Udef_author>${data[item].xml_metadata.Udef_author}</Udef_author>
+<Udef_doctypes>${data[item].xml_metadata.Udef_doctypes}</Udef_doctypes>
+<Udef_biliography_language>${data[item].xml_metadata.Udef_biliography_language}</Udef_biliography_language>`;
+        // Udef_author1 - Udef_author6
+        if(data[item].xml_metadata.Udef_author1!=""){
+            if(data[item].xml_metadata.Udef_author1.a!=""){
                 xmlContent += `
+<Udef_author1>
+<a href="${data[item].xml_metadata.Udef_author1.a}" target="_blank">${data[item].xml_metadata.Udef_author1.text}</a>
+</Udef_author1>`;}
+            else{
+                xmlContent += `
+<Udef_author1>${data[item].xml_metadata.Udef_author1.text}</Udef_author1>`;}}
+        if(data[item].xml_metadata.Udef_author2!=""){
+            if(data[item].xml_metadata.Udef_author2.a!=""){
+                xmlContent += `
+<Udef_author2>
+<a href="${data[item].xml_metadata.Udef_author2.a}" target="_blank">${data[item].xml_metadata.Udef_author2.text}</a>
+</Udef_author2>`;}
+            else{
+                xmlContent += `
+<Udef_author2>${data[item].xml_metadata.Udef_author2.text}</Udef_author2>`;}}
+        if(data[item].xml_metadata.Udef_author3!=""){
+            if(data[item].xml_metadata.Udef_author3.a!=""){
+                xmlContent += `
+<Udef_author3>
+<a href="${data[item].xml_metadata.Udef_author3.a}" target="_blank">${data[item].xml_metadata.Udef_author3.text}</a>
+</Udef_author3>`;}
+            else{
+                xmlContent += `
+<Udef_author3>${data[item].xml_metadata.Udef_author3.text}</Udef_author3>`;}}
+        if(data[item].xml_metadata.Udef_author4!=""){
+            if(data[item].xml_metadata.Udef_author4.a!=""){
+                xmlContent += `
+<Udef_author4>
+<a href="${data[item].xml_metadata.Udef_author4.a}" target="_blank">${data[item].xml_metadata.Udef_author4.text}</a>
+</Udef_author4>`;}
+            else{
+                xmlContent += `
+<Udef_author4>${data[item].xml_metadata.Udef_author4.text}</Udef_author4>`;}}
+        if(data[item].xml_metadata.Udef_author5!=""){
+            if(data[item].xml_metadata.Udef_author5.a!=""){
+                xmlContent += `
+<Udef_author5>
+<a href="${data[item].xml_metadata.Udef_author5.a}" target="_blank">${data[item].xml_metadata.Udef_author5.text}</a>
+</Udef_author5>`;}
+            else{
+                xmlContent += `
+<Udef_author5>${data[item].xml_metadata.Udef_author5.text}</Udef_author5>`;}}
+        if(data[item].xml_metadata.Udef_author6!=""){
+            if(data[item].xml_metadata.Udef_author6.a!=""){
+                xmlContent += `
+<Udef_author6>
+<a href="${data[item].xml_metadata.Udef_author6.a}" target="_blank">${data[item].xml_metadata.Udef_author6.text}</a>
+</Udef_author6>`;}
+            else{
+                xmlContent += `
+<Udef_author6>${data[item].xml_metadata.Udef_author6.text}</Udef_author6>`;}}
+                // compilation
+        if(data[item].xml_metadata.Udef_compilation_name.a!=""){
+            xmlContent += `
+<Udef_compilation_name>
+<a href="${data[item].xml_metadata.Udef_compilation_name.a}" target="_blank">${data[item].xml_metadata.Udef_compilation_name.text}</a>
+</Udef_compilation_name>`;}
+        else{
+            xmlContent += `
+<Udef_compilation_name>${data[item].xml_metadata.Udef_compilation_name.text}</Udef_compilation_name>`;}
+        if(data[item].xml_metadata.Udef_compilation_vol_page!=""){
+            xmlContent += `
+<Udef_compilation_vol_page>${data[item].xml_metadata.Udef_compilation_vol_page}</Udef_compilation_vol_page>`;}
+        // publisher
+        if(data[item].xml_metadata.Udef_publisher.a!=""){
+            xmlContent += `
+<Udef_publisher>
+<a href="${data[item].xml_metadata.Udef_publisher.a}" target="_blank">${data[item].xml_metadata.Udef_publisher.text}</a>
+</Udef_publisher>`;}
+        else{
+            xmlContent += `
+<Udef_publisher>${data[item].xml_metadata.Udef_publisher.text}</Udef_publisher>`;}
+        if(data[item].xml_metadata.Udef_publish_date!=""){
+            xmlContent += `
+<Udef_publish_date>${data[item].xml_metadata.Udef_publish_date}</Udef_publish_date>`;}
+        if(data[item].xml_metadata.Udef_publisher_location!=""){
+            xmlContent += `
+<Udef_publisher_location>${data[item].xml_metadata.Udef_publisher_location}</Udef_publisher_location>`;}
+        if(data[item].xml_metadata.Udef_book_code!=""){
+            xmlContent += `
+<Udef_book_code>${data[item].xml_metadata.Udef_book_code}</Udef_book_code>`;}
+        // content
+        if(data[item].xml_metadata.Udef_edition!=""){
+            xmlContent += `
+<Udef_edition>${data[item].xml_metadata.Udef_edition}</Udef_edition>`;}
+        if(data[item].xml_metadata.Udef_remark!=""){
+            xmlContent += `
+<Udef_remark>${data[item].xml_metadata.Udef_remark}</Udef_remark>`;}
+        if(data[item].xml_metadata.Udef_remarkcontent!=""){
+            xmlContent += `
+<Udef_remarkcontent>${data[item].xml_metadata.Udef_remarkcontent}</Udef_remarkcontent>`;}
+        if(data[item].xml_metadata.Udef_tablecontent!=""){
+            xmlContent += `
+<Udef_tablecontent>${data[item].xml_metadata.Udef_tablecontent}</Udef_tablecontent>`;}
+        if(data[item].xml_metadata.Udef_keywords!=""){
+            xmlContent += `
+<Udef_keywords>${data[item].xml_metadata.Udef_keywords}</Udef_keywords>`;}
+        // URL
+        if(data[item].xml_metadata.Udef_fulltextSrc.a!=""){
+            xmlContent += `
+<Udef_fulltextSrc>
+<a href="${data[item].xml_metadata.Udef_fulltextSrc.a}" target="_blank">全文網址</a>
+</Udef_fulltextSrc>`;}
+        else{
+            xmlContent += `
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>`;}
+        if(data[item].xml_metadata.Udef_doi!="無DOI"){
+            xmlContent += `
+<Udef_doi>
+<a href="${data[item].xml_metadata.Udef_doi}" target="_blank">DOI</a>
+</Udef_doi>`;}
+            xmlContent += `
+<Udef_refSrc>
+<a href="${data[item].xml_metadata.Udef_refSrc.a}" target="_blank">原書目網址</a>
+</Udef_refSrc>`;
+        // 叢書
+        if(data[item].xml_metadata.Udef_seriesname!=""){
+            xmlContent += `
+<Udef_seriesname>${data[item].xml_metadata.Udef_seriesname}</Udef_seriesname>`;}
+        if(data[item].xml_metadata.Udef_seriessubsidiary!=""){
+            xmlContent += `
+<Udef_seriessubsidiary>${data[item].xml_metadata.Udef_remark}</Udef_seriessubsidiary>`;}
+        if(data[item].xml_metadata.Udef_seriesno!=""){
+            xmlContent += `
+<Udef_seriesno>${data[item].xml_metadata.Udef_seriesno}</Udef_seriesno>`;}
+        // 藝術資料庫
+        if(data[item].xml_metadata.Udef_category!=""){
+            xmlContent += `
+<Udef_category>${data[item].xml_metadata.Udef_category}</Udef_category>`;}
+        if(data[item].xml_metadata.Udef_period!=""){
+            xmlContent += `
+<Udef_period>${data[item].xml_metadata.Udef_period}</Udef_period>`;}
+        if(data[item].xml_metadata.Udef_area!=""){
+            xmlContent += `
+<Udef_area>${data[item].xml_metadata.Udef_area}</Udef_area>`;}
+        if(data[item].xml_metadata.Udef_place!=""){
+            xmlContent += `
+<Udef_place>${data[item].xml_metadata.Udef_place}</Udef_place>`;}
+        // 碩博士論文
+        if(data[item].xml_metadata.Udef_institution!=""){
+            xmlContent += `
+<Udef_institution>${data[item].xml_metadata.Udef_institution}</Udef_institution>`;}
+        if(data[item].xml_metadata.Udef_department!=""){
+            xmlContent += `
+<Udef_department>${data[item].xml_metadata.Udef_department}</Udef_department>`;}
+        if(data[item].xml_metadata.Udef_publicationyear!=""){
+            xmlContent += `
+<Udef_publicationyear>${data[item].xml_metadata.Udef_publicationyear}</Udef_publicationyear>`;}
+        if(data[item].xml_metadata.Udef_degree!=""){
+            xmlContent += `
+<Udef_degree>${data[item].xml_metadata.Udef_degree}</Udef_degree>`;}
+        xmlContent += `
 </xml_metadata>
 <doc_content>`;
-                if(dataItem.doc_content.Paragraph!="無摘要"){
-                    xmlContent += `
-<Paragraph>${dataItem.doc_content.Paragraph}</Paragraph>`
-                }
-                xmlContent += `
+        if(data[item].doc_content.Paragraph!="無摘要"){
+            xmlContent += `
+<Paragraph>${data[item].doc_content.Paragraph}</Paragraph>`
+        }
+        xmlContent += `
 <MetaTags>`;
-                if(Array.isArray(dataItem.doc_content.MetaTags.Udef_author)){
-                    let authorTags = "";
-                    for(i=0; i<dataItem.doc_content.MetaTags.Udef_author.length; i++){
-                        authorTags += `
-<Udef_author>${dataItem.doc_content.MetaTags.Udef_author[i]}</Udef_author>`;       
-                    }
-                    xmlContent += authorTags;
-                }else{
-                    xmlContent += `
-<Udef_author>${dataItem.doc_content.MetaTags.Udef_author}</Udef_author>`;
-                }
-                if(Array.isArray(dataItem.doc_content.MetaTags.Udef_keywords)){
-                    let keywordTags = "";
-                    for(i=0; i<dataItem.doc_content.MetaTags.Udef_keywords.length; i++){
-                        keywordTags += `
-<Udef_keywords>${dataItem.doc_content.MetaTags.Udef_keywords[i]}</Udef_keywords>`;       
-                    }
-                    xmlContent += keywordTags;
-                }else{
-                    xmlContent += `
-<Udef_keywords>${dataItem.doc_content.MetaTags.Udef_keywords}</Udef_keywords>`;
-                }
-                if(Array.isArray(dataItem.doc_content.MetaTags.Udef_doctype)){
-                    let doctypeTags = "";
-                    for(i=0; i<dataItem.doc_content.MetaTags.Udef_doctype.length; i++){
-                        doctypeTags += `
-<Udef_doctype>${dataItem.doc_content.MetaTags.Udef_doctype[i]}</Udef_doctype>`;       
-                    }
-                    xmlContent += doctypeTags;
-                }else{
-                    xmlContent += `
-<Udef_doctype>${dataItem.doc_content.MetaTags.Udef_doctype}</Udef_doctype>`;
-                }
-                if(Array.isArray(dataItem.doc_content.MetaTags.Udef_docclass)){
-                    let docclassTags = "";
-                    for(i=0; i<dataItem.doc_content.MetaTags.Udef_docclass.length; i++){
-                        docclassTags += `
-<Udef_docclass>${dataItem.doc_content.MetaTags.Udef_docclass[i]}</Udef_docclass>`;       
-                    }
-                    xmlContent += docclassTags;
-                }else{
-                    xmlContent += `
-<Udef_docclass>${dataItem.doc_content.MetaTags.Udef_docclass}</Udef_docclass>`;
-                }
-                xmlContent += `
+        if(Array.isArray(data[item].doc_content.MetaTags.Udef_author)){
+            let authorTags = "";
+            for(i=0; i<data[item].doc_content.MetaTags.Udef_author.length; i++){
+                authorTags += `
+<Udef_author>${data[item].doc_content.MetaTags.Udef_author[i]}</Udef_author>`;       
+            }
+            xmlContent += authorTags;
+        }else{
+            xmlContent += `
+<Udef_author>${data[item].doc_content.MetaTags.Udef_author}</Udef_author>`;
+        }
+        if(Array.isArray(data[item].doc_content.MetaTags.Udef_keywords)){
+            let keywordTags = "";
+            for(i=0; i<data[item].doc_content.MetaTags.Udef_keywords.length; i++){
+                keywordTags += `
+<Udef_keywords>${data[item].doc_content.MetaTags.Udef_keywords[i]}</Udef_keywords>`;       
+            }
+            xmlContent += keywordTags;
+        }else{
+            xmlContent += `
+<Udef_keywords>${data[item].doc_content.MetaTags.Udef_keywords}</Udef_keywords>`;
+        }
+        if(Array.isArray(data[item].doc_content.MetaTags.Udef_doctype)){
+            let doctypeTags = "";
+            for(i=0; i<data[item].doc_content.MetaTags.Udef_doctype.length; i++){
+                doctypeTags += `
+<Udef_doctype>${data[item].doc_content.MetaTags.Udef_doctype[i]}</Udef_doctype>`;       
+            }
+            xmlContent += doctypeTags;
+        }else{
+            xmlContent += `
+<Udef_doctype>${data[item].doc_content.MetaTags.Udef_doctype}</Udef_doctype>`;
+        }
+        if(Array.isArray(data[item].doc_content.MetaTags.Udef_docclass)){
+            let docclassTags = "";
+            for(i=0; i<data[item].doc_content.MetaTags.Udef_docclass.length; i++){
+                docclassTags += `
+<Udef_docclass>${data[item].doc_content.MetaTags.Udef_docclass[i]}</Udef_docclass>`;       
+            }
+            xmlContent += docclassTags;
+        }else{
+            xmlContent += `
+<Udef_docclass>${data[item].doc_content.MetaTags.Udef_docclass}</Udef_docclass>`;
+        }
+        xmlContent += `
 </MetaTags>
 </doc_content>
 </document>`;
-            }
-        });
     });
     xmlContent += `
 </documents>
