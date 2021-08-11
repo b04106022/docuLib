@@ -77,7 +77,7 @@
         "Udef_docclass": "中文=Chinese"
       }
     },
-    "folder": ["all", "阿閦佛"]
+    "folder": ["全部書目", "阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -157,7 +157,7 @@
             "Udef_docclass": "中文=Chinese"
         }
     },
-    "folder": ["all", "阿閦佛"]
+    "folder": ["全部書目", "阿閦佛"]
   },
   {
     "corpus": "佛圖資料2",
@@ -245,7 +245,7 @@
         "Udef_docclass": "中文=Chinese"
       }
     },
-    "folder": ["all", "潘重規"]
+    "folder": ["全部書目", "潘重規"]
   }],
   [
     "阿閦佛", "潘重規"
