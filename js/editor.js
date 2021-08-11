@@ -1,7 +1,7 @@
 let data = [];
 let folder = [];
 let trArray = [];
-let currentFolder = "";
+let currentFolder = "全部書目";
 let counter = {}
 axios.get('https://b04106022.github.io/docuLib/data.json')
     .then(function (response) {
@@ -233,18 +233,32 @@ function renderData(foldername){
 }
 
 function renderFolder(){
+    counter = getCounter();
     const folderList = document.querySelector('#folderList');
+    const allCount = document.querySelector('#allCount');
+    const trashCount = document.querySelector('#trashCount');
+    allCount.textContent = counter["全部書目"];
+    trashCount.textContent = counter["垃圾桶"];
     let folderListContent = "";
     folder.forEach(function(folderName){
-        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}()</a>
+        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
         <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"><button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;
 }
-// function getCounter(currentFolder){
-//     let src = currentFolder;
-    
-// }
+function getCounter(){
+    let src = currentFolder;
+    renderData("全部書目");
+    counter["全部書目"] = trArray.length;
+    renderData("垃圾桶");
+    counter["垃圾桶"] = trArray.length;
+    folder.forEach(function(item){
+        renderData(item);
+        counter[item] = trArray.length;
+    });
+    renderData(src);
+    return counter
+}
 
 function deleteData(){
     saveToJson();
@@ -253,9 +267,9 @@ function deleteData(){
         if(confirm("刪除後將無法復原，請確定是否刪除")){
             checkedboxArray.reverse().forEach(function(item){
                 data.splice(item, 1);
-                alert('刪除成功');
             })
         }
+        alert('刪除成功');
     }else{
         if(checkedboxArray.length>0){
             checkedboxArray.forEach(function(item){
@@ -266,6 +280,7 @@ function deleteData(){
         }
     }
     renderData(currentFolder);
+    renderFolder();
 }
 function copyData(){
     saveToJson();
@@ -278,7 +293,8 @@ function copyData(){
     }else{
         alert("請選取欲操作的書目");
     }
-    renderData(currentFolder)
+    renderData(currentFolder);
+    renderFolder();
 }
 function deepClone(obj){
     let copy = {};
