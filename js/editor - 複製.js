@@ -68,6 +68,7 @@ $(function() {
     });
 });
 
+
 function renderData(foldername){
     const folderID = document.querySelector('#folderID');
     folderID.textContent = foldername;    
@@ -232,19 +233,33 @@ function renderData(foldername){
     currentFolder = foldername;
 }
 
+function getCounter(currentFolder){
+    // renderData("全部書目");
+    // counter["全部書目"] = trArray.length;
+    // renderData("垃圾桶");
+    // counter["垃圾桶"] = trArray.length;
+    // folder.forEach(function(item){
+    //     renderData(item);
+    //     counter[item] = trArray.length;
+    // });
+    // renderData(currentFolder);
+    return counter;
+}
 function renderFolder(){
+    counter = getCounter();
+    console.log(counter);
     const folderList = document.querySelector('#folderList');
+    const allCount = document.querySelector('#allCount');
+    const trashCount = document.querySelector('#trashCount');
+    allCount.textContent = counter["全部書目"];
+    trashCount.textContent = counter["垃圾桶"];
     let folderListContent = "";
     folder.forEach(function(folderName){
-        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}()</a>
+        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
         <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"><button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;
 }
-// function getCounter(currentFolder){
-//     let src = currentFolder;
-    
-// }
 
 function deleteData(){
     saveToJson();
@@ -265,6 +280,7 @@ function deleteData(){
             alert("請選取欲操作的書目");
         }
     }
+    renderFolder();
     renderData(currentFolder);
 }
 function copyData(){
@@ -272,20 +288,13 @@ function copyData(){
     let checkedboxArray = getCheckedboxArray();
     if(checkedboxArray.length>0){
         checkedboxArray.forEach(function(item){
-            let obj = deepClone(data[item]);
-            data.push(obj);
+            data.push(data[item])
         })
     }else{
         alert("請選取欲操作的書目");
     }
+    renderFolder();
     renderData(currentFolder)
-}
-function deepClone(obj){
-    let copy = {};
-    for (let attr in obj) {
-          copy[attr] = obj[attr];
-    }
-    return copy;
 }
 
 const folderInput = document.querySelector('#folderInput');
@@ -321,8 +330,8 @@ function checkEditFolder(oldName){
             data[item].folder[data[item].folder.indexOf(oldName)] = newName.value;
         });
         alert("資料夾 "+newName.value+" 修改成功");
-        renderData(currentFolder);
         renderFolder();
+        renderData(currentFolder);
         newName.value='';
         editFolder.classList.add('hide');
     }
@@ -347,114 +356,113 @@ function getCheckedboxArray(){
 }
 
 function saveToJson(){
-    trArray.forEach(function(item){
+    trArray.forEach(function(item, index){
         let tr1 = document.getElementById(item);
         let tr2 = document.getElementById("hiddenRow_"+item);
         // 核心欄位
-        data[item].title = tr1.children[1].textContent;
-        data[item].xml_metadata.Udef_author = tr1.children[2].textContent;
-        data[item].year_for_grouping = tr1.children[3].textContent;
-        data[item].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
-        data[item].xml_metadata.Udef_keywords = tr1.children[5].textContent;
+        data[index].title = tr1.children[1].textContent;
+        data[index].xml_metadata.Udef_author = tr1.children[2].textContent;
+        data[index].year_for_grouping = tr1.children[3].textContent;
+        data[index].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
+        data[index].xml_metadata.Udef_keywords = tr1.children[5].textContent;
         // 使用者加值欄位
-        // data[item] = tr1.children[6].textContent;
-        // data[item] = tr1.children[7].textContent;
-        // data[item] = tr1.children[8].textContent;
-        // data[item] = tr1.children[9].textContent;
-        // data[item] = tr1.children[10].textContent;
-        // data[item] = tr1.chridren[11].firstChild.value
+        // data[index] = tr1.children[6].textContent;
+        // data[index] = tr1.children[7].textContent;
+        // data[index] = tr1.children[8].textContent;
+        // data[index] = tr1.children[9].textContent;
+        // data[index] = tr1.children[10].textContent;
+        // data[index] = tr1.chridren[11].firstChild.value
         if(tr1.children[12].firstElementChild.value=="垃圾桶"){
-            data[item].folder = ["垃圾桶"];
+            data[index].folder = ["垃圾桶"];
         }else{
-            data[item].folder = ["全部書目", tr1.children[12].firstElementChild.value];
+            data[index].folder = ["全部書目", tr1.children[12].firstElementChild.value];
         }
-        // console.log(data[item].title, data[item].folder)
-        // data[item] = tr1.children[13].textContent;
+        // data[index] = tr1.children[13].textContent;
         // 共同欄位
-        data[item].xml_metadata.Udef_compilation_vol_page = tr2.children[1].children[0].firstElementChild.value;
-        data[item].xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
-        data[item].time_orig_str = tr2.children[1].children[2].firstElementChild.value;
-        data[item].xml_metadata.Udef_publisher_location = tr2.children[1].children[3].firstElementChild.value;
-        data[item].xml_metadata.Udef_Udef_book_code = tr2.children[1].children[4].firstElementChild.value;
-        data[item].doc_content.MetaTags.Udef_doctype = tr2.children[1].children[5].firstElementChild.value;
-        data[item].doc_content.MetaTags.Udef_docclass = tr2.children[1].children[6].firstElementChild.value;
-        data[item].doc_content.Paragraph = tr2.children[1].children[7].lastElementChild.value;
-        data[item].xml_metadata.Udef_tablecontent = tr2.children[1].children[8].lastElementChild.value;
+        data[index].xml_metadata.Udef_compilation_vol_page = tr2.children[1].children[0].firstElementChild.value;
+        data[index].xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
+        data[index].time_orig_str = tr2.children[1].children[2].firstElementChild.value;
+        data[index].xml_metadata.Udef_publisher_location = tr2.children[1].children[3].firstElementChild.value;
+        data[index].xml_metadata.Udef_Udef_book_code = tr2.children[1].children[4].firstElementChild.value;
+        data[index].doc_content.MetaTags.Udef_doctype = tr2.children[1].children[5].firstElementChild.value;
+        data[index].doc_content.MetaTags.Udef_docclass = tr2.children[1].children[6].firstElementChild.value;
+        data[index].doc_content.Paragraph = tr2.children[1].children[7].lastElementChild.value;
+        data[index].xml_metadata.Udef_tablecontent = tr2.children[1].children[8].lastElementChild.value;
         // 共同欄位－網址
-        if(document.getElementById("author1_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author1.a = document.getElementById("author1_a_"+item).value;
+        if(document.getElementById("author1_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author1.a = document.getElementById("author1_a_"+index).value;
         }
-        if(document.getElementById("author2_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author2.a = document.getElementById("author2_a_"+item).value;
+        if(document.getElementById("author2_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author2.a = document.getElementById("author2_a_"+index).value;
         }
-        if(document.getElementById("author3_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author3.a = document.getElementById("author3_a_"+item).value;
+        if(document.getElementById("author3_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author3.a = document.getElementById("author3_a_"+index).value;
         }
-        if(document.getElementById("author4_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author4.a = document.getElementById("author4_a_"+item).value;
+        if(document.getElementById("author4_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author4.a = document.getElementById("author4_a_"+index).value;
         }
-        if(document.getElementById("author5_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author5.a = document.getElementById("author5_a_"+item).value;
+        if(document.getElementById("author5_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author5.a = document.getElementById("author5_a_"+index).value;
         }
-        if(document.getElementById("author6_a_"+item)!=null){
-            data[item].xml_metadata.Udef_author6.a = document.getElementById("author6_a_"+item).value;
+        if(document.getElementById("author6_a_"+index)!=null){
+            data[index].xml_metadata.Udef_author6.a = document.getElementById("author6_a_"+index).value;
         }
-        if(document.getElementById("compilation_name_a_"+item)!=null){
-            data[item].xml_metadata.Udef_compilation_name.a = document.getElementById("compilation_name_a_"+item).value;
+        if(document.getElementById("compilation_name_a_"+index)!=null){
+            data[index].xml_metadata.Udef_compilation_name.a = document.getElementById("compilation_name_a_"+index).value;
         }
-        if(document.getElementById("publisher_a_"+item)!=null){
-            data[item].xml_metadata.Udef_publisher.a = document.getElementById("publisher_a_"+item).value;
+        if(document.getElementById("publisher_a_"+index)!=null){
+            data[index].xml_metadata.Udef_publisher.a = document.getElementById("publisher_a_"+index).value;
         }
-        if(document.getElementById("fulltextSrc_a_"+item)!=null){
-            data[item].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_a_"+item).value;
+        if(document.getElementById("fulltextSrc_a_"+index)!=null){
+            data[index].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_a_"+index).value;
         }
-        if(document.getElementById("fulltextSrc_text_"+item)!=null){
+        if(document.getElementById("fulltextSrc_text_"+index)!=null){
             // 預設填入網址
-            if(document.getElementById("fulltextSrc_text_"+item).value=="無全文"){
-                data[item].xml_metadata.Udef_fulltextSrc.a = "";
-                data[item].xml_metadata.Udef_fulltextSrc.text = "無全文";
+            if(document.getElementById("fulltextSrc_text_"+index).value=="無全文"){
+                data[index].xml_metadata.Udef_fulltextSrc.a = "";
+                data[index].xml_metadata.Udef_fulltextSrc.text = "無全文";
             }else{
-                data[item].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_text_"+item).value;
+                data[index].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_text_"+index).value;
             }
         }
         // 輔助欄位
         // 叢書
-        if(document.getElementById("seriesname_"+item)!=null){
-            data[item].xml_metadata.Udef_seriesname = document.getElementById("seriesname_"+item).value;
-        }if(document.getElementById("seriessubsidiary_"+item)!=null){
-            data[item].xml_metadata.Udef_seriessubsidiary = document.getElementById("seriessubsidiary_"+item).value;
-        }if(document.getElementById("seriesno_"+item)!=null){
-            data[item].xml_metadata.Udef_seriesno = document.getElementById("seriesno_"+item).value;
+        if(document.getElementById("seriesname_"+index)!=null){
+            data[index].xml_metadata.Udef_seriesname = document.getElementById("seriesname_"+index).value;
+        }if(document.getElementById("seriessubsidiary_"+index)!=null){
+            data[index].xml_metadata.Udef_seriessubsidiary = document.getElementById("seriessubsidiary_"+index).value;
+        }if(document.getElementById("seriesno_"+index)!=null){
+            data[index].xml_metadata.Udef_seriesno = document.getElementById("seriesno_"+index).value;
         }
         // 藝術資料庫
-        if(document.getElementById("category_"+item)!=null){
-            data[item].xml_metadata.Udef_category = document.getElementById("category_"+item).value;
-        }if(document.getElementById("period_"+item)!=null){
-            data[item].xml_metadata.Udef_period = document.getElementById("period_"+item).value;
-        }if(document.getElementById("area_"+item)!=null){
-            data[item].xml_metadata.Udef_area = document.getElementById("area_"+item).value;
-        }if(document.getElementById("place_"+item)!=null){
-            data[item].xml_metadata.Udef_place = document.getElementById("place_"+item).value;
+        if(document.getElementById("category_"+index)!=null){
+            data[index].xml_metadata.Udef_category = document.getElementById("category_"+index).value;
+        }if(document.getElementById("period_"+index)!=null){
+            data[index].xml_metadata.Udef_period = document.getElementById("period_"+index).value;
+        }if(document.getElementById("area_"+index)!=null){
+            data[index].xml_metadata.Udef_area = document.getElementById("area_"+index).value;
+        }if(document.getElementById("place_"+index)!=null){
+            data[index].xml_metadata.Udef_place = document.getElementById("place_"+index).value;
         }
         // 碩博士論文
-        if(document.getElementById("institution_"+item)!=null){
-            data[item].xml_metadata.Udef_institution = document.getElementById("institution_"+item).value;
-        }if(document.getElementById("department_"+item)!=null){
-            data[item].xml_metadata.Udef_department = document.getElementById("department_"+item).value;
-        }if(document.getElementById("publicationyear_"+item)!=null){
-            data[item].xml_metadata.Udef_publicationyear = document.getElementById("publicationyear_"+item).value;
-        }if(document.getElementById("degree_"+item)!=null){
-            data[item].xml_metadata.Udef_degree = document.getElementById("degree_"+item).value;
-        }if(document.getElementById("doi_"+item)!=null){
-            data[item].xml_metadata.Udef_doi = document.getElementById("doi_"+item).value;
+        if(document.getElementById("institution_"+index)!=null){
+            data[index].xml_metadata.Udef_institution = document.getElementById("institution_"+index).value;
+        }if(document.getElementById("department_"+index)!=null){
+            data[index].xml_metadata.Udef_department = document.getElementById("department_"+index).value;
+        }if(document.getElementById("publicationyear_"+index)!=null){
+            data[index].xml_metadata.Udef_publicationyear = document.getElementById("publicationyear_"+index).value;
+        }if(document.getElementById("degree_"+index)!=null){
+            data[index].xml_metadata.Udef_degree = document.getElementById("degree_"+index).value;
+        }if(document.getElementById("doi_"+index)!=null){
+            data[index].xml_metadata.Udef_doi = document.getElementById("doi_"+index).value;
         }
         // 內容
-        if(document.getElementById("edition_"+item)!=null){
-            data[item].xml_metadata.Udef_edition = document.getElementById("edition_"+item).value;
-        }if(document.getElementById("remark_"+item)!=null){
-            data[item].xml_metadata.Udef_remark = document.getElementById("remark_"+item).value;
-        }if(document.getElementById("remarkcontent_"+item)!=null){
-            data[item].xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+item).value;
+        if(document.getElementById("edition_"+index)!=null){
+            data[index].xml_metadata.Udef_edition = document.getElementById("edition_"+index).value;
+        }if(document.getElementById("remark_"+index)!=null){
+            data[index].xml_metadata.Udef_remark = document.getElementById("remark_"+index).value;
+        }if(document.getElementById("remarkcontent_"+index)!=null){
+            data[index].xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+index).value;
         }
     })
     // let json = [data, folder];

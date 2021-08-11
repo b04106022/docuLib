@@ -25,9 +25,9 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">DocuLib Editor</div>
                 <div class="list-group list-group-flush" id="list">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('all');"><i class="fas fa-folder fa-lg"></i> 全部書目()</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('全部書目');"><i class="fas fa-folder fa-lg"></i> 全部書目(<span id="allCount"></span>)</a>
                     <div id="folderList"></div>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('trash');"><i class="fas fa-trash fa-lg"></i> 垃圾桶()</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('垃圾桶');"><i class="fas fa-trash fa-lg"></i> 垃圾桶(<span id="trashCount"></span>)</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="addFolder();"><i class="fas fa-folder-plus fa-lg"></i> 新增資料夾</a>
                     <a id="folderInput" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="folderName" type="text" size=15 placeholder="請輸入資料夾名稱"> <button class="btn btn-light" onclick="checkFolder();">建立</button></a>
                 </div>
@@ -54,6 +54,7 @@
                     <div class="mt-3">
                         <button class="btn btn-light" onclick="deleteData()">Delete</button>&ensp;
                         <button class="btn btn-light" onclick="copyData()">Copy</button>&ensp;
+                        <!-- <button class="btn btn-light" onclick="moveData()">Move</button>&ensp; -->
                     </div>
                     <table class="mt-2">
                         <thead>
@@ -71,7 +72,7 @@
                             <th>Social Tagging<i class="far fa-question-circle" title="some description"></i></th>
                             <th>重要<i class="far fa-question-circle" title="some description"></i></th>
                             <th>閱讀狀態<i class="far fa-question-circle" title="some description"></i></th>
-                            <th>Move To<i class="far fa-question-circle" title="some description"></i></th>
+                            <th>資料夾<i class="far fa-question-circle" title="some description"></i></th>
                             <th>筆記<i class="far fa-question-circle" title="some description"></i></th>
                             <th></th>
                           </tr>

@@ -4,6 +4,7 @@
 .ml-12{
     margin-left: 12px;
 }
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -29,3 +30,8 @@ table p textarea {
     border: 1px #dddddd solid;
     background-color: #eee;
 }
+
+select {
+    padding: 1px;   
+}
+
