@@ -34,6 +34,18 @@ axios.get('https://b04106022.github.io/docuLib/data.json')
         console.log(error);
     })
 
+// Toggle Menu
+function toggleMenu(){
+    let menuBtn = document.getElementById("sidebarToggle");
+    if(menuBtn.innerHTML === '<i class="fas fa-chevron-left"></i>') {
+      menuBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+    }else{
+        menuBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+    }
+  }
+$('#sidebarToggle').on('click', function() {
+    $(this).toggleClass('active');
+  });
 // Right Click Sidebar - contextMenu
 $(function() {
     $.contextMenu({
@@ -69,18 +81,21 @@ $(function() {
 });
 
 function renderData(foldername){
+    currentFolder = foldername;
     const folderID = document.querySelector('#folderID');
     folderID.textContent = foldername;    
-    
+
     const tbody = document.querySelector('tbody');
     const selectAll = document.querySelector('#selectAll');
-    selectAll.checked=false;
-    let content = "";
+    selectAll.checked = false;
+    
     trArray = [];
+    let content = "";
     data.forEach(function(item, index){
         if(item.folder.includes(foldername)){
             trArray.push(index);
 
+            // 資料夾下拉式選單
             let folderOption = "";
             let selected, trashSelected;
             folder.forEach(function(folderItem){
@@ -107,22 +122,16 @@ function renderData(foldername){
                     <td data-editable="true">${item.year_for_grouping}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
-                    <td data-editable="true"></td>
-                    <td data-editable="true"></td>
-                    <td data-editable="true"></td>
-                    <td data-editable="true"></td>
-                    <td data-editable="true"><input type="checkbox" name='important' value="important"></td>
+                    <td data-editable="true" class="folderLevel"></td>
+                    <td data-editable="true" class="folderLevel"></td>
+                    <td data-editable="true" class="folderLevel"><input type="checkbox" name='important' value="important"></td>
+                    <td class="folderLevel-hide">${item.folder}</td>
                     <td>
-                        <select>
-                            <option value='未閱讀'>未閱讀</option>
-                            <option value='閱讀中'>閱讀中</option>
-                            <option value='已閱讀'>已閱讀</option>
-                        <select>
-                    </td>
-                    <td>
-                        <select>
-                            ${folderOption}
-                        <select>
+                    <select>
+                        <option value='未閱讀'>未閱讀</option>
+                        <option value='閱讀中'>閱讀中</option>
+                        <option value='已閱讀'>已閱讀</option>
+                    <select>
                     </td>
                     <td data-editable="true"></td>
                     <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
@@ -229,7 +238,26 @@ function renderData(foldername){
         }
     })
     tbody.innerHTML = content;
-    currentFolder = foldername;
+    const folderLevels = document.getElementsByClassName('folderLevel');
+    const folderLevelsHide = document.getElementsByClassName('folderLevel-hide');
+    if(foldername=="全部書目" || foldername=="垃圾桶"){
+        for (let i=0; i<folderLevels.length; i++) {
+            folderLevels[i].classList.add('hide');
+        }
+        for (let i=0; i<folderLevelsHide.length; i++) {
+            if(folderLevelsHide[i].classList.contains('hide')){
+                folderLevelsHide[i].classList.remove('hide');
+            }
+        }
+    }
+    else{
+        for (let i=0; i<folderLevels.length; i++) {
+            folderLevels[i].classList.remove('hide');
+        }
+        for (let i=0; i<folderLevelsHide.length; i++) {
+            folderLevelsHide[i].classList.add('hide');
+        }
+    }
 }
 
 function renderFolder(){
@@ -242,7 +270,7 @@ function renderFolder(){
     let folderListContent = "";
     folder.forEach(function(folderName){
         folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
-        <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"><button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
+        <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"> <button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;
 }
@@ -337,7 +365,7 @@ function checkEditFolder(oldName){
             data[item].folder[data[item].folder.indexOf(oldName)] = newName.value;
         });
         alert("資料夾 "+newName.value+" 修改成功");
-        renderData(currentFolder);
+        renderData(newName.value);
         renderFolder();
         newName.value='';
         editFolder.classList.add('hide');
@@ -361,7 +389,7 @@ function getCheckedboxArray(){
     }
     return checkedboxArray;
 }
-
+let obj;
 function saveToJson(){
     trArray.forEach(function(item){
         let tr1 = document.getElementById(item);
@@ -373,19 +401,17 @@ function saveToJson(){
         data[item].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
         data[item].xml_metadata.Udef_keywords = tr1.children[5].textContent;
         // 使用者加值欄位
+        // 6主題分類, 7SocialTagging, 8重要,  9資料夾, 10閱讀狀態, 11筆記
         // data[item] = tr1.children[6].textContent;
         // data[item] = tr1.children[7].textContent;
-        // data[item] = tr1.children[8].textContent;
-        // data[item] = tr1.children[9].textContent;
-        // data[item] = tr1.children[10].textContent;
-        // data[item] = tr1.chridren[11].firstChild.value
-        if(tr1.children[12].firstElementChild.value=="垃圾桶"){
-            data[item].folder = ["垃圾桶"];
-        }else{
-            data[item].folder = ["全部書目", tr1.children[12].firstElementChild.value];
-        }
-        // console.log(data[item].title, data[item].folder)
-        // data[item] = tr1.children[13].textContent;
+        // data[item] = tr1.children[8].firstChild.value
+        // data[item] = tr1.chridren[9]
+        // Move
+        // if(tr1.children[9].firstElementChild.value=="垃圾桶"){
+        //     data[item].folder = ["垃圾桶"];
+        // }else{
+        //     data[item].folder = ["全部書目", tr1.children[9].firstElementChild.value];
+        // }
         // 共同欄位
         data[item].xml_metadata.Udef_compilation_vol_page = tr2.children[1].children[0].firstElementChild.value;
         data[item].xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
@@ -489,11 +515,11 @@ function jsonToCsv(){
         checkedboxArray = trArray;
     }
     // header
-    let csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類一,主題分類二,主題分類三,主題詞,Social Tagging,重要度,筆記,評註,卷期 / 頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,DOI,版本項,附註項,內容項\r\n`;
+    let csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類,Social Tagging,重要度,筆記,評註,卷期 / 頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,DOI,版本項,附註項,內容項\r\n`;
     checkedboxArray.forEach(function(item){
         // content
         let row = [data[item].title, data[item].xml_metadata.Udef_author, data[item].year_for_grouping, data[item].xml_metadata.Udef_compilation_name.text, data[item].xml_metadata.Udef_keywords, 
-                    "", "", "", "", "", "", "", "", 
+                    "", "", "", "", "", 
                     data[item].xml_metadata.Udef_compilation_vol_page, data[item].xml_metadata.Udef_publisher.text, data[item].time_orig_str, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].doc_content.MetaTags.Udef_doctype, data[item].doc_content.MetaTags.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
                     data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a,
                     data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_doi, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent];
