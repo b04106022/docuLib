@@ -524,6 +524,7 @@ function jsonToCsv(){
                     data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a,
                     data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_doi, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent];
         row.forEach(function(cell){
+            console.log(typeof row)
             if(cell!=undefined){
                 cell = cell.replaceAll(',', ' ');
                 cell = cell.replaceAll('\n', ' ');

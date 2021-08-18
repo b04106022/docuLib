@@ -111,6 +111,18 @@ function renderData(foldername){
             //     folderOption += `<option value='${folderItem}' ${selected}>${folderItem}</option>`;
             // })
             // folderOption += `<option value='垃圾桶' ${trashSelected}>垃圾桶</option>`;  
+            
+            let readOption = "";
+            let readSelected;
+            let readStatus = ["未閱讀", "閱讀中", "已閱讀"];
+            readStatus.forEach(function(readItem){
+                if(item.doculib.read==readItem){
+                    readSelected = "selected";
+                }else{
+                    readSelected = "";
+                }
+                readOption += `<option value='${readItem}' ${readSelected}>${readItem}</option>`;
+            })
 
             // 核心欄位 & 使用者加值欄位
             content += `
@@ -127,12 +139,10 @@ function renderData(foldername){
                     <td class="folderLevel-hide">${item.doculib.folder}</td>
                     <td>
                     <select>
-                        <option value='未閱讀'>未閱讀</option>
-                        <option value='閱讀中'>閱讀中</option>
-                        <option value='已閱讀'>已閱讀</option>
+                        ${readOption}
                     <select>
                     </td>
-                    <td data-editable="true">${item.doculib.note[foldername]}</td>
+                    <td data-editable="true">${item.doculib.note}</td>
                     <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
                 </tr>
                 <tr class="hide" id="hiddenRow_${index}">
@@ -171,10 +181,10 @@ function renderData(foldername){
             content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${index}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
             content += `<p>出版者網址：<input type="text" id="publisher_a_${index}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
             if(item.xml_metadata.Udef_fulltextSrc.a!=""){
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_a_${index}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_${index}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
             }
             else{
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${index}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
+                content += `<p>全文網址：<input type="text" id="fulltextSrc_${index}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
             }
             if(item.xml_metadata.Udef_doi.a!=""){
                 content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi.a}'></p></details>`;
@@ -371,7 +381,7 @@ function getCheckedboxArray(){
     }
     return checkedboxArray;
 }
-let obj;
+
 function saveToJson(){
     trArray.forEach(function(item){
         let tr1 = document.getElementById(item);
@@ -389,7 +399,7 @@ function saveToJson(){
         data[item].doculib.socialTagging[currentFolder] = tr1.children[7].textContent;
         data[item].doculib.important[currentFolder] = tr1.children[8].firstElementChild.value;
         // tr1.children[9].textContent
-        data[item].doculib.read[currentFolder] = tr1.children[10].firstElementChild.value;
+        data[item].doculib.read = tr1.children[10].firstElementChild.value;
         data[item].doculib.note = tr1.children[11].textContent;
         // Move
         // if(tr1.children[9].firstElementChild.value=="垃圾桶"){
@@ -433,22 +443,26 @@ function saveToJson(){
         if(document.getElementById("publisher_a_"+item)!=null){
             data[item].xml_metadata.Udef_publisher.a = document.getElementById("publisher_a_"+item).value;
         }
-        // ???
-        if(document.getElementById("fulltextSrc_a_"+item)!=null){
-            data[item].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_a_"+item).value;
-        }
-        if(document.getElementById("fulltextSrc_text_"+item)!=null){
+        if(document.getElementById("fulltextSrc_"+item)!=null){
             // 預設填入網址
-            if(document.getElementById("fulltextSrc_text_"+item).value=="無全文"){
+            if(document.getElementById("fulltextSrc_"+item).value=="無全文"){
                 data[item].xml_metadata.Udef_fulltextSrc.a = "";
                 data[item].xml_metadata.Udef_fulltextSrc.text = "無全文";
             }else{
-                data[item].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_text_"+item).value;
+                data[item].xml_metadata.Udef_fulltextSrc.a = document.getElementById("fulltextSrc_"+item).value;
                 data[item].xml_metadata.Udef_fulltextSrc.text = "全文網址";
             }
         }
         if(document.getElementById("doi_"+item)!=null){
-            data[item].xml_metadata.Udef_doi.a = document.getElementById("doi_"+item).value;
+            // 預設填入網址
+            if(document.getElementById("doi_"+item).value=="無DOI"){
+                data[item].xml_metadata.Udef_doi.a = "";
+                data[item].xml_metadata.Udef_doi.text = "無DOI";
+            }
+            else{
+                data[item].xml_metadata.Udef_doi.a = document.getElementById("doi_"+item).value;
+                data[item].xml_metadata.Udef_doi.text = "DOI";
+            }
         }
         // 輔助欄位
         // 叢書
@@ -488,13 +502,13 @@ function saveToJson(){
             data[item].xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+item).value;
         }
     })
-    let json = [data, folder];
-    let link = document.createElement('a');
-    let blob = new Blob([JSON.stringify(json)], {type:""});
-    let url = URL.createObjectURL(blob);
-    link.href = url;
-    link.setAttribute('download', 'matadata.json');
-    link.click();
+    // let json = [data, folder];
+    // let link = document.createElement('a');
+    // let blob = new Blob([JSON.stringify(json)], {type:""});
+    // let url = URL.createObjectURL(blob);
+    // link.href = url;
+    // link.setAttribute('download', 'matadata.json');
+    // link.click();
 }
 
 function jsonToCsv(){
@@ -504,17 +518,17 @@ function jsonToCsv(){
         checkedboxArray = trArray;
     }
     // header
-    let csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類,Social Tagging,重要度,筆記,評註,卷期 / 頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,DOI,版本項,附註項,內容項\r\n`;
+    let csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類,Social Tagging,重要,閱讀狀態,筆記,卷期,頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,DOI,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,版本項,附註項,內容項\r\n`;
     checkedboxArray.forEach(function(item){
         // content
         let row = [data[item].title, data[item].xml_metadata.Udef_author, data[item].year_for_grouping, data[item].xml_metadata.Udef_compilation_name.text, data[item].xml_metadata.Udef_keywords, 
-                    "", "", "", "", "", 
-                    data[item].xml_metadata.Udef_compilation_vol_page, data[item].xml_metadata.Udef_publisher.text, data[item].time_orig_str, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].doc_content.MetaTags.Udef_doctype, data[item].doc_content.MetaTags.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
-                    data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a,
-                    data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_doi, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent];
+                    data[item].doculib.topic[currentFolder], data[item].doculib.socialTagging[currentFolder], data[item].doculib.important[currentFolder], data[item].doculib.read, data[item].doculib.note, 
+                    data[item].xml_metadata.Udef_compilation_vol, data[item].xml_metadata.Udef_compilation_page, data[item].xml_metadata.Udef_publisher.text, data[item].xml_metadata.Udef_publish_date, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].xml_metadata.Udef_doctypes, data[item].xml_metadata.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
+                    data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a, data[item].xml_metadata.Udef_doi.a,
+                    data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent];
         row.forEach(function(cell){
             if(cell!=undefined){
-                cell = cell.replaceAll(',', ' ');
+                cell = cell.replaceAll(',', ';');
                 cell = cell.replaceAll('\n', ' ');
             }
             else{
