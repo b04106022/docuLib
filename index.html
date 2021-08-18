@@ -52,9 +52,10 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <div class="mt-3">
-                        <button class="btn btn-light" onclick="deleteData()">Delete</button>&ensp;
+                        <button id="delBtn" class="btn btn-light" onclick="deleteData()">Delete</button>&ensp;&ensp;&ensp;&ensp;&ensp;                        
+                        <select id="folderSelector" class="form-select" style="width:auto; display: inline;"></select>
                         <button id="addBtn" class="btn btn-light folderLevel-hide" onclick="addData()">Add</button>&ensp;
-                    </div>
+                    </div>                    
                     <table class="mt-2">
                         <thead>
                           <tr>
