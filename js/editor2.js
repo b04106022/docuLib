@@ -294,21 +294,39 @@ function getCounter(){
 function deleteData(){
     saveToJson();
     let checkedboxArray = getCheckedboxArray();
-    if(currentFolder=="垃圾桶"){
-        if(confirm("刪除後將無法復原，請確定是否刪除")){
-            checkedboxArray.reverse().forEach(function(item){
-                data.splice(item, 1);
-            })
-        }
-        alert('刪除成功');
-    }else{
-        if(checkedboxArray.length>0){
+    if(checkedboxArray.length>0){
+        if(currentFolder=="全部書目"){
+            let alertData = "";
             checkedboxArray.forEach(function(item){
-                data[item].folder = ['垃圾桶'];
+                if(data[item].doculib.folder.length>1){
+                    alertData += data[item].title + "\n";
+                }
             })
+            if(alertData != ""){
+                if(confirm(`以下書目仍存在其他研究資料夾中，請確認是否移至垃圾桶\n${alertData}`)){
+                    checkedboxArray.forEach(function(item){
+                        data[item].doculib.folder = ["垃圾桶"];
+                    })
+                }
+            }else{
+                checkedboxArray.forEach(function(item){
+                    data[item].doculib.folder = ["垃圾桶"];
+                })
+            }
+        }else if(currentFolder=="垃圾桶"){
+            if(confirm("刪除後將無法復原，請確定是否刪除")){
+                checkedboxArray.reverse().forEach(function(item){
+                    data.splice(item, 1);
+                })
+            }
         }else{
-            alert("請選取欲操作的書目");
+            checkedboxArray.forEach(function(item){
+                let index = data[item].doculib.folder.indexOf(currentFolder);
+                data[item].doculib.folder.splice(index, 1);
+            })
         }
+    }else{
+        alert("請選取欲操作的書目");
     }
     renderData(currentFolder);
     renderFolder();
