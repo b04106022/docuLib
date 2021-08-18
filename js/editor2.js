@@ -1,7 +1,8 @@
 let data = [];
 let folder = [];
 let trArray = [];
-let currentFolder = "全部書目";
+// let currentFolder = "全部書目";
+let currentFolder = "";
 let counter = {}
 axios.get('https://b04106022.github.io/docuLib/dataformat.json')
     .then(function (response) {
@@ -43,9 +44,7 @@ function toggleMenu(){
         menuBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
     }
   }
-$('#sidebarToggle').on('click', function() {
-    $(this).toggleClass('active');
-  });
+
 // Right Click Sidebar - contextMenu
 $(function() {
     $.contextMenu({
@@ -96,22 +95,22 @@ function renderData(foldername){
             trArray.push(index);
 
             // 資料夾下拉式選單
-            let folderOption = "";
-            let selected, trashSelected;
-            folder.forEach(function(folderItem){
-                if(item.folder[1]==folderItem){
-                    selected = "selected";
-                }else{
-                    selected = "";
-                }
-                if(item.folder.length==1){
-                    trashSelected = "selected";
-                }else{
-                    trashSelected = "";
-                }
-                folderOption += `<option value='${folderItem}' ${selected}>${folderItem}</option>`;
-            })
-            folderOption += `<option value='垃圾桶' ${trashSelected}>垃圾桶</option>`;  
+            // let folderOption = "";
+            // let selected, trashSelected;
+            // folder.forEach(function(folderItem){
+            //     if(item.folder[1]==folderItem){
+            //         selected = "selected";
+            //     }else{
+            //         selected = "";
+            //     }
+            //     if(item.folder.length==1){
+            //         trashSelected = "selected";
+            //     }else{
+            //         trashSelected = "";
+            //     }
+            //     folderOption += `<option value='${folderItem}' ${selected}>${folderItem}</option>`;
+            // })
+            // folderOption += `<option value='垃圾桶' ${trashSelected}>垃圾桶</option>`;  
 
             // 核心欄位 & 使用者加值欄位
             content += `
@@ -119,13 +118,13 @@ function renderData(foldername){
                     <td><input type="checkbox" name='c' value="${index}"></td>
                     <td data-editable="true">${item.title}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_author}</td>
-                    <td data-editable="true">${item.year_for_grouping}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_publish_date.substr(0, 3)}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
-                    <td data-editable="true" class="folderLevel"></td>
-                    <td data-editable="true" class="folderLevel"></td>
-                    <td data-editable="true" class="folderLevel"><input type="checkbox" name='important' value="important"></td>
-                    <td class="folderLevel-hide">${item.folder}</td>
+                    <td data-editable="true" class="folderLevel">${item.doculib.topic}</td>
+                    <td data-editable="true" class="folderLevel">${item.doculib.socialTagging}</td>
+                    <td data-editable="true" class="folderLevel"><input type="checkbox" name='important' value="重要" ${item.doculib.important}></td>
+                    <td class="folderLevel-hide">${item.doculib.folder}</td>
                     <td>
                     <select>
                         <option value='未閱讀'>未閱讀</option>
@@ -133,50 +132,40 @@ function renderData(foldername){
                         <option value='已閱讀'>已閱讀</option>
                     <select>
                     </td>
-                    <td data-editable="true"></td>
+                    <td data-editable="true">${item.doculib.note}</td>
                     <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
                 </tr>
                 <tr class="hide" id="hiddenRow_${index}">
                     <td></td>
                     <td colspan="14">`;
             // 共同欄位
-            content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol_page}'></p>`;
+            content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol}, ${item.xml_metadata.Udef_compilation_page}'></p>`;
             content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
             content += `<p>出版日期：<input type="text" value='${item.time_orig_str}'></p>`;
             content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
             content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
-            content += `<p>資料類型：<input type="text" value='${item.doc_content.MetaTags.Udef_doctype}'</p>`;
-            content += `<p>語言：<input type="text" value='${item.doc_content.MetaTags.Udef_docclass}'</p>`;
-            if(item.doc_content.Paragraph!=""){
-                content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
-            }
-            else{
-                content += `<p>摘要：<br><textarea rows="4">無摘要</textarea></p>`;
-            }
-            if(item.xml_metadata.Udef_tablecontent!=""){
-                content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
-            }
-            else{
-                content += `<p>目次：<br><textarea rows="4">無目次</textarea></p>`;
-            }
+            content += `<p>資料類型：<input type="text" value='${item.doc_content.xml_metadata.Udef_doctype}'</p>`;
+            content += `<p>語言：<input type="text" value='${item.doc_content.xml_metadata.Udef_docclass}'</p>`;
+            content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
+            content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
             // 共同欄位－網址
             content += `<details><summary class="mb-3">網址</summary>`;
-            if(item.xml_metadata.Udef_author1!=""){
+            if(item.xml_metadata.Udef_author1!={}){
                 content += `<p>作者1網址：<input type="text" id="author1_a_${index}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
             }
-            if(item.xml_metadata.Udef_author2!=""){
+            if(item.xml_metadata.Udef_author2!={}){
                 content += `<p>作者2網址：<input type="text" id="author2_a_${index}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
             }
-            if(item.xml_metadata.Udef_author3!=""){
+            if(item.xml_metadata.Udef_author3!={}){
                 content += `<p>作者3網址：<input type="text" id="author3_a_${index}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
             }
-            if(item.xml_metadata.Udef_author4!=""){
+            if(item.xml_metadata.Udef_author4!={}){
                 content += `<p>作者4網址：<input type="text" id="author4_a_${index}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
             }
-            if(item.xml_metadata.Udef_author5!=""){
+            if(item.xml_metadata.Udef_author5!={}){
                 content += `<p>作者5網址：<input type="text" id="author5_a_${index}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
             }
-            if(item.xml_metadata.Udef_author6!=""){
+            if(item.xml_metadata.Udef_author6!={}){
                 content += `<p>作者6網址：<input type="text" id="author6_a_${index}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
             }
             content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${index}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
@@ -187,11 +176,11 @@ function renderData(foldername){
             else{
                 content += `<p>全文網址：<input type="text" id="fulltextSrc_text_${index}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
             }
-            if(item.xml_metadata.Udef_doi!=""){
-                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi}'></p></details>`;
+            if(item.xml_metadata.Udef_doi.a!=""){
+                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi.a}'></p></details>`;
             }
             else{
-                content += `<p>DOI：<input type="text" id="doi_${index}" value='無DOI'></p></details>`;
+                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi.text}'></p></details>`;
             }
             // 輔助欄位
             if(item.xml_metadata.Udef_seriesname!="" || item.xml_metadata.Udef_seriessubsidiary!="" || item.xml_metadata.Udef_seriesno!="" || item.xml_metadata.Udef_remark!="" || item.xml_metadata.Udef_remarkcontent!="" || item.xml_metadata.Udef_edition!="" || item.xml_metadata.Udef_category!="" || item.xml_metadata.Udef_period!="" || item.xml_metadata.Udef_area!="" || item.xml_metadata.Udef_place!="" || item.xml_metadata.Udef_institution!="" || item.xml_metadata.Udef_department!="" || item.xml_metadata.Udef_publicationyear!="" || item.xml_metadata.Udef_degree!=""){
