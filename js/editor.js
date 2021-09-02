@@ -35,6 +35,72 @@ axios.get('https://b04106022.github.io/docuLib/dataformat.json')
         console.log(error);
     })
 
+var docuSkyDbObj = null;
+var docuSkyGetDocsObj = null;
+var docuSkyDataFilesObj = null;
+
+$(document).ready(function() {
+    docuSkyDbObj = docuskyManageDbListSimpleUI;
+    docuSkyGetDocsObj = docuskyGetDbCorpusDocumentsSimpleUI;
+    docuSkyDataFilesObj = docuskyManageDataFileListSimpleUI;
+
+    $("#manageDbList").click(function(e) {
+        docuSkyDbObj.manageDbList(e);
+    });
+    $("#getDocuSkyDocs").click(function(e) {
+        docuSkyGetDocsObj.getDbCorpusDocuments('', '', '', e);
+    });
+    $("#manageDataFiles").click(function(e) {
+        docuSkyDataFilesObj.manageDataFileList(e);
+    });
+});
+
+/* ---
+upload DocuXML to DocuSky directly
+--- */
+var _docuSkyObj = docuskyManageDbListSimpleUI;
+$('#output-db').click(function(event) {
+	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
+});
+/* ---
+callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
+--- */
+function uploadXML2DocuSky() {
+	
+	// hide UI
+	// _docuSkyObj.hideWidget();
+
+	// info
+	var dbTitle = "test";
+	if (dbTitle === '') dbTitle = 'DB-' + now();
+	var formData = { 
+		dummy: {
+			name: 'dbTitleForImport', 
+			value: dbTitle 
+		}, 
+		file: {
+			value: _xml, 
+			filename: dbTitle + '.xml', 
+			name: 'importedFiles[]'
+		}
+	};
+	// upload
+	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
+}
+/* ---
+success function of uploadXML2DocuSky()
+--- */
+function succUploadFunc() {
+	alert("已成功上傳檔案至 DocuSky。");
+}
+/* ---
+fail function of uploadXML2DocuSky()
+--- */
+function failUploadFunc() {
+	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
+}
+
+
 function toggleMenu(){
     let menuBtn = document.getElementById("sidebarToggle");
     if(menuBtn.innerHTML === '<i class="fas fa-chevron-left"></i>') {
@@ -884,51 +950,12 @@ ${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
 }
 
 
-/* ---
-upload DocuXML to DocuSky directly
---- */
-var _docuSkyObj = docuskyManageDbListSimpleUI;
-$('#output-db').click(function(event) {
-	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
-});
 
-/* ---
-callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
---- */
-function uploadXML2DocuSky() {
-	
-	// hide UI
-	_docuSkyObj.hideWidget();
 
-	// info
-	var dbTitle = "test";
-	if (dbTitle === '') dbTitle = 'DB-' + now();
-	var formData = { 
-		dummy: {
-			name: 'dbTitleForImport', 
-			value: dbTitle 
-		}, 
-		file: {
-			value: _xml, 
-			filename: dbTitle + '.xml', 
-			name: 'importedFiles[]'
-		}
-	};
-	// upload
-	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
-}
-/* ---
-success function of uploadXML2DocuSky()
---- */
-function succUploadFunc() {
-	alert("已成功上傳檔案至 DocuSky。");
-}
-/* ---
-fail function of uploadXML2DocuSky()
---- */
-function failUploadFunc() {
-	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
-}
+
+
+
+
 
 
 // /* ---
