@@ -2,8 +2,7 @@ let data = [];
 let folder = [];
 let trArray = [];
 let currentFolder = "";
-let counter = {};
-let _xml = ""
+let counter = {}
 axios.get('https://b04106022.github.io/docuLib/dataformat.json')
     .then(function (response) {
         data = response.data[0];
@@ -161,24 +160,13 @@ function renderData(foldername){
             content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
             // 共同欄位－網址
             content += `<details><summary class="mb-3">網址</summary>`;
-            if(Object.keys(item.xml_metadata.Udef_author1).length>0){
-                content += `<p>作者1網址：<input type="text" id="author1_a_${index}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author2).length>0){
-                content += `<p>作者2網址：<input type="text" id="author2_a_${index}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author3).length>0){
-                content += `<p>作者3網址：<input type="text" id="author3_a_${index}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author4).length>0){
-                content += `<p>作者4網址：<input type="text" id="author4_a_${index}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author5).length>0){
-                content += `<p>作者5網址：<input type="text" id="author5_a_${index}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author6).length>0){
-                content += `<p>作者6網址：<input type="text" id="author6_a_${index}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
-            }
+            content += `<details class="ml-125"><summary class="mb-3">作者</summary>`;
+            content += `<p>作者1網址：<input type="text" id="author1_a_${index}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
+            content += `<p>作者2網址：<input type="text" id="author2_a_${index}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
+            content += `<p>作者3網址：<input type="text" id="author3_a_${index}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
+            content += `<p>作者4網址：<input type="text" id="author4_a_${index}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
+            content += `<p>作者5網址：<input type="text" id="author5_a_${index}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
+            content += `<p>作者6網址：<input type="text" id="author6_a_${index}" value='${item.xml_metadata.Udef_author6.a}'></p></details>`;
             content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${index}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
             content += `<p>出版者網址：<input type="text" id="publisher_a_${index}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
             if(item.xml_metadata.Udef_fulltextSrc.a!=""){
@@ -428,7 +416,7 @@ function getCheckedboxArray(){
 }
 function arrToStr(arr){
     let str = "";
-    if(arr==undefined || arr.length<1){
+    if(arr==undefined){
         return str
     }
     arr.forEach(function(item){
@@ -878,16 +866,13 @@ ${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
 </documents>
 </ThdlPrototypeExport>`;
     // using FileSaver
-    // let blob = new Blob([xmlContent], {type: "text/xml;charset=utf-8"});
-    // saveAs(blob, "corpus.xml");
-    _xml = xmlContent;
+    let blob = new Blob([xmlContent], {type: "text/xml;charset=utf-8"});
+    saveAs(blob, "corpus.xml");
 }
-
 
 /* ---
 upload DocuXML to DocuSky directly
 --- */
-var _docuSkyObj = docuskyManageDbListSimpleUI;
 $('#output-db').click(function(event) {
 	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
 });
@@ -901,7 +886,7 @@ function uploadXML2DocuSky() {
 	_docuSkyObj.hideWidget();
 
 	// info
-	var dbTitle = "test";
+	var dbTitle = $("#output-dbname input").val().trim();
 	if (dbTitle === '') dbTitle = 'DB-' + now();
 	var formData = { 
 		dummy: {
@@ -914,6 +899,12 @@ function uploadXML2DocuSky() {
 			name: 'importedFiles[]'
 		}
 	};
+
+	// progress bar
+	_progress.upload = _docuSkyObj.uploadProgressId;
+	_docuSkyObj.uploadProgressId = 'myUploadProgressId';
+	$("#download .main .progress").show();
+
 	// upload
 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
 }
@@ -921,6 +912,12 @@ function uploadXML2DocuSky() {
 success function of uploadXML2DocuSky()
 --- */
 function succUploadFunc() {
+	
+	// progress bar
+	_docuSkyObj.uploadProgressId = _progress.upload;
+	$("#download .main .progress").hide();
+
+	// message
 	alert("已成功上傳檔案至 DocuSky。");
 }
 /* ---
@@ -929,63 +926,3 @@ fail function of uploadXML2DocuSky()
 function failUploadFunc() {
 	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
 }
-
-
-// /* ---
-// upload DocuXML to DocuSky directly
-// --- */
-// var _docuSkyObj = docuskyManageDbListSimpleUI
-// var $ = jQuery.noConflict(true);
-// $('#output-db').click(function(event) {
-// 	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
-// });
-
-// /* ---
-// callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
-// --- */
-// function uploadXML2DocuSky() {
-	
-// 	// hide UI
-// 	_docuSkyObj.hideWidget();
-
-// 	// info
-// 	var dbTitle = $("#output-dbname input").val().trim();
-// 	if (dbTitle === '') dbTitle = 'DB-' + now();
-// 	var formData = { 
-// 		dummy: {
-// 			name: 'dbTitleForImport', 
-// 			value: dbTitle 
-// 		}, 
-// 		file: {
-// 			value: _xml, 
-// 			filename: dbTitle + '.xml', 
-// 			name: 'importedFiles[]'
-// 		}
-// 	};
-
-// 	// progress bar
-// 	_progress.upload = _docuSkyObj.uploadProgressId;
-// 	_docuSkyObj.uploadProgressId = 'myUploadProgressId';
-// 	$("#download .main .progress").show();
-
-// 	// upload
-// 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
-// }
-// /* ---
-// success function of uploadXML2DocuSky()
-// --- */
-// function succUploadFunc() {
-	
-// 	// progress bar
-// 	_docuSkyObj.uploadProgressId = _progress.upload;
-// 	$("#download .main .progress").hide();
-
-// 	// message
-// 	alert("已成功上傳檔案至 DocuSky。");
-// }
-// /* ---
-// fail function of uploadXML2DocuSky()
-// --- */
-// function failUploadFunc() {
-// 	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
-// }

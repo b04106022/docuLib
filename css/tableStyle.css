@@ -4,28 +4,31 @@
 .ml-12{
     margin-left: 12px;
 }
+/* .ml-125{
+    margin-left: 1.25em;
+} */
 
-table {
+#table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
 } 
-td, th {
+#table td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
-tr:nth-child(even) {
+#table tr:nth-child(even) {
     background-color: #eeeeee;
 }
-table p{
+#table p{
     display: flex;
 }
-table p input[type='text'] {
+#table p input[type='text'] {
     flex: 1;
     border: none;
     background-color: #eee;
 }
-table p textarea {
+#table p textarea {
     flex: 1;
     border: 1px #dddddd solid;
     background-color: #eee;
