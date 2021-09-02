@@ -35,38 +35,33 @@ axios.get('https://b04106022.github.io/docuLib/dataformat.json')
         console.log(error);
     })
 
-var docuSkyDbObj = null;
-var docuSkyGetDocsObj = null;
-var docuSkyDataFilesObj = null;
+// var docuSkyDbObj = null;
+// var docuSkyGetDocsObj = null;
+// var docuSkyDataFilesObj = null;
 
-$(document).ready(function() {
-    docuSkyDbObj = docuskyManageDbListSimpleUI;
-    docuSkyGetDocsObj = docuskyGetDbCorpusDocumentsSimpleUI;
-    docuSkyDataFilesObj = docuskyManageDataFileListSimpleUI;
+// $(document).ready(function() {
+//     docuSkyDbObj = docuskyManageDbListSimpleUI;
+//     docuSkyGetDocsObj = docuskyGetDbCorpusDocumentsSimpleUI;
+//     docuSkyDataFilesObj = docuskyManageDataFileListSimpleUI;
 
-    $("#manageDbList").click(function(e) {
-        docuSkyDbObj.manageDbList(e);
-    });
-    $("#getDocuSkyDocs").click(function(e) {
-        docuSkyGetDocsObj.getDbCorpusDocuments('', '', '', e);
-    });
-    $("#manageDataFiles").click(function(e) {
-        docuSkyDataFilesObj.manageDataFileList(e);
-    });
-});
+//     $("#manageDbList").click(function(e) {
+//         docuSkyDbObj.manageDbList(e);
+//     });
+//     $("#getDocuSkyDocs").click(function(e) {
+//         docuSkyGetDocsObj.getDbCorpusDocuments('', '', '', e);
+//     });
+//     $("#manageDataFiles").click(function(e) {
+//         docuSkyDataFilesObj.manageDataFileList(e);
+//     });
+// });
 
-/* ---
-upload DocuXML to DocuSky directly
---- */
+// upload DocuXML to DocuSky directly
 var _docuSkyObj = docuskyManageDbListSimpleUI;
 $('#output-db').click(function(event) {
 	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
 });
-/* ---
-callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
---- */
+// callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
 function uploadXML2DocuSky() {
-	
 	// hide UI
 	// _docuSkyObj.hideWidget();
 
@@ -87,15 +82,11 @@ function uploadXML2DocuSky() {
 	// upload
 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
 }
-/* ---
-success function of uploadXML2DocuSky()
---- */
+// success function of uploadXML2DocuSky()
 function succUploadFunc() {
 	alert("已成功上傳檔案至 DocuSky。");
 }
-/* ---
-fail function of uploadXML2DocuSky()
---- */
+// fail function of uploadXML2DocuSky()
 function failUploadFunc() {
 	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
 }
