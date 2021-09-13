@@ -2,6 +2,7 @@ let data = [];
 let folder = [];
 let trArray = [];
 let currentFolder = "";
+let oldFolderName = "";
 let counter = {};
 let _xml = ""
 axios.get('https://b04106022.github.io/docuLib/dataformat.json')
@@ -11,7 +12,7 @@ axios.get('https://b04106022.github.io/docuLib/dataformat.json')
         renderData('全部書目');
         renderFolder();
 
-        const tbody = document.querySelector('tbody');
+        const tbody = document.querySelector('#tbody');
         let previousCell = null;
         tbody.addEventListener('click', function(e){
             // let fields be editable
@@ -50,8 +51,8 @@ $(function() {
         items: {
             "edit": {name: "Edit", icon: "edit", 
                 callback: function() {
-                    let oldFolder = $(this).text().split('(')[0].trim();
-                    document.querySelector('#edit'+oldFolder).classList.toggle('hide')
+                    $('#editFolderModal').modal('show');
+                    oldFolderName = $(this).text().split('(')[0].trim();
                 }
             },
             "delete": {name: "Delete", icon: "delete", 
@@ -83,7 +84,7 @@ function renderData(foldername){
     const folderID = document.querySelector('#folderID');
     folderID.textContent = foldername;    
 
-    const tbody = document.querySelector('tbody');
+    const tbody = document.querySelector('#tbody');
     const selectAll = document.querySelector('#selectAll');
     selectAll.checked = false;
     
@@ -370,10 +371,6 @@ function addData(){
     }
 }
 
-const folderInput = document.querySelector('#folderInput');
-function addFolder(){
-    folderInput.classList.toggle('hide');
-}
 function checkFolder(){
     const folderName = document.querySelector('#folderName');
     if(folderName.value==''){
@@ -384,29 +381,28 @@ function checkFolder(){
         folder.push(folderName.value);
         alert(folderName.value + " 新建成功");
         folderName.value='';
-        folderInput.classList.add('hide');
         renderFolder();
         renderData(currentFolder);
+        $('#createFolderModal').modal('hide');
     }
 }
-function checkEditFolder(oldName){
-    const newName = document.getElementById('new'+oldName);
-    const editFolder = document.getElementById('edit'+oldName);
+function checkEditFolder(){
+    const newName = document.getElementById('newFolderName');
     if(newName.value==''){
         alert("請輸入資料夾名稱")
     }else if(folder.includes(newName.value)){
         alert("資料夾 "+newName.value+" 已存在")
     }else{
-        folder[folder.indexOf(oldName)] = newName.value;
-        renderData(oldName);
+        folder[folder.indexOf(oldFolderName)] = newName.value;
+        renderData(oldFolderName);
         trArray.forEach(function(item){
-            data[item].folder[data[item].folder.indexOf(oldName)] = newName.value;
+            data[item].doculib.folder[data[item].doculib.folder.indexOf(oldFolderName)] = newName.value;
         });
         alert("資料夾 "+newName.value+" 修改成功");
+        $('#editFolderModal').modal('hide');
         renderData(newName.value);
         renderFolder();
         newName.value='';
-        editFolder.classList.add('hide');
     }
 }
 
