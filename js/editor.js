@@ -4,8 +4,28 @@ let trArray = [];
 let currentFolder = "";
 let oldFolderName = "";
 let counter = {};
+let username = "";
+let _docuSkyObj = null;
 let _xml = ""
-axios.get('https://b04106022.github.io/docuLib/dataformat.json')
+
+$(document).ready(function(){
+
+    _docuSkyObj = docuskyManageDbListSimpleUI;
+    _docuSkyObj.loginSuccFunc = getUserInfo;
+
+    let removeWidgetLogin  = function(){
+        if($("#DbList_loginContainer_0").is(':visible')){
+            $("#DbList_loginContainer_0").hide();
+            $('#loginModal').modal('show');
+        }
+      }
+    setInterval(removeWidgetLogin, 100);
+
+    $("#manageDbList").click(function(e) {
+        _docuSkyObj.manageDbList(e);
+    });
+
+    axios.get('https://b04106022.github.io/docuLib/dataformat.json')
     .then(function (response) {
         data = response.data[0];
         folder = response.data[1];
@@ -31,10 +51,30 @@ axios.get('https://b04106022.github.io/docuLib/dataformat.json')
                 document.getElementById(e.target.value).classList.toggle("hide");
             }
         });
+
     })
     .catch(function (error) {
         console.log(error);
     })
+})
+
+function login(){
+    _docuSkyObj.login($("#username").val(), $("#password").val(), loginSuccFunc, loginFailFunc);
+}
+function loginSuccFunc(){
+    alert("登入成功");
+    $('#loginModal').modal('hide');
+}
+function loginFailFunc(){
+    alert("帳號或密碼錯誤");
+    $("#password").val("");
+}
+function getUserInfo(data){
+    _docuSkyObj.getUserProfile(null, getUsername);
+}
+function getUsername(userData){
+    username = userData.username;
+}
 
 function toggleMenu(){
     let menuBtn = document.getElementById("sidebarToggle");
@@ -877,11 +917,9 @@ ${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
 }
 
 // upload DocuXML to DocuSky directly
-var _docuSkyObj = docuskyManageDbListSimpleUI;
 $('#output-db').click(function(event) {
 	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
 });
-// callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
 function uploadXML2DocuSky() {
 	// hide UI
 	// _docuSkyObj.hideWidget();
@@ -903,11 +941,9 @@ function uploadXML2DocuSky() {
 	// upload
 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
 }
-// success function of uploadXML2DocuSky()
 function succUploadFunc() {
 	alert("已成功上傳檔案至 DocuSky");
 }
-// fail function of uploadXML2DocuSky()
 function failUploadFunc() {
     // using FileSaver
     let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});

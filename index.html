@@ -8,12 +8,12 @@
         <!-- DOCUSKY WIDGET API -->
         <script src="https://docusky.org.tw/DocuSky/js/jquery.min.js"></script>
         <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.manageDbListSimpleUI.js"></script>
+        <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.getDbCorpusDocumentsSimpleUI.js"></script>
+        <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.manageDataFileListSimpleUI.js"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/themeStyles.css" rel="stylesheet" />
         <link href="css/tableStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script> -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <!-- jQuery-contextMenu -->
         <script src="js/contextmenu"></script>
@@ -54,6 +54,9 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <div class="mt-3">
+                        <button class="btn btn-primary" id="manageDbList">管理文獻集</button>
+                        <br>
+
                         <button id="delBtn" class="btn btn-light" onclick="deleteData()">Delete</button>&ensp;&ensp;&ensp;&ensp;&ensp;                        
                         <select id="folderSelector" class="form-select" style="width:auto; display: inline;"></select>
                         <button id="addBtn" class="btn btn-light folderLevel-hide" onclick="addData()">Add</button>&ensp;
@@ -91,11 +94,11 @@
         
         <!-- Button trigger modal -->
         <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">請輸入帳號密碼</h5>
+                  <h5 class="modal-title">DocuSky</h5>
                 </div>
                 <div class="modal-body">
                     <p class="text-center">
@@ -107,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary" href="https://docusky.org.tw/DocuSky/home/v5/#signUp" target="_blank">帳號申請</a>
-                    <button type="button" class="btn btn-primary" onclick="loginDocusky()">登入</button>
+                    <button type="button" class="btn btn-primary" onclick="login()">登入</button>
                 </div>
               </div>
             </div>
