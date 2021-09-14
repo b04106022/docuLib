@@ -11,7 +11,7 @@ let _xml = ""
 $(document).ready(function(){
 
     _docuSkyObj = docuskyManageDbListSimpleUI;
-    _docuSkyObj.loginSuccFunc = getUserInfo;
+    _docuSkyObj.getUserProfile(null, getUsername);
 
     let removeWidgetLogin  = function(){
         if($("#DbList_loginContainer_0").is(':visible')){
@@ -68,9 +68,6 @@ function loginSuccFunc(){
 function loginFailFunc(){
     alert("帳號或密碼錯誤");
     $("#password").val("");
-}
-function getUserInfo(data){
-    _docuSkyObj.getUserProfile(null, getUsername);
 }
 function getUsername(userData){
     username = userData.username;
