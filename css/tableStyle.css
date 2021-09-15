@@ -4,9 +4,6 @@
 .ml-12{
     margin-left: 12px;
 }
-/* .ml-125{
-    margin-left: 1.25em;
-} */
 
 #table {
     font-family: arial, sans-serif;
@@ -32,6 +29,9 @@
     flex: 1;
     border: 1px #dddddd solid;
     background-color: #eee;
+}
+#table details p{
+    margin-left: 1.25em;
 }
 
 select {

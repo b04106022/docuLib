@@ -8,8 +8,6 @@
         <!-- DOCUSKY WIDGET API -->
         <script src="https://docusky.org.tw/DocuSky/js/jquery.min.js"></script>
         <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.manageDbListSimpleUI.js"></script>
-        <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.getDbCorpusDocumentsSimpleUI.js"></script>
-        <script src="https://docusky.org.tw/DocuSky/js.ui/docusky.ui.manageDataFileListSimpleUI.js"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/themeStyles.css" rel="stylesheet" />
         <link href="css/tableStyle.css" rel="stylesheet" />
@@ -47,6 +45,7 @@
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item"><a class="nav-link" href="#!">使用說明</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://docusky.org.tw/DocuSky/docuTools/userMain/index.html" target="_blank">我的資料庫</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!" onclick="logout()">登出</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,9 +53,6 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <div class="mt-3">
-                        <button class="btn btn-primary" id="manageDbList">管理文獻集</button>
-                        <br>
-
                         <button id="delBtn" class="btn btn-light" onclick="deleteData()">Delete</button>&ensp;&ensp;&ensp;&ensp;&ensp;                        
                         <select id="folderSelector" class="form-select" style="width:auto; display: inline;"></select>
                         <button id="addBtn" class="btn btn-light folderLevel-hide" onclick="addData()">Add</button>&ensp;
@@ -84,9 +80,10 @@
                     </table>
                     <div class="mt-3 text-end">
                         <button class="btn btn-danger" onclick="saveToJson(); renderFolder();">Save</button>&ensp;
-                        <button class="btn btn-primary">查看引用格式</button>&ensp;
+                        <button class="btn btn-primary" onclick="jsonToAPA()">查看引用格式</button>&ensp;
                         <button class="btn btn-primary" onclick="jsonToCsv()">匯出書目資料</button>&ensp;
-                        <button id="output-db" class="btn btn-primary" onclick="jsonToDocuXML()">建立個人資料庫</button>
+                        <button class="btn btn-primary" onclick="downloadXML()">下載 DocuXML</button>&ensp;
+                        <button class="btn btn-primary" onclick="uploadXML()">建立個人資料庫</button>
                     </div>
                 </div>
             </div>

@@ -72,6 +72,10 @@ function loginFailFunc(){
 function getUsername(userData){
     username = userData.username;
 }
+function logout(){
+    _docuSkyObj.logout();
+    location.reload();
+  }
 
 function toggleMenu(){
     let menuBtn = document.getElementById("sidebarToggle");
@@ -82,18 +86,18 @@ function toggleMenu(){
     }
   }
 // Right Click Sidebar - contextMenu
-$(function() {
+$(function(){
     $.contextMenu({
         selector: '.context-menu-one', 
         items: {
             "edit": {name: "Edit", icon: "edit", 
-                callback: function() {
+                callback: function(){
                     $('#editFolderModal').modal('show');
                     oldFolderName = $(this).text().split('(')[0].trim();
                 }
             },
             "delete": {name: "Delete", icon: "delete", 
-                callback: function() {
+                callback: function(){
                     let delFolder = $(this).text().split('(')[0].trim();
                     renderData(delFolder);
                     if(trArray.length>0){
@@ -616,6 +620,9 @@ function saveToJson(){
     // link.click();
 }
 
+function jsonToAPA(){
+    window.open('bib.html')
+}
 function jsonToCsv(){
     saveToJson();
     let checkedboxArray = getCheckedboxArray()
@@ -664,7 +671,7 @@ function jsonToCsv(){
     let blob = new Blob(["\ufeff"+csvContent], {type:'text/csv;charset=utf-8;'});
     let url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'matadata.csv');
+    link.setAttribute('download', currentFolder+'.csv');
     link.click();
 }
 
@@ -912,18 +919,20 @@ ${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
 </ThdlPrototypeExport>`;
     _xml = xmlContent;
 }
-
+function downloadXML(){
+    jsonToDocuXML();
+    let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
+    saveAs(blob, currentFolder+".xml");
+}
 // upload DocuXML to DocuSky directly
-$('#output-db').click(function(event) {
-	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
-});
-function uploadXML2DocuSky() {
-	// hide UI
-	// _docuSkyObj.hideWidget();
+function uploadXML(){
+    jsonToDocuXML();
+	_docuSkyObj.manageDbList(null, uploadXML2DocuSky);
+}
+function uploadXML2DocuSky(){
+	_docuSkyObj.hideWidget();
 
-	// info
-	var dbTitle = "test";
-	if (dbTitle === '') dbTitle = 'DB-' + now();
+	var dbTitle = 'DB-' + now();
 	var formData = { 
 		dummy: {
 			name: 'dbTitleForImport', 
@@ -935,82 +944,22 @@ function uploadXML2DocuSky() {
 			name: 'importedFiles[]'
 		}
 	};
-	// upload
 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
 }
-function succUploadFunc() {
+function succUploadFunc(){
 	alert("已成功上傳檔案至 DocuSky");
+    window.open('https://docusky.org.tw/DocuSky/docuTools/userMain/index.html')
 }
-function failUploadFunc() {
+function failUploadFunc(){
     // using FileSaver
     let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
     saveAs(blob, currentFolder+".xml");
 	alert("上傳失敗，已將 DocuXML 下載至本機");
 }
-
-
-
-
-
-
-
-
-
-// /* ---
-// upload DocuXML to DocuSky directly
-// --- */
-// var _docuSkyObj = docuskyManageDbListSimpleUI
-// var $ = jQuery.noConflict(true);
-// $('#output-db').click(function(event) {
-// 	_docuSkyObj.manageDbList(event, uploadXML2DocuSky);
-// });
-
-// /* ---
-// callback function of widget function manageDbList() - upload converted DocuXML to DocuSky directly
-// --- */
-// function uploadXML2DocuSky() {
-	
-// 	// hide UI
-// 	_docuSkyObj.hideWidget();
-
-// 	// info
-// 	var dbTitle = $("#output-dbname input").val().trim();
-// 	if (dbTitle === '') dbTitle = 'DB-' + now();
-// 	var formData = { 
-// 		dummy: {
-// 			name: 'dbTitleForImport', 
-// 			value: dbTitle 
-// 		}, 
-// 		file: {
-// 			value: _xml, 
-// 			filename: dbTitle + '.xml', 
-// 			name: 'importedFiles[]'
-// 		}
-// 	};
-
-// 	// progress bar
-// 	_progress.upload = _docuSkyObj.uploadProgressId;
-// 	_docuSkyObj.uploadProgressId = 'myUploadProgressId';
-// 	$("#download .main .progress").show();
-
-// 	// upload
-// 	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
-// }
-// /* ---
-// success function of uploadXML2DocuSky()
-// --- */
-// function succUploadFunc() {
-	
-// 	// progress bar
-// 	_docuSkyObj.uploadProgressId = _progress.upload;
-// 	$("#download .main .progress").hide();
-
-// 	// message
-// 	alert("已成功上傳檔案至 DocuSky。");
-// }
-// /* ---
-// fail function of uploadXML2DocuSky()
-// --- */
-// function failUploadFunc() {
-// 	alert("上傳失敗，建議將已製作完畢檔案先下載至本機。");
-// }
+function now(){
+	let date = (new Date()).getFullYear()+"."+(new Date()).getMonth()+"."+(new Date()).getDate();
+	let hour = (new Date()).getHours();
+	let minute = (new Date()).getMinutes();
+	let second = (new Date()).getSeconds();
+    return `${date}_${hour}.${minute}.${second}`;
+}
