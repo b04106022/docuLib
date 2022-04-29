@@ -75,7 +75,7 @@ function getUsername(userData){
 function logout(){
     _docuSkyObj.logout();
     location.reload();
-  }
+}
 
 function toggleMenu(){
     let menuBtn = document.getElementById("sidebarToggle");
@@ -185,7 +185,8 @@ function renderData(foldername){
                         ${readOption}
                     <select>
                     </td>
-                    <td data-editable="true">${item.doculib.note}</td>
+                    <td><a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#noteModal" id='noteBtn' onclick="renderNoteData('${index}')">edit</a>
+                    </td>
                     <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
                 </tr>
                 <tr class="hide" id="hiddenRow_${index}">
@@ -306,6 +307,17 @@ function renderData(foldername){
         folderSelector.style.display = 'none';
     }
 }
+function renderNoteData(index){
+    document.getElementById('noteId').value = index
+    document.getElementById('noteTitle').innerHTML = "筆記 ─ " + data[index].title
+    document.getElementById('noteContent').value = data[index].doculib.note 
+}
+function saveNoteData(){
+    let index = document.getElementById('noteId').value;
+    data[index].doculib.note = document.getElementById('noteContent').value
+}
+    
+
 
 function renderFolder(){
     counter = getCounter();
@@ -514,7 +526,7 @@ function saveToJson(){
             data[item].doculib.important[currentFolder] = tr1.children[8].firstElementChild.value;
         }
         data[item].doculib.read = tr1.children[10].firstElementChild.value;
-        data[item].doculib.note = tr1.children[11].textContent;
+        // data[item].doculib.note = tr1.children[11].textContent;
         // 共同欄位
         let volPage = tr2.children[1].children[0].firstElementChild.value.split(';');
         data[item].xml_metadata.Udef_compilation_vol = volPage[0];

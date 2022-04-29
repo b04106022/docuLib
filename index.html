@@ -125,8 +125,8 @@
                     <p class="text-center"><input type="text" id="folderName"></p>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="checkFolder();">新建</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="checkFolder();">新建</button>
                 </div>
             </div>
             </div>
@@ -144,8 +144,26 @@
                     <p class="text-center"><input type="text" id="newFolderName"></p>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="checkEditFolder();">修改</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="checkEditFolder();">修改</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Edit Note Modal -->
+        <div class="modal fade" id="noteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noteTitle">筆記</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <input id="noteId" type="hidden" value="">
+                    <textarea id="noteContent" cols="75" rows="18"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveNoteData();">Save changes</button>
                 </div>
             </div>
             </div>
