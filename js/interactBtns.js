@@ -1,354 +1,78 @@
-let data = [];
-let folder = [];
-let trArray = [];
-
 let currentFolder = "";
 let oldFolderName = "";
-let counter = {};
-
-let username = "";
-let _docuSkyObj = null;
 let _xml = ""
 
-$(document).ready(function(){
-
-    _docuSkyObj = docuskyManageDbListSimpleUI;
-    _docuSkyObj.getUserProfile(null, getUsername);
-
-    let removeWidgetLogin  = function(){
-        if($("#DbList_loginContainer_0").is(':visible')){
-            $("#DbList_loginContainer_0").hide();
-            $('#loginModal').modal('show');
-        }
-      }
-    setInterval(removeWidgetLogin, 100);
-
-    $("#manageDbList").click(function(e) {
-        _docuSkyObj.manageDbList(e);
-    });
-
-    axios.get('https://b04106022.github.io/docuLib/dataformat.json')
-    .then(function (response) {
-        data = response.data[0];
-        folder = response.data[1];
-        renderData('全部書目');
-        renderFolder();
-
-        const tbody = document.querySelector('#tbody');
-        let previousCell = null;
-        tbody.addEventListener('click', function(e){
-            // let fields be editable
-            if(e.target.getAttribute('data-editable')){
-                if(!previousCell){
-                    e.target.setAttribute('contenteditable', true);
-                    previousCell = e.target;
-                }else if(previousCell != e.target){
-                    previousCell.setAttribute('contenteditable', false);
-                    e.target.setAttribute('contenteditable', true);
-                    previousCell = e.target;
-                }
-            }
-            // collapse or expand details
-            if(e.target.nodeName=='BUTTON'){
-                document.getElementById(e.target.value).classList.toggle("hide");
-            }
-        });
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-})
-
-function login(){
-    _docuSkyObj.login($("#username").val(), $("#password").val(), loginSuccFunc, loginFailFunc);
-}
-function loginSuccFunc(){
-    alert("登入成功");
-    $('#loginModal').modal('hide');
-}
-function loginFailFunc(){
-    alert("帳號或密碼錯誤");
-    $("#password").val("");
-}
-function getUsername(userData){
-    username = userData.username;
-}
-function logout(){
-    _docuSkyObj.logout();
-    location.reload();
-}
-
-function toggleMenu(){
-    let menuBtn = document.getElementById("sidebarToggle");
-    if(menuBtn.innerHTML === '<i class="fas fa-chevron-left"></i>') {
-      menuBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+function checkCreateFolder(){
+    const folderName = document.querySelector('#folderName');
+    if(folderName.value==''){
+        alert("請輸入資料夾名稱")
+    }else if(folder.includes(folderName.value)){
+        alert("資料夾 "+folderName.value+" 已存在")
     }else{
-        menuBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        folder.push(folderName.value);
+        alert(folderName.value + " 新建成功");
+        folderName.value='';
+        renderFolder();
+        renderData(currentFolder);
+        $('#createFolderModal').modal('hide');
     }
-  }
-// Right Click Sidebar - contextMenu
-$(function(){
-    $.contextMenu({
-        selector: '.context-menu-one', 
-        items: {
-            "edit": {name: "Edit", icon: "edit", 
-                callback: function(){
-                    $('#editFolderModal').modal('show');
-                    oldFolderName = $(this).text().split('(')[0].trim();
-                }
-            },
-            "delete": {name: "Delete", icon: "delete", 
-                callback: function(){
-                    let delFolder = $(this).text().split('(')[0].trim();
-                    renderData(delFolder);
-                    if(trArray.length>0){
-                        if(confirm(delFolder+"內存有書目，請確定是否刪除")){
-                            folder.splice(folder.indexOf(delFolder), 1);
-                            trArray.forEach(function(item){
-                                let index = data[item].doculib.folder.indexOf(delFolder);
-                                data[item].doculib.folder.splice(index, 1);
-                            });
-                        }
-                    }else{
-                        folder.splice(folder.indexOf(delFolder), 1);
+}
+function checkEditFolder(){
+    const newName = document.getElementById('newFolderName');
+    if(newName.value==''){
+        alert("請輸入資料夾名稱")
+    }else if(folder.includes(newName.value)){
+        alert("資料夾 "+newName.value+" 已存在")
+    }else{
+        folder[folder.indexOf(oldFolderName)] = newName.value;
+        renderData(oldFolderName);
+        trArray.forEach(function(item){
+            data[item].doculib.folder[data[item].doculib.folder.indexOf(oldFolderName)] = newName.value;
+        });
+        alert("資料夾 "+newName.value+" 修改成功");
+        $('#editFolderModal').modal('hide');
+        renderData(newName.value);
+        renderFolder();
+        newName.value='';
+    }
+}
+
+function addDataToFolder(){
+    saveToJson();
+    let checkedboxArray = getCheckedboxArray();
+    const folderSelector = document.querySelector('#folderSelector');
+    if(checkedboxArray.length==0 &&　folderSelector.value==""){
+        alert("請選取欲操作的書目與資料夾");
+    }else if(checkedboxArray.length==0){
+        alert("請選取欲操作的書目");
+    }else if(folderSelector.value==""){
+        alert("請選擇欲加入的資料夾");
+    }else{
+        if(currentFolder=="全部書目"){
+            checkedboxArray.forEach(function(item){
+                if(!data[item].doculib.folder.includes(folderSelector.value)){
+                    data[item].doculib.folder.push(folderSelector.value);
+                    if (!(folderSelector.value in data[item].doculib.topic)){
+                        data[item].doculib.topic[folderSelector.value] = "";
+                        data[item].doculib.socialTagging[folderSelector.value] = "";
+                        data[item].doculib.important[folderSelector.value] = "";
                     }
-                    renderFolder();
-                    renderData('全部書目');
-                    alert(delFolder+"已刪除，回到全部書目列表");
                 }
-            }  
-        }
-    });
-});
-
-function renderData(foldername){
-    currentFolder = foldername;
-    const folderID = document.querySelector('#folderID');
-    folderID.textContent = foldername;    
-
-    const tbody = document.querySelector('#tbody');
-    const selectAll = document.querySelector('#selectAll');
-    selectAll.checked = false;
-    
-    trArray = [];
-    let content = "";
-    data.forEach(function(item, index){
-        if(item.doculib.folder.includes(foldername)){
-            trArray.push(index);
-
-            const folderSelector = document.querySelector('#folderSelector');
-            let folderOption = "<option value=''>請選擇欲加入的資料夾</option>";
-            folder.forEach(function(folderItem){
-                folderOption += `<option value='${folderItem}'>${folderItem}</option>`;
             })
-            folderSelector.innerHTML = folderOption;
-
-            let folderContent = ""
-            for(let i=0; i<item.doculib.folder.length; i++){
-                if(item.doculib.folder[i]=="全部書目"){
-                    continue;
+        }else{
+            checkedboxArray.forEach(function(item){
+                data[item].doculib.folder = ["全部書目", folderSelector.value];
+                if (!(folderSelector.value in data[item].doculib.topic)){
+                    data[item].doculib.topic[folderSelector.value] = "";
+                    data[item].doculib.socialTagging[folderSelector.value] = "";
+                    data[item].doculib.important[folderSelector.value] = "";
                 }
-                folderContent += item.doculib.folder[i] + "; ";
-            }
-
-            let readOption = "";
-            let readSelected;
-            let readStatus = ["未閱讀", "閱讀中", "已閱讀"];
-            readStatus.forEach(function(readItem){
-                if(item.doculib.read==readItem){
-                    readSelected = "selected";
-                }else{
-                    readSelected = "";
-                }
-                readOption += `<option value='${readItem}' ${readSelected}>${readItem}</option>`;
             })
-            let importantChecked;
-            if(item.doculib.important[foldername]=="重要"){
-                importantChecked = "checked";
-            }
-
-            // 核心欄位 & 使用者加值欄位
-            // Metatags: author, keyword, topic, social tagging, doctypes, docclass
-            content += `
-                <tr id="${index}">
-                    <td><input type="checkbox" name='c' value="${index}"></td>
-                    <td data-editable="true">${item.title}</td>
-                    <td data-editable="true">${arrToStr(item.xml_metadata.Udef_author)}</td>
-                    <td data-editable="true">${item.year_for_grouping}</td>
-                    <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
-                    <td data-editable="true">${arrToStr(item.xml_metadata.Udef_keywords)}</td>
-                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.topic[foldername])}</td>
-                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.socialTagging[foldername])}</td>
-                    <td data-editable="true" class="folderLevel"><input type="checkbox" name='important' value="重要" ${importantChecked}></td>
-                    <td class="folderLevel-hide">${folderContent}</td>
-                    <td>
-                    <select>
-                        ${readOption}
-                    <select>
-                    </td>
-                    <td><a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#noteModal" id='noteBtn' onclick="renderNoteData('${index}')">edit</a>
-                    </td>
-                    <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
-                </tr>
-                <tr class="hide" id="hiddenRow_${index}">
-                    <td></td>
-                    <td colspan="14">`;
-            // 共同欄位
-            content += `<p>卷期 / 頁次：<input type="text" value='${item.xml_metadata.Udef_compilation_vol}; ${item.xml_metadata.Udef_compilation_page}'></p>`;
-            content += `<p>出版者：<input type="text" value='${item.xml_metadata.Udef_publisher.text}'></p>`;
-            content += `<p>出版日期：<input type="text" value='${item.xml_metadata.Udef_publish_date}'></p>`;
-            content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
-            content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
-            content += `<p>資料類型：<input type="text" value='${arrToStr(item.xml_metadata.Udef_doctypes)}'</p>`;
-            content += `<p>語言：<input type="text" value='${arrToStr(item.xml_metadata.Udef_biliography_language)}'</p>`;
-            content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
-            content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
-            // 共同欄位－網址
-            content += `<details><summary class="mb-3">網址</summary>`;
-            if(Object.keys(item.xml_metadata.Udef_author1).length>0){
-                content += `<p>作者1網址：<input type="text" id="author1_a_${index}" value='${item.xml_metadata.Udef_author1.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author2).length>0){
-                content += `<p>作者2網址：<input type="text" id="author2_a_${index}" value='${item.xml_metadata.Udef_author2.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author3).length>0){
-                content += `<p>作者3網址：<input type="text" id="author3_a_${index}" value='${item.xml_metadata.Udef_author3.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author4).length>0){
-                content += `<p>作者4網址：<input type="text" id="author4_a_${index}" value='${item.xml_metadata.Udef_author4.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author5).length>0){
-                content += `<p>作者5網址：<input type="text" id="author5_a_${index}" value='${item.xml_metadata.Udef_author5.a}'></p>`;
-            }
-            if(Object.keys(item.xml_metadata.Udef_author6).length>0){
-                content += `<p>作者6網址：<input type="text" id="author6_a_${index}" value='${item.xml_metadata.Udef_author6.a}'></p>`;
-            }
-            content += `<p>出處題名網址：<input type="text" id="compilation_name_a_${index}" value='${item.xml_metadata.Udef_compilation_name.a}'></p>`;
-            content += `<p>出版者網址：<input type="text" id="publisher_a_${index}" value='${item.xml_metadata.Udef_publisher.a}'></p>`;
-            if(item.xml_metadata.Udef_fulltextSrc.a!=""){
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_${index}" value='${item.xml_metadata.Udef_fulltextSrc.a}'</p>`;
-            }
-            else{
-                content += `<p>全文網址：<input type="text" id="fulltextSrc_${index}" value='${item.xml_metadata.Udef_fulltextSrc.text}'</p>`;
-            }
-            if(item.xml_metadata.Udef_doi.a!=""){
-                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi.a}'></p></details>`;
-            }
-            else{
-                content += `<p>DOI：<input type="text" id="doi_${index}" value='${item.xml_metadata.Udef_doi.text}'></p></details>`;
-            }
-            // 輔助欄位
-            if(item.xml_metadata.Udef_seriesname!="" || item.xml_metadata.Udef_seriessubsidiary!="" || item.xml_metadata.Udef_seriesno!="" || item.xml_metadata.Udef_remark!="" || item.xml_metadata.Udef_remarkcontent!="" || item.xml_metadata.Udef_edition!="" || item.xml_metadata.Udef_category!="" || item.xml_metadata.Udef_period!="" || item.xml_metadata.Udef_area!="" || item.xml_metadata.Udef_place!="" || item.xml_metadata.Udef_institution!="" || item.xml_metadata.Udef_department!="" || item.xml_metadata.Udef_publicationyear!="" || item.xml_metadata.Udef_degree!=""){
-                content += `<details><summary class="mb-3">輔助欄位</summary>`;
-                // 叢書
-                if(item.xml_metadata.Udef_seriesname!=""){
-                    content += `<p>叢書名：<input type="text" id="seriesname_${index}" value='${item.xml_metadata.Udef_seriesname}'></p>`;
-                }if(item.xml_metadata.Udef_seriessubsidiary!=""){
-                    content += `<p>附屬叢書：<input type="text" id="seriessubsidiary_${index}" value='${item.xml_metadata.Udef_seriessubsidiary}'></p>`;
-                }if(item.xml_metadata.Udef_seriesno!=""){
-                    content += `<p>叢書號：<input type="text" id="seriesno_${index}" value='${item.xml_metadata.Udef_seriesno}'></p>`;
-                }
-                // 藝術資料庫
-                if(item.xml_metadata.Udef_category!=""){
-                    content += `<p>研究類別：<input type="text" id="category_${index}" value='${item.xml_metadata.Udef_category}'></p>`;
-                }if(item.xml_metadata.Udef_period!=""){
-                    content += `<p>研究時代：<input type="text" id="period_${index}" value='${item.xml_metadata.Udef_period}'></p>`;
-                }if(item.xml_metadata.Udef_area!=""){
-                    content += `<p>研究地區：<input type="text" id="area_${index}" value='${item.xml_metadata.Udef_area}'></p>`;
-                }if(item.xml_metadata.Udef_place!=""){
-                    content += `<p>研究地點：<input type="text" id="place_${index}" value='${item.xml_metadata.Udef_place}'></p>`;
-                }
-                // 碩博士論文
-                if(item.xml_metadata.Udef_institution!=""){
-                    content += `<p>校院名稱：<input type="text" id="institution_${index}" value='${item.xml_metadata.Udef_institution}'></p>`;
-                }if(item.xml_metadata.Udef_department!=""){
-                    content += `<p>系所名稱：<input type="text" id="department_${index}" value='${item.xml_metadata.Udef_department}'></p>`;
-                }if(item.xml_metadata.Udef_publicationyear!=""){
-                    content += `<p>畢業年度：<input type="text" id="publicationyear_${index}" value='${item.xml_metadata.Udef_publicationyear}'></p>`;
-                }if(item.xml_metadata.Udef_degree!=""){
-                    content += `<p>學位類別：<input type="text"id="degree_${index}" value='${item.xml_metadata.Udef_degree}'></p>`;
-                }
-                // 內容
-                if(item.xml_metadata.Udef_edition!=""){
-                    content += `<p>版本項：<input type="text" id="edition_${index}" value='${item.xml_metadata.Udef_edition}'></p>`;
-                }if(item.xml_metadata.Udef_remark!=""){
-                    content += `<p>附註項：<input type="text" id="remark_${index}" value='${item.xml_metadata.Udef_remark}'></p>`;
-                }if(item.xml_metadata.Udef_remarkcontent!=""){
-                    content += `<p>內容註：<input type="text" id="remarkcontent_${index}" value='${item.xml_metadata.Udef_remarkcontent}'></p>`;
-                }
-                content += `</details>`;
-            }
-            content += `</td></tr>`;
         }
-    })
-    tbody.innerHTML = content;
-    const delBtn = document.querySelector('#delBtn');
-    const folderLevels = document.getElementsByClassName('folderLevel');
-    const folderLevelsHide = document.getElementsByClassName('folderLevel-hide');
-    if(foldername=="全部書目" || foldername=="垃圾桶"){
-        for (let i=0; i<folderLevels.length; i++) {
-            folderLevels[i].classList.add('hide');
-        }
-        for (let i=0; i<folderLevelsHide.length; i++) {
-            if(folderLevelsHide[i].classList.contains('hide')){
-                folderLevelsHide[i].classList.remove('hide');
-            }
-        }
-        delBtn.textContent = "Delete";
-        folderSelector.style.display = 'inline';
-    }
-    else{
-        for (let i=0; i<folderLevels.length; i++) {
-            folderLevels[i].classList.remove('hide');
-        }
-        for (let i=0; i<folderLevelsHide.length; i++) {
-            folderLevelsHide[i].classList.add('hide');
-        }
-        delBtn.textContent = "Move Out";
-        folderSelector.style.display = 'none';
+        renderData(currentFolder);
+        renderFolder();
     }
 }
-function renderNoteData(index){
-    document.getElementById('noteId').value = index
-    document.getElementById('noteTitle').innerHTML = "筆記 ─ " + data[index].title
-    document.getElementById('noteContent').value = data[index].doculib.note 
-}
-function saveNoteData(){
-    let index = document.getElementById('noteId').value;
-    data[index].doculib.note = document.getElementById('noteContent').value
-}
-    
-
-
-function renderFolder(){
-    counter = getCounter();
-    const folderList = document.querySelector('#folderList');
-    const allCount = document.querySelector('#allCount');
-    const trashCount = document.querySelector('#trashCount');
-    allCount.textContent = counter["全部書目"];
-    trashCount.textContent = counter["垃圾桶"];
-    let folderListContent = "";
-    folder.forEach(function(folderName){
-        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
-        <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"> <button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
-    });
-    folderList.innerHTML = folderListContent;
-}
-function getCounter(){
-    let src = currentFolder;
-    renderData("全部書目");
-    counter["全部書目"] = trArray.length;
-    renderData("垃圾桶");
-    counter["垃圾桶"] = trArray.length;
-    folder.forEach(function(item){
-        renderData(item);
-        counter[item] = trArray.length;
-    });
-    renderData(src);
-    return counter
-}
-
 function deleteData(){
     saveToJson();
     let checkedboxArray = getCheckedboxArray();
@@ -388,77 +112,6 @@ function deleteData(){
     }
     renderData(currentFolder);
     renderFolder();
-}
-function addData(){
-    saveToJson();
-    let checkedboxArray = getCheckedboxArray();
-    const folderSelector = document.querySelector('#folderSelector');
-    if(checkedboxArray.length==0 &&　folderSelector.value==""){
-        alert("請選取欲操作的書目與資料夾");
-    }else if(checkedboxArray.length==0){
-        alert("請選取欲操作的書目");
-    }else if(folderSelector.value==""){
-        alert("請選擇欲加入的資料夾");
-    }else{
-        if(currentFolder=="全部書目"){
-            checkedboxArray.forEach(function(item){
-                if(!data[item].doculib.folder.includes(folderSelector.value)){
-                    data[item].doculib.folder.push(folderSelector.value);
-                    if (!(folderSelector.value in data[item].doculib.topic)){
-                        data[item].doculib.topic[folderSelector.value] = "";
-                        data[item].doculib.socialTagging[folderSelector.value] = "";
-                        data[item].doculib.important[folderSelector.value] = "";
-                    }
-                }
-            })
-        }else{
-            checkedboxArray.forEach(function(item){
-                data[item].doculib.folder = ["全部書目", folderSelector.value];
-                if (!(folderSelector.value in data[item].doculib.topic)){
-                    data[item].doculib.topic[folderSelector.value] = "";
-                    data[item].doculib.socialTagging[folderSelector.value] = "";
-                    data[item].doculib.important[folderSelector.value] = "";
-                }
-            })
-        }
-        renderData(currentFolder);
-        renderFolder();
-    }
-}
-
-function checkFolder(){
-    const folderName = document.querySelector('#folderName');
-    if(folderName.value==''){
-        alert("請輸入資料夾名稱")
-    }else if(folder.includes(folderName.value)){
-        alert("資料夾 "+folderName.value+" 已存在")
-    }else{
-        folder.push(folderName.value);
-        alert(folderName.value + " 新建成功");
-        folderName.value='';
-        renderFolder();
-        renderData(currentFolder);
-        $('#createFolderModal').modal('hide');
-    }
-}
-function checkEditFolder(){
-    const newName = document.getElementById('newFolderName');
-    if(newName.value==''){
-        alert("請輸入資料夾名稱")
-    }else if(folder.includes(newName.value)){
-        alert("資料夾 "+newName.value+" 已存在")
-    }else{
-        folder[folder.indexOf(oldFolderName)] = newName.value;
-        renderData(oldFolderName);
-        trArray.forEach(function(item){
-            data[item].doculib.folder[data[item].doculib.folder.indexOf(oldFolderName)] = newName.value;
-        });
-        alert("資料夾 "+newName.value+" 修改成功");
-        $('#editFolderModal').modal('hide');
-        renderData(newName.value);
-        renderFolder();
-        newName.value='';
-    }
 }
 
 function check_all(obj, cName){
@@ -509,6 +162,152 @@ function getMetatagContent(tagName, arr){
     }
 }
 
+// render folderlist in userImportModal1
+function getFolderCheckboxes(){
+    let checkboxHtml = ''
+    if(folder.length > 0){
+        folder.forEach(function(folderName){
+            checkboxHtml += `<input type="checkbox" name="importFolder" value="${folderName}"> ${folderName}<br>`
+        })
+        $('#u_folder_p').html('匯入資料夾<br>' + checkboxHtml)
+    }else{
+        $('#u_folder_p').html('')
+    }
+}
+// check userImportModal1
+$('#u_title').change(function(){
+    checkDupBib($('#u_title').val())
+});
+function checkDupBib(u_title){
+    data.forEach(function(item){
+        if(item.title == u_title){
+            alert("書目「" + u_title + "」已存在，請確認是否仍需匯入")
+        }
+    })
+}
+function checkImportModal1(){
+    if($('#u_title').val()==0){
+        alert('請填寫文獻題名')
+    }else{
+        $('#userImportModal1').modal('hide');
+        $('#userImportModal2').modal('show');
+    }
+}
+// add user bib to Data
+function importDataByUser(){
+    let userDataNumber = 'user_' + getUserDataNumber()
+    let authorArr = strToArr($('#u_author').val())
+    let importFolder = getImportFolder()
+    let topicObj = {}
+    let socialTaggingObj = {}
+    let importantObj = {}
+    if(importFolder.length > 1){
+        for(let i=1; i<importFolder.length; i++){
+            topicObj[importFolder[i]] = []
+            socialTaggingObj[importFolder[i]] = []
+            importantObj[importFolder[i]] = ""
+        }
+    }
+
+    let userDataObj = {
+        "filename": userDataNumber,
+        "title": $('#u_title').val(),
+        "doc_source": "User Imported",
+        "xml_metadata": {
+            "Udef_refSrc": {
+                "a": "", 
+                "text": "原書目網址"
+            },
+            "Udef_author" : authorArr,
+            "Udef_author1": {},
+            "Udef_author2": {},
+            "Udef_author3": {},
+            "Udef_author4": {},
+            "Udef_author5": {},
+            "Udef_author6": {},
+            "Udef_compilation_name": {
+                "a": "",
+                "text": $('#u_compilation_name').val()
+            },
+            "Udef_seriesname": "",
+            "Udef_seriessubsidiary": "",
+            "Udef_seriesno": "",
+            "Udef_compilation_vol": $('#u_compilation_vol').val(),
+            "Udef_compilation_page": $('#u_compilation_page').val(),
+            "Udef_publish_date": $('#u_publish_date').val(),
+            "Udef_publisher": {
+                "a": "",
+                "text": $('#u_publisher').val()
+            },
+            "Udef_publisher_location": $('#u_publisher_location').val(),
+            "Udef_doctypes": strToArr($('#u_doctypes').val()),
+            "Udef_biliography_language": strToArr($('#u_biliography_language').val()),
+            "Udef_remark": "",
+            "Udef_remarkcontent": "",
+            "Udef_keywords": strToArr($('#u_keywords').val()),
+            "Udef_tablecontent": $('#u_tablecontent').val(),
+            "Udef_book_code": $('#u_book_code').val(),
+            "Udef_edition": "",
+            "Udef_fulltextSrc": {
+                "a": $('#u_fulltextSrc').val(),
+                "text": $('#u_fulltextSrc').val()? "全文網址" : "無全文網址"
+            },
+            "Udef_category": "",
+            "Udef_period": "",
+            "Udef_area": "",
+            "Udef_place": "",
+            "Udef_institution": "",
+            "Udef_department": "",
+            "Udef_publicationyear": "",
+            "Udef_degree": "",
+            "Udef_doi": {
+            "a": $('#u_doi').val(),
+            "text": $('#u_doi').val()? "DOI" : "無DOI"
+            }
+        },
+        "doc_content": {
+            "Paragraph": $('#u_paragraph').val()
+        },
+        "doculib":{
+            "folder": importFolder,
+            "topic": topicObj,
+            "socialTagging": socialTaggingObj,
+            "important": importantObj,
+            "read": $('#u_read').val(),
+            "note": $('#u_note').val()
+        }
+    }
+    data.push(userDataObj)
+
+    $('#userImportModal2').modal('hide');
+    alert("書目已匯入，回到全部書目列表");
+    renderFolder('全部書目');
+    console.log(userDataObj)
+}
+function getUserDataNumber(){
+    let number = 0
+    data.forEach(function(item){
+        if(item.filename.includes('user')){
+            n = parseInt(item.filename.replace('user_', ''))
+            if(n > number){
+                number = n
+            }
+        }
+    })
+    return number+1
+}
+function getImportFolder(){
+    let importFolder = ["全部書目"];
+	$.each($("input[name='importFolder']:checked"), function() {
+		importFolder.push($(this).val());
+	});
+    return importFolder
+}
+
+function saveNoteData(){
+    let index = document.getElementById('noteId').value;
+    data[index].doculib.note = document.getElementById('noteContent').value
+}
 function saveToJson(){
     trArray.forEach(function(item){
         let tr1 = document.getElementById(item);
@@ -517,7 +316,7 @@ function saveToJson(){
         // Metatags: author, keyword, topic, social tagging, doctypes, docclass
         data[item].title = tr1.children[1].textContent;
         data[item].xml_metadata.Udef_author = strToArr(tr1.children[2].textContent);
-        data[item].year_for_grouping = tr1.children[3].textContent;
+        // data[item].year_for_grouping = tr1.children[3].textContent;
         data[item].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
         data[item].xml_metadata.Udef_keywords = strToArr(tr1.children[5].textContent);
         // 使用者加值欄位
@@ -534,7 +333,7 @@ function saveToJson(){
         data[item].xml_metadata.Udef_compilation_vol = volPage[0];
         data[item].xml_metadata.Udef_compilation_page = volPage[1].trim();
         data[item].xml_metadata.Udef_publisher.text = tr2.children[1].children[1].firstElementChild.value;
-        data[item].xml_metadata.time_orig_str = tr2.children[1].children[2].firstElementChild.value;
+        data[item].xml_metadata.Udef_publish_date = tr2.children[1].children[2].firstElementChild.value;
         data[item].xml_metadata.Udef_publisher_location = tr2.children[1].children[3].firstElementChild.value;
         data[item].xml_metadata.Udef_Udef_book_code = tr2.children[1].children[4].firstElementChild.value;
         data[item].xml_metadata.Udef_doctypes = strToArr(tr2.children[1].children[5].firstElementChild.value);
@@ -633,10 +432,9 @@ function saveToJson(){
     // link.setAttribute('download', 'matadata.json');
     // link.click();
 }
-
-function jsonToAPA(){
-    window.open('bib.html')
-}
+// function jsonToAPA(){
+//     window.open('bib.html')
+// }
 function jsonToCsv(){
     saveToJson();
     let checkedboxArray = getCheckedboxArray()
@@ -688,7 +486,11 @@ function jsonToCsv(){
     link.setAttribute('download', currentFolder+'.csv');
     link.click();
 }
-
+function downloadXML(){
+    jsonToDocuXML();
+    let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
+    saveAs(blob, currentFolder+".xml");
+}
 function jsonToDocuXML(){
     saveToJson();
     let checkedboxArray = getCheckedboxArray()
@@ -932,48 +734,4 @@ ${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
 </documents>
 </ThdlPrototypeExport>`;
     _xml = xmlContent;
-}
-function downloadXML(){
-    jsonToDocuXML();
-    let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
-    saveAs(blob, currentFolder+".xml");
-}
-// upload DocuXML to DocuSky directly
-function uploadXML(){
-    jsonToDocuXML();
-	_docuSkyObj.manageDbList(null, uploadXML2DocuSky);
-}
-function uploadXML2DocuSky(){
-	_docuSkyObj.hideWidget();
-
-	var dbTitle = 'DB-' + now();
-	var formData = { 
-		dummy: {
-			name: 'dbTitleForImport', 
-			value: dbTitle 
-		}, 
-		file: {
-			value: _xml, 
-			filename: dbTitle + '.xml', 
-			name: 'importedFiles[]'
-		}
-	};
-	_docuSkyObj.uploadMultipart(formData, succUploadFunc, failUploadFunc);
-}
-function succUploadFunc(){
-	alert("已成功上傳檔案至 DocuSky");
-    window.open('https://docusky.org.tw/DocuSky/docuTools/userMain/index.html')
-}
-function failUploadFunc(){
-    // using FileSaver
-    let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
-    saveAs(blob, currentFolder+".xml");
-	alert("上傳失敗，已將 DocuXML 下載至本機");
-}
-function now(){
-	let date = (new Date()).getFullYear()+"."+(new Date()).getMonth()+"."+(new Date()).getDate();
-	let hour = (new Date()).getHours();
-	let minute = (new Date()).getMinutes();
-	let second = (new Date()).getSeconds();
-    return `${date}_${hour}.${minute}.${second}`;
 }

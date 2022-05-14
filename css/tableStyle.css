@@ -1,11 +1,26 @@
+.right-aligned{
+    float: right;
+}
 .hide {
     display: none;
 }
 .ml-12{
     margin-left: 12px;
 }
+.line-height-30px{
+    line-height: 30px;
+}
 
+#logo{
+    text-decoration: none;
+    color: black;
+}
+#folderSelector{
+    width:auto;
+    display: inline;
+}
 #table {
+    width: 100%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
 } 
@@ -33,13 +48,20 @@
 #table details p{
     margin-left: 1.25em;
 }
-
-select {
-    padding: 1px;   
-}
-textarea {
+#noteContent {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100%;
+}
+
+#u_read{
+    width: 183px;
+}
+
+th{
+    text-align: center;
+}
+select {
+    padding: 1px;   
 }
