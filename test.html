@@ -3,70 +3,45 @@
 
 <head>
 	<!-- Import bootstrap cdn -->
-	<link rel="stylesheet" href=
-"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-		integrity=
-"sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-		crossorigin="anonymous">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<!-- Import jquery cdn -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity=
-"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 	</script>
 </head>
 
 <body>
-	<!DOCTYPE html>
-<html>
-  <head>
+
+    <select id="url">
+		<option value="https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6">https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6</option>
+		<option value="https://b04106022.github.io/docuLib/UserJsonFiles/workshop16.json">https://b04106022.github.io/docuLib/UserJsonFiles/workshop16.json</option>
+		<option value="https://buddhism.lib.ntu.edu.tw/ExportToDocuLib?dlbs=20220429154016">https://buddhism.lib.ntu.edu.tw/ExportToDocuLib?dlbs=20220429154016</option>
+		<option value="https://docusky.org.tw/DocuSky/devtools/doculib/exportToDocuLibJson.json">https://docusky.org.tw/DocuSky/devtools/doculib/exportToDocuLibJson.json</option>
+	</select>
+	<input id="btn" type="button" value="submit">
+	<br><br>
+
+	<p id="p"></p>
     
-    <h5>What is your favorite programming language?</h5>
-    <p> 
-      <label><input type="checkbox" name="langage" value="javascript">JavaScript</label><br> 
-      <label><input type="checkbox" name="langage" value="python">Python</label><br>
-      <label><input type="checkbox" name="langage" value="php">PHP</label><br>
-      <label><input type="checkbox" name="langage" value="java">Java</label><br>
-      <label><input type="checkbox" name="langage" value="scala">Scala</label>
-    </p>
-    <input type="button" value="Get the value">
 
-	<script>
-		$(document).ready(function() {
-			$("input[type='button']").click(function() {
-				var langPref = [];
-				$.each($("input[name='langage']:checked"), function() {
-					langPref.push($(this).val());
-				});
-			console.log(langPref)
-			});
-		});
+    <script>
+		$('#btn').click(function(){
+			var dataUrl= $('#url').val()
+			var xhr = new XMLHttpRequest()
+			xhr.open('GET',dataUrl, true)
+			xhr.send()
+			xhr.onload = function(){
+				// console.log(xhr.status)
+				var data = JSON.parse(this.responseText);
+				console.log(data)
 
-		function checkFileExist(urlToFile) {
-			var xhr = new XMLHttpRequest();
-			xhr.open('HEAD', urlToFile, false);
-			xhr.send();
-			
-			if (xhr.status == "404") {
-				return false;
-			} else {
-				return true;
+				// $('#p').text(this.responseText)
 			}
-		}
-		
-		// Calling function
-		// set the path to check
-		var result = checkFileExist("UserJsonFiles/workshop16.json");
-		
-		if (result == true) {
-			alert('yay, file exists!');
-		} else {
-			alert('file does not exist!');
-		}
+		})
+		let json=`{"filename":"DLBS_125757","doc_source":"DLBS","xml_metadata":{"Udef_author1":{"a":"https:\/\/buddhism.lib.ntu.edu.tw\/author\/authorinfo.jsp?ID=46024","text":"\u5f90\u5b5f\u5fd7"},"Udef_department":"\u4e2d\u570b\u8a9e\u6587\u7814\u7a76\u6240","Udef_publisher":{"a":"","text":"\u7384\u5958\u4eba\u6587\u793e\u6703\u5b78\u9662\u4e2d\u570b\u8a9e\u6587\u7814\u7a76\u6240"},"Udef_seriesno":"","Udef_publisher_date":"2004","Udef_category":"","Udef_remarkcontent":"","Udef_fulltextSrc":{"a":"","text":"\u7121\u5168\u6587"},"Udef_author6":{},"Udef_author4":{},"Udef_doctypes":[],"Udef_author5":{},"Udef_author2":{},"Udef_keywords":[],"Udef_author3":{},"Udef_edition":"","Udef_doi":{"a":"","text":"\u7121DOI"},"Udef_tablecontent":"\u7121\u76ee\u6b21","Udef_publicationyear":"92","Udef_remark":"","Udef_seriessubsidiary":"","Udef_publisher_location":"\u81fa\u7063 [Taiwan]","Udef_book_code":"","Udef_institution":"\u7384\u5958\u4eba\u6587\u793e\u6703\u5b78\u9662","Udef_compilation_name":{"a":"https:\/\/buddhism.lib.ntu.edu.tw\/journal\/journaldetail.jsp?seq=","text":""},"Udef_compilation_page":"","Udef_compilation_vol":"","Udef_author":["徐孟志"],"Udef_refSrc":{"a":"https:\/\/buddhism.lib.ntu.edu.tw\/search\/search_detail.jsp?seq=125757","text":"\u539f\u66f8\u76ee\u7db2\u5740"},"Udef_degree":"master","Udef_seriesname":"","Udef_period":"","Udef_biliography_language":[],"doc_content":{"Paragraph":"\u300a\u6cd5\u83ef\u7d93\u300b\u4fe1\u4ef0\u5728\u968b\u5510\u6642\u4ee3\uff0c\u4e0d\u7ba1\u662f\u5728\u50e7\u5718\u5bfa\u9662\uff0c\u6216\u662f\u5728\u4e16\u4fd7\u793e\u6703\u4e2d\uff0c\u90fd\u662f\u76f8\u7576\u5805\u5be6\u4e14\u6df1\u7372\u4eba\u5fc3\u7684\uff0c\u7576\u6642\u7684\u6ce8\u758f\u8207\u8b1b\u7d93\u6587\u5c31\u662f\u6642\u4eba\u8a6e\u91cb\u7d93\u5178\u5167\u6db5\uff0c\u5ba3\u8b1b\u50b3\u6388\u7684\u91cd\u8981\u4f5c\u54c1\u8207\u73cd\u8cb4\u8a18\u9304\uff0c\u7136\u800c\u9019\u5169\u7a2e\u8a6e\u91cb\u4f5c\u54c1\uff0c\u5728\u8a6e\u91cb\u65b9\u5f0f\u3001\u5b57\u53e5\u8a9e\u6cd5\u3001\u5167\u5bb9\u3001\u5f62\u5f0f\u3001\u4fee\u8fad\u98a8\u683c\u4e0a\u90fd\u6709\u76f8\u7576\u7684\u5dee\u7570\uff0c\u800c\u9019\u4e9b\u5dee\u7570\u73fe\u8c61\u503c\u5f97\u9032\u4e00\u6b65\u7684\u6df1\u7a76\u8207\u4e86\u89e3\u3002\u56e0\u6b64\u7b46\u8005\u64ec\u904b\u7528\u6b77\u53f2\u6558\u4e8b\u3001\u6587\u737b\u8cc7\u6599\u6574\u7406\u3001\u5206\u6790\u3001\u6b78\u7d0d\u3001\u6bd4\u8f03\u7b49\u7814\u7a76\u65b9\u6cd5\uff0c\u63a2\u8a0e\u3008\u6cd5\u83ef\u7d93\u8b1b\u7d93\u6587\u3009\u8207\u300a\u6cd5\u83ef\u7d93\u300b\u6ce8\u758f\u5728\u8a6e\u91cb\u65b9\u5f0f\u3001\u5f62\u5f0f\u3001\u5167\u5bb9\u3001\u4fee\u8fad\u7b49\u65b9\u9762\u7684\u5dee\u7570\u3002"},"doculib":{"important":{"\u672a\u5b9a\u7fa9":""},"note":"","folder":[],"read":"\u672a\u95b1\u8b80","socialTagging":{"\u672a\u5b9a\u7fa9":[]},"topic":{"\u672a\u5b9a\u7fa9":[]}},"title":"\u3008\u6cd5\u83ef\u7d93\u8b1b\u7d93\u6587\u3009\u8207\u300a\u6cd5\u83ef\u7d93\u300b\u6ce8\u758f\u4e4b\u6bd4\u8f03\u7814\u7a76"}}`
+		let jsonObj = JSON.parse(json)
+		// $('#p').text(json)
+		// console.log(json)
 	</script>
-
-        
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

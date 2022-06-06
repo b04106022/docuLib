@@ -8,11 +8,11 @@ function docuWidgetInitialize(){
 	// remove default DocuSky login widget
     let removeWidgetLogin  = function(){
         if($("#DbList_loginContainer_0").is(':visible')){
-            $("#DbList_loginContainer_0").hide();
-            $('#loginModal').modal('show');
+            $("#DbList_loginContainer_0").hide();    
         }
-      }
+    }
     setInterval(removeWidgetLogin, 100);
+    $('#loginModal').modal('show');
 
     $("#manageDbList").click(function(e) {
         _docuSkyObj.manageDbList(e);
@@ -25,6 +25,8 @@ function loginSuccFunc(){
     alert("登入成功");
     $('#loginModal').modal('hide');
     _docuSkyObj.getUserProfile(null, getUsername);
+	_docuSkyObj.manageDbList(null, uploadXML2DocuSky);
+    $('#logoutDiv').removeClass('hide');
 }
 function loginFailFunc(){
     alert("帳號或密碼錯誤");
@@ -32,21 +34,22 @@ function loginFailFunc(){
 }
 function logout(){
     _docuSkyObj.logout();
-    location.reload();
+    username = '';
+    $('#logoutDiv').addClass('hide');
+    renderData('全部書目')
 }
 function getUsername(userData){
     username = userData.username;
-    getUSerJsonFile()
-}
-
-function getUSerJsonFile(){
-    console.log('Func: '+username)
 }
 
 // upload DocuXML to DocuSky directly
 function uploadXML(){
     jsonToDocuXML();
-	_docuSkyObj.manageDbList(null, uploadXML2DocuSky);
+    if(username == ''){
+        docuWidgetInitialize();
+    }else{
+	    _docuSkyObj.manageDbList(null, uploadXML2DocuSky);
+    }
 }
 function uploadXML2DocuSky(){
 	_docuSkyObj.hideWidget();

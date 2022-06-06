@@ -14,43 +14,46 @@ let trArray = [];
 let counter = {};
 
 $(document).ready(function(){
-    docuWidgetInitialize();
-
-    // read the user's json file
-    axios.get('https://b04106022.github.io/docuLib/dataformat.json')
-    .then(function (response) {
-        data = response.data[0];
-        folder = response.data[1];
-        renderData('全部書目');
-        renderFolder();
-
-        const tbody = document.querySelector('#tbody');
-        let previousCell = null;
-        tbody.addEventListener('click', function(e){
-            // let fields be editable
-            if(e.target.getAttribute('data-editable')){
-                if(!previousCell){
-                    e.target.setAttribute('contenteditable', true);
-                    previousCell = e.target;
-                }else if(previousCell != e.target){
-                    previousCell.setAttribute('contenteditable', false);
-                    e.target.setAttribute('contenteditable', true);
-                    previousCell = e.target;
-                }
-            }else if(e.target.getAttribute('auto-edit')){
-                alert('自動提取自「出版日期」欄位，請由「出版日期」修改')
-            }
-            // collapse or expand details
-            if(e.target.nodeName=='BUTTON'){
-                document.getElementById(e.target.value).classList.toggle("hide");
-            }
-        });
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
+    doculibInitialize();
+    // if(localStorage.hasOwnProperty("userData")){
+    //     let userData = JSON.parse(localStorage.getItem('userData'))
+    //     data = userData[0];
+    //     folder = userData[1];
+    //     doculibInitialize();
+    // }else{
+    //     jsonUrl = 'https://b04106022.github.io/docuLib/UserJsonFiles/workshop16.json'
+    //     getUserJsonData(jsonUrl);
+    // }
 })
+window.addEventListener("beforeunload", function(e) {
+    e.preventDefault(); // firefox
+    e.returnValue = ''; // Chrome
+});
+
+function doculibInitialize(){
+    const tbody = document.querySelector('#tbody');
+    let previousCell = null;
+    tbody.addEventListener('click', function(e){
+        // let fields be editable
+        if(e.target.getAttribute('data-editable')){
+            if(!previousCell){
+                e.target.setAttribute('contenteditable', true);
+                previousCell = e.target;
+            }else if(previousCell != e.target){
+                previousCell.setAttribute('contenteditable', false);
+                e.target.setAttribute('contenteditable', true);
+                previousCell = e.target;
+            }
+        }else if(e.target.getAttribute('auto-edit')){
+            alert('自動提取自「出版日期」欄位，請由「出版日期」修改')
+        }
+        // collapse or expand details
+        if(e.target.nodeName == 'BUTTON'){
+            console.log('click')
+            document.getElementById(e.target.value).classList.toggle("hide");
+        }
+    })
+}
 
 function toggleMenu(){
     let menuBtn = document.getElementById("sidebarToggle");
@@ -75,13 +78,15 @@ $(function(){
             "delete": {name: "Delete", icon: "delete", 
                 callback: function(){
                     let delFolder = $(this).text().split('(')[0].trim();
-                    renderData(delFolder);
-                    if(trArray.length>0){
-                        if(confirm(delFolder+"內存有書目，請確定是否刪除")){
+                    trArray = getTrArray(delFolder);
+                    if(trArray.length > 0){
+                        if(confirm(delFolder + "內存有書目，請確定是否刪除")){
                             folder.splice(folder.indexOf(delFolder), 1);
                             trArray.forEach(function(item){
                                 let index = data[item].doculib.folder.indexOf(delFolder);
                                 data[item].doculib.folder.splice(index, 1);
+                                // doculib.folder: removed
+                                // doculib.topic, socialTagging, important: still stored
                             });
                         }
                     }else{
@@ -89,12 +94,25 @@ $(function(){
                     }
                     renderFolder();
                     renderData('全部書目');
-                    alert(delFolder+"已刪除，回到全部書目列表");
+                    alert(delFolder + " 已刪除，回到全部書目列表");
                 }
             }  
         }
     });
 });
+
+// render folderlist in addBibModal
+function renderFolderList(){
+    let checkboxHtml = ''
+    if(folder.length > 0){
+        folder.forEach(function(folderName){
+            checkboxHtml += `<input type="checkbox" name="importFolder" value="${folderName}"> ${folderName}<br>`
+        })
+        $('#u_folder_p').html('匯入資料夾<br>' + checkboxHtml)
+    }else{
+        $('#u_folder_p').html('')
+    }
+}
 
 function renderFolder(){
     counter = getCounter();
@@ -111,19 +129,24 @@ function renderFolder(){
     folderList.innerHTML = folderListContent;
 }
 function getCounter(){
-    let src = currentFolder;
-    renderData("全部書目");
-    counter["全部書目"] = trArray.length;
-    renderData("垃圾桶");
-    counter["垃圾桶"] = trArray.length;
-    folder.forEach(function(item){
-        renderData(item);
-        counter[item] = trArray.length;
-    });
-    renderData(src);
+    let countArr = [...folder];
+    countArr.push("全部書目", "垃圾桶");
+    for(let i=0; i<countArr.length; i++){
+        let result = data.filter(el => el.doculib.folder.includes(countArr[i]))
+        counter[countArr[i]] = result.length
+    }
     return counter
 }
 
+function getTrArray(foldername){
+    trArray = [];
+    data.forEach(function(item, index){
+        if(item.doculib.folder.includes(foldername)){
+            trArray.push(index);
+        }
+    });
+    return trArray
+}
 function renderData(foldername){
     currentFolder = foldername;
     const folderID = document.querySelector('#folderID');
@@ -133,11 +156,9 @@ function renderData(foldername){
     const selectAll = document.querySelector('#selectAll');
     selectAll.checked = false;
     
-    trArray = [];
     let content = "";
     data.forEach(function(item, index){
         if(item.doculib.folder.includes(foldername)){
-            trArray.push(index);
 
             const folderSelector = document.querySelector('#folderSelector');
             let folderOption = "<option value=''>請選擇欲加入的資料夾</option>";
@@ -290,7 +311,7 @@ function renderData(foldername){
     const delBtn = document.querySelector('#delBtn');
     const folderLevels = document.getElementsByClassName('folderLevel');
     const folderLevelsHide = document.getElementsByClassName('folderLevel-hide');
-    if(foldername=="全部書目" || foldername=="垃圾桶"){
+    if(foldername == "全部書目" || foldername == "垃圾桶"){
         for (let i=0; i<folderLevels.length; i++) {
             folderLevels[i].classList.add('hide');
         }
