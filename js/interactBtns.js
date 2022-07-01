@@ -3,13 +3,13 @@ let oldFolderName = "";
 let _xml = ""
 
 function checkFolderName(folderName){
-    let result = false
+    let result = false;
     if(folderName == ''){
         alert("請輸入資料夾名稱")
     }else if(folder.includes(folderName)){
         alert("資料夾 " + folderName + " 已存在")
     }else{
-        result = true
+        result = true;
     }
     return result
 }
@@ -57,7 +57,7 @@ function addDataToFolder(){
                     data[item].doculib.folder.push(folderSelector.value);
                     if (!(folderSelector.value in data[item].doculib.topic)){
                         data[item].doculib.topic[folderSelector.value] = [];
-                        data[item].doculib.socialTagging[folderSelector.value] = [];
+                        data[item].doculib.tag[folderSelector.value] = [];
                         data[item].doculib.important[folderSelector.value] = "";
                     }
                 }
@@ -68,7 +68,7 @@ function addDataToFolder(){
                 data[item].doculib.folder = ["全部書目", folderSelector.value];
                 if (!(folderSelector.value in data[item].doculib.topic)){
                     data[item].doculib.topic[folderSelector.value] = [];
-                    data[item].doculib.socialTagging[folderSelector.value] = [];
+                    data[item].doculib.tag[folderSelector.value] = [];
                     data[item].doculib.important[folderSelector.value] = "";
                 }
             })
@@ -153,24 +153,50 @@ function strToArr(str){
     if(arr[arr.length-1] == ""){
         arr.splice(arr.length-1, 1);
     }
-    return arr;
+    return arr
+}
+function encodeUrl(url){
+    return url.replaceAll('&','&amp;')
+}
+function getGeoLevel(pub_loc){
+    let locArr = ['', '', ''];
+    if(pub_loc.includes('[')){
+        pub_loc = pub_loc.split('[')[0]
+    }
+    temp = pub_loc.replaceAll(' ','').split(',');
+    if(temp.length == 2){
+        locArr[2] = temp[0];
+        locArr[0] = temp[1];
+    }else if(temp.length == 3){
+        locArr[2] = temp[0];
+        locArr[1] = temp[1];
+        locArr[0] = temp[2];
+    }
+    return locArr
 }
 function getMetatagContent(tagName, arr){
     if(arr.length>0){
         let content = "";
-        for(let i=0; i<arr.length; i++){
-            content += `<${tagName}>${arr[i]}</${tagName}>`;
+        if(tagName=='Udef_keyword'){
+            for(let i=0; i<arr.length; i++){
+                content += `<${tagName}>${arr[i].toLowerCase()}</${tagName}>`;
+            }
+        }else{
+            for(let i=0; i<arr.length; i++){
+                content += `<${tagName}>${arr[i]}</${tagName}>`;
+            }
         }
-        return content;
+        return content
     }else{
         return ""
     }
 }
 
+// Import DocuLib Json
 function readJsonFile(){
     let file = document.querySelector('#file');
     if (!file.value.length){
-        alert('請先選擇檔案')
+        alert('請先選擇檔案');
     }else{
         let reader = new FileReader();
         reader.onload = jsonFile;
@@ -184,23 +210,16 @@ function jsonFile(event) {
         data = json[0];
         folder = json[1];
     }else{
+        let temp_data = json[0];
+        let temp_folder = json[1];
+
         // check bibliography for duplicates
-        let temp_data = json[0]
-        let temp_folder = json[1]
-        for(let i=0; i<temp_data.length; i++){
-            if(data.some(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title)){
-                if(confirm('書目「' + temp_data[i].title + '」已存在，請確認是否仍要匯入')){
-                    temp_data[i].filename += 'd'
-                    data.push(temp_data[i])
-                    // console.log(temp_data[i])
-                }
-            }else{
-                data.push(temp_data[i])
-            }
-        }
+        checkDupData(temp_data)
+
+        // import folder
         for(let j=0; j<temp_folder.length; j++){
             if(!folder.includes(temp_folder[j])){
-                folder.push(temp_folder[j])
+                folder.push(temp_folder[j]);
             }
         }
     }
@@ -209,18 +228,106 @@ function jsonFile(event) {
     renderFolder();
     renderData('全部書目')
 }
+function checkDupData(temp_data){
+    // record the duplicate bibs & import bibs that are not duplicate
+    let dupArray = [];
+    let pushed = [];
+    for(let i=0; i<temp_data.length; i++){
+        if(data.some(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title)){ 
+            let result = data.filter(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title);
+            dupArray.push(...result);
+        }else{
+            data.push(temp_data[i]);
+            pushed.push(i)
+        }
+    }
+    // check if user is importing duplicate bibs
+    if(dupArray.length > 0){
+        displayDupBibInfo(dupArray, 1);
+        for(let i=0; i<temp_data.length; i++){
+            if(!pushed.includes(i)){
+                if(confirm('書目「' + temp_data[i].title + '」已存在，請確認是否仍要匯入')){
+                    let suffix = getFilenameSuffix(temp_data[i].filename);
+                    temp_data[i].filename += suffix;
+                    data.push(temp_data[i]);
+                    // console.log(temp_data[i])
+                }
+            }
+        }
+    }
+}
+function getFilenameSuffix(filename){
+    let suffix = 'd';
+    let n = data.filter(el => el.filename.includes(filename)).length;
+    return suffix.repeat(n)
+}
+
+// Import From DLBS
+function getDLBSJson(){
+    var url = 'https://buddhism.lib.ntu.edu.tw/ExportToDocuLib?dlbs=' + $('#dlbs').val() + '&callback=dlbs';
+    var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = url;
+	document.getElementsByTagName("head")[0].appendChild(script);
+}
+function dlbs(dlbs){
+    let temp_data = cleanDLBSData(dlbs.books)
+
+    if(data.length == 0){
+        data = temp_data
+    }else{
+        checkDupData(temp_data)
+    }
+    alert('匯入完成，回到全部書目列表');
+    $('#ImportDLBSModal').modal('hide');
+    renderFolder();
+    renderData('全部書目')
+}
+function cleanDLBSData(data){
+    data.forEach(function(item){
+        // rename Udef_publisher_data to Udef_publish_data
+        Object.defineProperty(item.xml_metadata, 'Udef_publish_date', Object.getOwnPropertyDescriptor(item.xml_metadata, 'Udef_publisher_date'));
+        delete item.xml_metadata['Udef_publisher_date'];
+
+        // check Udef_compilation_name is missing or not
+        if(!item.xml_metadata.hasOwnProperty('Udef_compilation_name')){
+            item.xml_metadata.Udef_compilation_name = {'a':'', 'text':''};
+        }
+
+        // Udef_author1-6
+        if(item.xml_metadata.Udef_author1.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author1.text == ''){
+            item.xml_metadata.Udef_author1 = {};
+        }if(item.xml_metadata.Udef_author2.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author2.text == ''){
+            item.xml_metadata.Udef_author2 = {};
+        }if(item.xml_metadata.Udef_author3.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author3.text == ''){
+            item.xml_metadata.Udef_author3 = {};
+        }if(item.xml_metadata.Udef_author4.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author4.text == ''){
+            item.xml_metadata.Udef_author4 = {};
+        }if(item.xml_metadata.Udef_author5.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author5.text == ''){
+            item.xml_metadata.Udef_author5 = {};
+        }if(item.xml_metadata.Udef_author6.a == 'https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=' && item.xml_metadata.Udef_author6.text == ''){
+            item.xml_metadata.Udef_author6 = {};
+        }
+
+        // topic, tag, important
+        item.doculib.topic = {};
+        item.doculib.tag = {};
+        item.doculib.important = {};
+    });
+    return data
+}
 
 // check addBibModal: dup or null
 $('#u_title').change(function(){
-    checkDupBib($('#u_title').val())
+    checkUserBib($('#u_title').val());
 });
-function checkDupBib(u_title){
+function checkUserBib(u_title){
     let dupArray = [];
     data.forEach(function(item, index){
         if(item.title == u_title){
-            dupArray.push(index)
-            displayDupBibInfo(dupArray);
+            dupArray.push(item);
             alert("書目「" + u_title + "」已存在，請確認是否仍需匯入");
+            displayDupBibInfo(dupArray, 0);
         }
     })
 }
@@ -233,63 +340,79 @@ function checkAddBibModal(){
     }
 }
 // Show duplicate bibliography details
-// dupArray = [0, 2]
-function displayDupBibInfo(dupArray){
-    let infoHTML = '';
+/* 
+1. dupArray records all duplicate bibliography objects.
+    e.g., [dupBib0, dupBib1]
+2. mode represents the method of opening a web page.
+    0: using window.open (The page will be loaded completely after the alert)
+    1: using link
+*/
+function displayDupBibInfo(dupArray, mode){
+    let infoHTML = '<p>下為已存在 DocuLib 書目的詳細資訊：</p>';
     dupArray.forEach(function(item){
         infoHTML +=`<table>
         <tr>
-            <td>文獻題名：</td>
-            <td>${data[item].title}</td>
+            <td style="width:80px">文獻題名：</td>
+            <td>${item.title}</td>
         </tr>
         <tr>
             <td>　　作者：</td>
-            <td>${arrToStr(data[item].xml_metadata.Udef_author)}</td>
+            <td>${item.xml_metadata.Udef_author}</td>
         </tr>
         <tr>
             <td>出版日期：</td>
-            <td>${data[item].xml_metadata.Udef_publish_date}</td>
+            <td>${item.xml_metadata.Udef_publish_date}</td>
         </tr>
         <tr>
             <td>出處題名：</td>
-            <td>${data[item].xml_metadata.Udef_compilation_name.text}</td>
+            <td>${item.xml_metadata.Udef_compilation_name.text}</td>
         </tr>
         <tr>
             <td>　關鍵字：</td>
-            <td>${arrToStr(data[item].xml_metadata.Udef_keywords)}</td>
+            <td>${item.xml_metadata.Udef_keywords}</td>
         </tr>
         <tr>
-            <td>　　筆記：</td>
-            <td>${data[item].doculib.note}</td>
+            <td style="vertical-align:top">　　摘要：</td>
+            <td>${item.doc_content.Paragraph}</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">　　筆記：</td>
+            <td>${item.doculib.note}</td>
         </tr>
         <tr>
             <td>　資料夾：</td>
-            <td>${arrToStr(data[item].doculib.folder)}</td>
+            <td>${arrToStr(item.doculib.folder)}</td>
         </tr>
         </table><br>
         `
     });
+    localStorage.setItem("dupInfo", infoHTML);
 
-    let windowFeatures  = 'top=30, left=450, height=600, width=620, resizable=1, scrollbars=1, status=1, toolbar=0, location=1';
-    let win = window.open('', 'dupInfo', windowFeatures);
-    // win.document.write('<html><head><title>Dup Info</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head><body>');
-    win.document.write(infoHTML);
-    // win.document.write('</body></html>');
+    let dupUrl = 'dupBibInfo.html';
+    if(mode){
+        var a = document.createElement('a');
+        a.href = dupUrl;
+        a.target = '_blank';
+        a.click();
+    }else{
+        let windowFeatures  = 'top=30, left=450, height=600, width=620, resizable=1, scrollbars=1, status=1, toolbar=0, location=1';
+        window.open(dupUrl, 'dupInfo', windowFeatures);
+    }
 }
 
 // add user bib to Data
 function addBibByUser(){
-    let userDataNumber = 'user_' + getUserDataNumber()
-    let authorArr = strToArr($('#u_author').val())
-    let importFolder = getImportFolder()
-    let topicObj = {}
-    let socialTaggingObj = {}
-    let importantObj = {}
+    let userDataNumber = 'user_' + getUserDataNumber();
+    let authorArr = strToArr($('#u_author').val());
+    let importFolder = getImportFolder();
+    let topicObj = {};
+    let tagObj = {};
+    let importantObj = {};
     if(importFolder.length > 1){
         for(let i=1; i<importFolder.length; i++){
-            topicObj[importFolder[i]] = []
-            socialTaggingObj[importFolder[i]] = []
-            importantObj[importFolder[i]] = ""
+            topicObj[importFolder[i]] = [];
+            tagObj[importFolder[i]] = [];
+            importantObj[importFolder[i]] = "";
         }
     }
 
@@ -355,13 +478,13 @@ function addBibByUser(){
         "doculib":{
             "folder": importFolder,
             "topic": topicObj,
-            "socialTagging": socialTaggingObj,
+            "tag": tagObj,
             "important": importantObj,
             "read": $('#u_read').val(),
             "note": $('#u_note').val()
         }
     }
-    data.push(userDataObj)
+    data.push(userDataObj);
     // console.log(userDataObj)
 
     clearAddBibModal();
@@ -370,12 +493,12 @@ function addBibByUser(){
     renderFolder('全部書目');
 }
 function getUserDataNumber(){
-    let number = 0
+    let number = 0;
     data.forEach(function(item){
         if(item.filename.includes('user')){
-            n = parseInt(item.filename.replace('user_', ''))
+            n = parseInt(item.filename.replace('user_', ''));
             if(n > number){
-                number = n
+                number = n;
             }
         }
     })
@@ -414,24 +537,24 @@ function clearAddBibModal(){
 
 function saveNoteData(){
     let index = document.getElementById('noteId').value;
-    data[index].doculib.note = document.getElementById('noteContent').value
+    data[index].doculib.note = document.getElementById('noteContent').value;
 }
 function saveToJson(){
     trArray.forEach(function(item){
         let tr1 = document.getElementById(item);
         let tr2 = document.getElementById("hiddenRow_"+item);
         // 核心欄位
-        // Metatags: author, keyword, topic, social tagging, doctypes, docclass
+        // Metatags: author, keyword, topic, tag, doctypes, docclass
         data[item].title = tr1.children[1].textContent;
         data[item].xml_metadata.Udef_author = strToArr(tr1.children[2].textContent);
         // data[item].year_for_grouping = tr1.children[3].textContent;
         data[item].xml_metadata.Udef_compilation_name.text = tr1.children[4].textContent;
         data[item].xml_metadata.Udef_keywords = strToArr(tr1.children[5].textContent);
         // 使用者加值欄位
-        // 6主題分類, 7SocialTagging, 8重要,  9資料夾, 10閱讀狀態, 11筆記
+        // 6主題分類, 7tag, 8重要,  9資料夾, 10閱讀狀態, 11筆記
         if(currentFolder != '全部書目'){
             data[item].doculib.topic[currentFolder] = strToArr(tr1.children[6].textContent);
-            data[item].doculib.socialTagging[currentFolder] = strToArr(tr1.children[7].textContent);
+            data[item].doculib.tag[currentFolder] = strToArr(tr1.children[7].textContent);
             if(tr1.children[8].firstElementChild.checked){
                 data[item].doculib.important[currentFolder] = tr1.children[8].firstElementChild.value;
             }
@@ -540,35 +663,35 @@ function downloadJson(){
     let blob = new Blob([JSON.stringify([data, folder])], {type:""});
     let url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'matadata.json');
+    link.setAttribute('download', currentFolder + '_' + now() + '.json');
     link.click();
 }
 
 function jsonToCsv(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray()
+    let checkedboxArray = getCheckedboxArray();
     if(checkedboxArray.length == 0){
-        checkedboxArray = trArray;
+        checkedboxArray = getTrArray(currentFolder);
     }
     // header
     let csvContent;
     if(currentFolder=="全部書目" || currentFolder=="垃圾桶"){
         csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,閱讀狀態,筆記,卷期,頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,DOI,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,版本項,附註項,內容項,原書目網址\r\n`;
     }else{
-        csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類,Social Tagging,重要,閱讀狀態,筆記,卷期,頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,DOI,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,版本項,附註項,內容項,原書目網址\r\n`;
+        csvContent = `文獻題名,作者,出版年,出處題名,關鍵字,主題分類,Tag,重要,閱讀狀態,筆記,卷期,頁次,出版者,出版日期,出版地,ISSN/ISBN/ISRC,資料類型,語言,摘要,目次,作者1網址,作者2網址,作者3網址,作者4網址,作者5網址,作者6網址,出處題名網址,出版者網址,全文網址,DOI,叢書名,附屬叢書,叢書號,研究類別,研究時代,研究地區,研究地點,校院名稱,系所名稱,畢業年度,學位類別,版本項,附註項,內容項,原書目網址\r\n`;
     }
     checkedboxArray.forEach(function(item){
         // content
         let row;
-        if(currentFolder=="全部書目" || currentFolder=="垃圾桶"){
-            row = [data[item].title, arrToStr(data[item].xml_metadata.Udef_author), data[item].year_for_grouping, data[item].xml_metadata.Udef_compilation_name.text, arrToStr(data[item].xml_metadata.Udef_keywords), data[item].doculib.read, data[item].doculib.note, 
-            data[item].xml_metadata.Udef_compilation_vol, data[item].xml_metadata.Udef_compilation_page, data[item].xml_metadata.Udef_publisher.text, data[item].xml_metadata.Udef_publish_date, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, arrToStr(data[item].xml_metadata.Udef_doctypes), arrToStr(data[item].xml_metadata.Udef_docclass), data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
+        if(currentFolder == "全部書目" || currentFolder == "垃圾桶"){
+            row = [data[item].title, data[item].xml_metadata.Udef_author, data[item].xml_metadata.Udef_publish_date.substring(0,4), data[item].xml_metadata.Udef_compilation_name.text, data[item].xml_metadata.Udef_keywords, data[item].doculib.read, data[item].doculib.note, 
+            data[item].xml_metadata.Udef_compilation_vol, data[item].xml_metadata.Udef_compilation_page, data[item].xml_metadata.Udef_publisher.text, data[item].xml_metadata.Udef_publish_date, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].xml_metadata.Udef_doctypes, data[item].xml_metadata.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
             data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a, data[item].xml_metadata.Udef_doi.a,
             data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent, data[item].xml_metadata.Udef_refSrc.a];
         }else{            
-            row = [data[item].title, arrToStr(data[item].xml_metadata.Udef_author), data[item].year_for_grouping, data[item].xml_metadata.Udef_compilation_name.text, arrToStr(data[item].xml_metadata.Udef_keywords), 
-                    arrToStr(data[item].doculib.topic[currentFolder]), arrToStr(data[item].doculib.socialTagging[currentFolder]), data[item].doculib.important[currentFolder], data[item].doculib.read, data[item].doculib.note, 
-                    data[item].xml_metadata.Udef_compilation_vol, data[item].xml_metadata.Udef_compilation_page, data[item].xml_metadata.Udef_publisher.text, data[item].xml_metadata.Udef_publish_date, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, arrToStr(data[item].xml_metadata.Udef_doctypes), arrToStr(data[item].xml_metadata.Udef_docclass), data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
+            row = [data[item].title, data[item].xml_metadata.Udef_author, data[item].xml_metadata.Udef_publish_date.substring(0,4), data[item].xml_metadata.Udef_compilation_name.text, data[item].xml_metadata.Udef_keywords, 
+                    arrToStr(data[item].doculib.topic[currentFolder]), arrToStr(data[item].doculib.tag[currentFolder]), data[item].doculib.important[currentFolder], data[item].doculib.read, data[item].doculib.note, 
+                    data[item].xml_metadata.Udef_compilation_vol, data[item].xml_metadata.Udef_compilation_page, data[item].xml_metadata.Udef_publisher.text, data[item].xml_metadata.Udef_publish_date, data[item].xml_metadata.Udef_publisher_location, data[item].xml_metadata.Udef_Udef_book_code, data[item].xml_metadata.Udef_doctypes, data[item].xml_metadata.Udef_docclass, data[item].doc_content.Paragraph, data[item].xml_metadata.Udef_tablecontent, 
                     data[item].xml_metadata.Udef_author1.a, data[item].xml_metadata.Udef_author2.a, data[item].xml_metadata.Udef_author3.a, data[item].xml_metadata.Udef_author4.a, data[item].xml_metadata.Udef_author5.a, data[item].xml_metadata.Udef_author6.a, data[item].xml_metadata.Udef_compilation_name.a, data[item].xml_metadata.Udef_publisher.a, data[item].xml_metadata.Udef_fulltextSrc.a, data[item].xml_metadata.Udef_doi.a,
                     data[item].xml_metadata.Udef_seriesname, data[item].xml_metadata.Udef_seriessubsidiary, data[item].xml_metadata.Udef_seriesno, data[item].xml_metadata.Udef_category, data[item].xml_metadata.Udef_period, data[item].xml_metadata.Udef_area, data[item].xml_metadata.Udef_place, data[item].xml_metadata.Udef_institution, data[item].xml_metadata.Udef_department, data[item].xml_metadata.Udef_publicationyear, data[item].xml_metadata.Udef_degree, data[item].xml_metadata.Udef_edition, data[item].xml_metadata.Udef_remark, data[item].xml_metadata.Udef_remarkcontent, data[item].xml_metadata.Udef_refSrc.a];
         }
@@ -579,6 +702,7 @@ function jsonToCsv(){
                 }
                 cell = cell.replaceAll(',', ';');
                 cell = cell.replaceAll('\n', ' ');
+                cell = cell.replaceAll('\r', ' ');
             }
             else{
                 cell = "";
@@ -592,19 +716,19 @@ function jsonToCsv(){
     let blob = new Blob(["\ufeff"+csvContent], {type:'text/csv;charset=utf-8;'});
     let url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', currentFolder+'.csv');
+    link.setAttribute('download', currentFolder  + '_' + now() + '.csv');
     link.click();
 }
 function downloadXML(){
     jsonToDocuXML();
     let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
-    saveAs(blob, currentFolder+".xml");
+    saveAs(blob, currentFolder  + '_' + now() + ".xml");
 }
 function jsonToDocuXML(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray()
+    let checkedboxArray = getCheckedboxArray();
     if(checkedboxArray.length == 0){
-        checkedboxArray = trArray;
+        checkedboxArray = getTrArray(currentFolder);
     }
     let xmlContent = 
 `<ThdlPrototypeExport>
@@ -612,25 +736,25 @@ function jsonToDocuXML(){
 <metadata_field_settings>
 <compilation_name show_spotlight="Y" display_order="999">出處題名</compilation_name>
 <year_for_grouping show_spotlight="Y" display_order="999">出版年</year_for_grouping>
-<geo_level1 show_spotlight="Y" display_order="999">geo_level1</geo_level1>
-<geo_level2 show_spotlight="Y" display_order="999">geo_level2</geo_level2>
-<geo_level3 show_spotlight="Y" display_order="999">geo_level3</geo_level3>
+<geo_level1 show_spotlight="Y" display_order="999">出版國家</geo_level1>
+<geo_level2 show_spotlight="Y" display_order="999">出版省分</geo_level2>
+<geo_level3 show_spotlight="Y" display_order="999">出版地點</geo_level3>
 <book_code show_spotlight="Y" display_order="999">ISSN/ISBN/ISRC</book_code>
-<doc_source show_spotlight="Y" display_order="999">doc_source</doc_source>
+<doc_source show_spotlight="Y" display_order="999">書目來源</doc_source>
 </metadata_field_settings>
 <feature_analysis>
 <spotlight category="Udef_author" sub_category="-" display_order="1" title="作者"/>
 <tag type="contentTagging" name="Udef_author" default_category="Udef_author" default_sub_category="-"/>
-<spotlight category="Udef_keywords" sub_category="-" display_order="2" title="關鍵字"/>
-<tag type="contentTagging" name="Udef_keywords" default_category="Udef_keywords" default_sub_category="-"/>
+<spotlight category="Udef_keyword" sub_category="-" display_order="2" title="關鍵字"/>
+<tag type="contentTagging" name="Udef_keyword" default_category="Udef_keyword" default_sub_category="-"/>
 <spotlight category="Udef_docclass" sub_category="-" display_order="3" title="語言"/>
 <tag type="contentTagging" name="Udef_docclass" default_category="Udef_docclass" default_sub_category="-"/>
 <spotlight category="Udef_doctype" sub_category="-" display_order="4" title="資料類型"/>
 <tag type="contentTagging" name="Udef_doctype" default_category="Udef_doctype" default_sub_category="-"/>
 <spotlight category="Udef_topic" sub_category="-" display_order="5" title="主題分類"/>
 <tag type="contentTagging" name="Udef_topic" default_category="Udef_topic" default_sub_category="-"/>
-<spotlight category="Udef_socialTagging" sub_category="-" display_order="6" title="Social Tagging"/>
-<tag type="contentTagging" name="Udef_socialTagging" default_category="Udef_socialTagging" default_sub_category="-"/>
+<spotlight category="Udef_tag" sub_category="-" display_order="6" title="Tag"/>
+<tag type="contentTagging" name="Udef_tag" default_category="Udef_tag" default_sub_category="-"/>
 </feature_analysis>
 </corpus>
 <documents>`;
@@ -642,23 +766,23 @@ function jsonToDocuXML(){
 <compilation_name>${data[item].xml_metadata.Udef_compilation_name.text}</compilation_name>
 <compilation_vol>${data[item].xml_metadata.Udef_compilation_vol}</compilation_vol>
 <time_orig_str>${data[item].xml_metadata.Udef_publish_date}</time_orig_str>
-<year_for_grouping>${data[item].year_for_grouping}</year_for_grouping>
-<geo_level1>${data[item].geo_level1}</geo_level1>
-<geo_level2>${data[item].geo_level2}</geo_level2>
-<geo_level3>${data[item].geo_level3}</geo_level3>
+<year_for_grouping>${data[item].xml_metadata.Udef_publish_date.substring(0,4)}</year_for_grouping>
+<geo_level1>${getGeoLevel(data[item].xml_metadata.Udef_publisher_location)[0]}</geo_level1>
+<geo_level2>${getGeoLevel(data[item].xml_metadata.Udef_publisher_location)[1]}</geo_level2>
+<geo_level3>${getGeoLevel(data[item].xml_metadata.Udef_publisher_location)[2]}</geo_level3>
 <book_code>${data[item].xml_metadata.Udef_book_code}</book_code>
 <doc_source>${data[item].doc_source}</doc_source>
 <xml_metadata>
-<Udef_author>${arrToStr(data[item].xml_metadata.Udef_author)}</Udef_author>
-<Udef_doctypes>${arrToStr(data[item].xml_metadata.Udef_doctypes)}</Udef_doctypes>
-<Udef_biliography_language>${arrToStr(data[item].xml_metadata.Udef_biliography_language)}</Udef_biliography_language>
-<Udef_keywords>${arrToStr(data[item].xml_metadata.Udef_keywords)}</Udef_keywords>
+<Udef_author>${data[item].xml_metadata.Udef_author}</Udef_author>
+<Udef_doctypes>${data[item].xml_metadata.Udef_doctypes}</Udef_doctypes>
+<Udef_biliography_language>${data[item].xml_metadata.Udef_biliography_language}</Udef_biliography_language>
+<Udef_keywords>${data[item].xml_metadata.Udef_keywords}</Udef_keywords>
 <Udef_read>${data[item].doculib.read}</Udef_read>
 <Udef_note>${data[item].doculib.note}</Udef_note>`;
-        if(currentFolder!="全部書目" || currentFolder!="垃圾桶"){
+        if(currentFolder!="全部書目" && currentFolder!="垃圾桶"){
             xmlContent +=`
 <Udef_topic>${arrToStr(data[item].doculib.topic[currentFolder])}</Udef_topic>
-<Udef_socialTagging>${arrToStr(data[item].doculib.socialTagging[currentFolder])}</Udef_socialTagging>
+<Udef_tag>${arrToStr(data[item].doculib.tag[currentFolder])}</Udef_tag>
 <Udef_important>${data[item].doculib.important[currentFolder]}</Udef_important>`;
 }
         // Udef_author1 - Udef_author6
@@ -666,7 +790,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author1.a!=""){
                 xmlContent += `
 <Udef_author1>
-<a href="${data[item].xml_metadata.Udef_author1.a}" target="_blank">${data[item].xml_metadata.Udef_author1.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author1.a)}" target="_blank">${data[item].xml_metadata.Udef_author1.text}</a>
 </Udef_author1>`;}
             else{
                 xmlContent += `
@@ -675,7 +799,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author2.a!=""){
                 xmlContent += `
 <Udef_author2>
-<a href="${data[item].xml_metadata.Udef_author2.a}" target="_blank">${data[item].xml_metadata.Udef_author2.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author2.a)}" target="_blank">${data[item].xml_metadata.Udef_author2.text}</a>
 </Udef_author2>`;}
             else{
                 xmlContent += `
@@ -684,7 +808,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author3.a!=""){
                 xmlContent += `
 <Udef_author3>
-<a href="${data[item].xml_metadata.Udef_author3.a}" target="_blank">${data[item].xml_metadata.Udef_author3.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author3.a)}" target="_blank">${data[item].xml_metadata.Udef_author3.text}</a>
 </Udef_author3>`;}
             else{
                 xmlContent += `
@@ -693,7 +817,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author4.a!=""){
                 xmlContent += `
 <Udef_author4>
-<a href="${data[item].xml_metadata.Udef_author4.a}" target="_blank">${data[item].xml_metadata.Udef_author4.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author4.a)}" target="_blank">${data[item].xml_metadata.Udef_author4.text}</a>
 </Udef_author4>`;}
             else{
                 xmlContent += `
@@ -702,7 +826,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author5.a!=""){
                 xmlContent += `
 <Udef_author5>
-<a href="${data[item].xml_metadata.Udef_author5.a}" target="_blank">${data[item].xml_metadata.Udef_author5.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author5.a)}" target="_blank">${data[item].xml_metadata.Udef_author5.text}</a>
 </Udef_author5>`;}
             else{
                 xmlContent += `
@@ -711,7 +835,7 @@ function jsonToDocuXML(){
             if(data[item].xml_metadata.Udef_author6.a!=""){
                 xmlContent += `
 <Udef_author6>
-<a href="${data[item].xml_metadata.Udef_author6.a}" target="_blank">${data[item].xml_metadata.Udef_author6.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_author6.a)}" target="_blank">${data[item].xml_metadata.Udef_author6.text}</a>
 </Udef_author6>`;}
             else{
                 xmlContent += `
@@ -720,7 +844,7 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_compilation_name.a!=""){
             xmlContent += `
 <Udef_compilation_name>
-<a href="${data[item].xml_metadata.Udef_compilation_name.a}" target="_blank">${data[item].xml_metadata.Udef_compilation_name.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_compilation_name.a)}" target="_blank">${data[item].xml_metadata.Udef_compilation_name.text}</a>
 </Udef_compilation_name>`;}
         else{
             xmlContent += `
@@ -735,7 +859,7 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_publisher.a!=""){
             xmlContent += `
 <Udef_publisher>
-<a href="${data[item].xml_metadata.Udef_publisher.a}" target="_blank">${data[item].xml_metadata.Udef_publisher.text}</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_publisher.a)}" target="_blank">${data[item].xml_metadata.Udef_publisher.text}</a>
 </Udef_publisher>`;}
         else{
             xmlContent += `
@@ -766,7 +890,7 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_fulltextSrc.a!=""){
             xmlContent += `
 <Udef_fulltextSrc>
-<a href="${data[item].xml_metadata.Udef_fulltextSrc.a}" target="_blank">全文網址</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_fulltextSrc.a)}" target="_blank">全文網址</a>
 </Udef_fulltextSrc>`;}
         else{
             xmlContent += `
@@ -774,7 +898,7 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_doi.text!="無DOI"){
             xmlContent += `
 <Udef_doi>
-<a href="${data[item].xml_metadata.Udef_doi}" target="_blank">DOI</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_doi)}" target="_blank">DOI</a>
 </Udef_doi>`;}
         else{
             xmlContent += `
@@ -782,7 +906,7 @@ function jsonToDocuXML(){
         }
             xmlContent += `
 <Udef_refSrc>
-<a href="${data[item].xml_metadata.Udef_refSrc.a}" target="_blank">原書目網址</a>
+<a href="${encodeUrl(data[item].xml_metadata.Udef_refSrc.a)}" target="_blank">原書目網址</a>
 </Udef_refSrc>`;
         // 叢書
         if(data[item].xml_metadata.Udef_seriesname!=""){
@@ -801,10 +925,10 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_period!=""){
             xmlContent += `
 <Udef_period>${data[item].xml_metadata.Udef_period}</Udef_period>`;}
-        if(data[item].xml_metadata.Udef_area!=""){
+        if(data[item].xml_metadata.Udef_area!=undefined && data[item].xml_metadata.Udef_area!=""){
             xmlContent += `
 <Udef_area>${data[item].xml_metadata.Udef_area}</Udef_area>`;}
-        if(data[item].xml_metadata.Udef_place!=""){
+        if(data[item].xml_metadata.Udef_place!=undefined && data[item].xml_metadata.Udef_place!=""){
             xmlContent += `
 <Udef_place>${data[item].xml_metadata.Udef_place}</Udef_place>`;}
         // 碩博士論文
@@ -814,9 +938,9 @@ function jsonToDocuXML(){
         if(data[item].xml_metadata.Udef_department!=""){
             xmlContent += `
 <Udef_department>${data[item].xml_metadata.Udef_department}</Udef_department>`;}
-        if(data[item].xml_metadata.Udef_publicationyear!=""){
+        if(data[item].xml_metadata.Udef_publish_date!=""){
             xmlContent += `
-<Udef_publicationyear>${data[item].xml_metadata.Udef_publicationyear}</Udef_publicationyear>`;}
+<Udef_publicationyear>${data[item].xml_metadata.Udef_publish_date.substring(0,4)}</Udef_publicationyear>`;}
         if(data[item].xml_metadata.Udef_degree!=""){
             xmlContent += `
 <Udef_degree>${data[item].xml_metadata.Udef_degree}</Udef_degree>`;}
@@ -830,11 +954,11 @@ function jsonToDocuXML(){
         xmlContent += `
 <MetaTags>
 ${getMetatagContent("Udef_author", data[item].xml_metadata.Udef_author)}
-${getMetatagContent("Udef_keywords", data[item].xml_metadata.Udef_keywords)}
+${getMetatagContent("Udef_keyword", data[item].xml_metadata.Udef_keywords)}
 ${getMetatagContent("Udef_doctype", data[item].xml_metadata.Udef_doctypes)}
-${getMetatagContent("Udef_docclass", data[item].xml_metadata.Udef_docclass)}
+${getMetatagContent("Udef_docclass", data[item].xml_metadata.Udef_biliography_language)}
 ${getMetatagContent("Udef_topic", data[item].doculib.topic)}
-${getMetatagContent("Udef_socialTagging", data[item].doculib.socialTagging)}
+${getMetatagContent("Udef_tag", data[item].doculib.tag)}
 </MetaTags>
 </doc_content>
 </document>`;

@@ -75,7 +75,7 @@ function succUploadFunc(){
 function failUploadFunc(){
     // using FileSaver
     let blob = new Blob([_xml], {type: "text/xml;charset=utf-8"});
-    saveAs(blob, currentFolder+".xml");
+    saveAs(blob, currentFolder  + '_' + now() + ".xml");
 	alert("上傳失敗，已將 DocuXML 下載至本機");
 }
 function now(){

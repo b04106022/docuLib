@@ -31,6 +31,8 @@ window.addEventListener("beforeunload", function(e) {
 });
 
 function doculibInitialize(){
+    $('#guideModal').modal('show');
+    
     const tbody = document.querySelector('#tbody');
     let previousCell = null;
     tbody.addEventListener('click', function(e){
@@ -86,7 +88,7 @@ $(function(){
                                 let index = data[item].doculib.folder.indexOf(delFolder);
                                 data[item].doculib.folder.splice(index, 1);
                                 // doculib.folder: removed
-                                // doculib.topic, socialTagging, important: still stored
+                                // doculib.topic, tag, important: still stored
                             });
                         }
                     }else{
@@ -197,13 +199,13 @@ function renderData(foldername){
                 <tr id="${index}">
                     <td><input type="checkbox" name='c' value="${index}"></td>
                     <td data-editable="true">${item.title}</td>
-                    <td data-editable="true">${arrToStr(item.xml_metadata.Udef_author)}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_author}</td>
                     <td auto-edit="true">${item.xml_metadata.Udef_publish_date.substring(0,4)}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
-                    <td data-editable="true">${arrToStr(item.xml_metadata.Udef_keywords)}</td>
+                    <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
                     <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.topic[foldername])}</td>
-                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.socialTagging[foldername])}</td>
-                    <td data-editable="true" class="folderLevel"><input type="checkbox" name='important' value="重要" ${importantChecked}></td>
+                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.tag[foldername])}</td>
+                    <td class="folderLevel"><input type="checkbox" name='important' value="重要" ${importantChecked}></td>
                     <td class="folderLevel-hide">${folderContent}</td>
                     <td>
                     <select>
@@ -223,8 +225,8 @@ function renderData(foldername){
             content += `<p>出版日期：<input type="text" value='${item.xml_metadata.Udef_publish_date}'></p>`;
             content += `<p>出版地：<input type="text" value='${item.xml_metadata.Udef_publisher_location}'></p>`;
             content += `<p>ISSN/ISBN/ISRC：<input type="text" value='${item.xml_metadata.Udef_book_code}'</p>`;
-            content += `<p>資料類型：<input type="text" value='${arrToStr(item.xml_metadata.Udef_doctypes)}'</p>`;
-            content += `<p>語言：<input type="text" value='${arrToStr(item.xml_metadata.Udef_biliography_language)}'</p>`;
+            content += `<p>資料類型：<input type="text" value='${item.xml_metadata.Udef_doctypes}'</p>`;
+            content += `<p>語言：<input type="text" value='${item.xml_metadata.Udef_biliography_language}'</p>`;
             content += `<p>摘要：<br><textarea rows="4">${item.doc_content.Paragraph}</textarea></p>`;
             content += `<p>目次：<br><textarea rows="4">${item.xml_metadata.Udef_tablecontent}</textarea></p>`;
             // 共同欄位－網址

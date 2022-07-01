@@ -1,0 +1,1916 @@
+<ThdlPrototypeExport>
+<corpus name="全部書目">
+<metadata_field_settings>
+<compilation_name show_spotlight="Y" display_order="999">出處題名</compilation_name>
+<year_for_grouping show_spotlight="Y" display_order="999">出版年</year_for_grouping>
+<geo_level1 show_spotlight="Y" display_order="999">出版國家</geo_level1>
+<geo_level2 show_spotlight="Y" display_order="999">出版省分</geo_level2>
+<geo_level3 show_spotlight="Y" display_order="999">出版地點</geo_level3>
+<book_code show_spotlight="Y" display_order="999">ISSN/ISBN/ISRC</book_code>
+<doc_source show_spotlight="Y" display_order="999">書目來源</doc_source>
+</metadata_field_settings>
+<feature_analysis>
+<spotlight category="Udef_author" sub_category="-" display_order="1" title="作者"/>
+<tag type="contentTagging" name="Udef_author" default_category="Udef_author" default_sub_category="-"/>
+<spotlight category="Udef_keyword" sub_category="-" display_order="2" title="關鍵字"/>
+<tag type="contentTagging" name="Udef_keyword" default_category="Udef_keyword" default_sub_category="-"/>
+<spotlight category="Udef_docclass" sub_category="-" display_order="3" title="語言"/>
+<tag type="contentTagging" name="Udef_docclass" default_category="Udef_docclass" default_sub_category="-"/>
+<spotlight category="Udef_doctype" sub_category="-" display_order="4" title="資料類型"/>
+<tag type="contentTagging" name="Udef_doctype" default_category="Udef_doctype" default_sub_category="-"/>
+<spotlight category="Udef_topic" sub_category="-" display_order="5" title="主題分類"/>
+<tag type="contentTagging" name="Udef_topic" default_category="Udef_topic" default_sub_category="-"/>
+<spotlight category="Udef_tag" sub_category="-" display_order="6" title="Tag"/>
+<tag type="contentTagging" name="Udef_tag" default_category="Udef_tag" default_sub_category="-"/>
+</feature_analysis>
+</corpus>
+<documents>
+<document filename="DLBS_367164">
+<corpus>全部書目</corpus>
+<title>20年來「佛經文學對中國小說影響」研究綜述=Summarization Study of Influence of Sutra Literature to China Novel in Twenty Years</title>
+<compilation_name>韶關學院學報=Journal of Shaoguan University</compilation_name>
+<compilation_vol>n7</compilation_vol>
+<time_orig_str>2004</time_orig_str>
+<year_for_grouping>2004</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>廣東</geo_level3>
+<book_code>10075348 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>王立; 黃艷燕; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛經文學; sutra literature; 宣佛小說; the novel that publicize Buddhism; 比較文學; comparative literature; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=28852" target="_blank">王立</a>
+</Udef_author1>
+<Udef_author2>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=55646" target="_blank">黃艷燕</a>
+</Udef_author2>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=1066" target="_blank">韶關學院學報=Journal of Shaoguan University</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n7</Udef_compilation_vol>
+<Udef_compilation_page>12 - 16</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.sgu.edu.cn/" target="_blank">韶關學院</a>
+</Udef_publisher>
+<Udef_publish_date>2004</Udef_publish_date>
+<Udef_publisher_location>廣東, 中國 [Guangdong, China]</Udef_publisher_location>
+<Udef_book_code>10075348 (P)</Udef_book_code>
+<Udef_remark>全文下載:中國期刊網－文史哲輯專欄目錄
+</Udef_remark>
+<Udef_tablecontent>一、佛教對小說的利用及小說對佛教的反作用 12
+二、佛教對小說的影響 13
+三、宣佛小說的價值 13
+四、宣佛小說在小說史上的地位 14
+</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://big5.oversea.cnki.net/kcms/detail/detail.aspx?filename=SSCG200407002&amp;DBName=cjfqtotal&amp;dbcode=cjfq&amp;uid=WEEvREcwSlJHSldRa1Fhb09pSnNwL3Nab2ZjZUt3L0Rubi9UeXhCVnB3MD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=367164" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2004</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教東傳對中國古代小說，尤其是宋前小說的影響，是全方位、多角度的，它涉及小說故事題材、情節結構、思想內容等方面，近二十年對佛教與小說關係的研究日益增多，研究對象也逐漸由整體研究發展到個案研究，有關宣佛小說的價值與定位也相應起了變化。 
+
+The influence that Buddhism to china archaic novel, especially to the novel before the dynasty of song is all-around and from many angles, and deal with the theme of novel, polt and structure, thought and content , etc. Near twenty years the study about the relationship between Buddhism and China novel is manifolded. The object of research is developed from integer to individual. The worth and orientation about the novel that publicize Buddhism is changed. </Paragraph>
+<MetaTags>
+<Udef_author>王立</Udef_author><Udef_author>黃艷燕</Udef_author>
+<Udef_keyword>佛經文學</Udef_keyword><Udef_keyword>sutra literature</Udef_keyword><Udef_keyword>宣佛小說</Udef_keyword><Udef_keyword>the novel that publicize buddhism</Udef_keyword><Udef_keyword>比較文學</Udef_keyword><Udef_keyword>comparative literature</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_139701">
+<corpus>全部書目</corpus>
+<title>中古漢譯佛經敍事文學研究</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>200407</time_orig_str>
+<year_for_grouping>2004</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>北京</geo_level3>
+<book_code>7800601897</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>吳海勇; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>譯經; The Translation of Sutra; 佛教文學; Buddhist Literature; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=35821" target="_blank">吳海勇</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>661</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.ssreader.com/publishing/xycbs" target="_blank">學苑出版社</a>
+</Udef_publisher>
+<Udef_publish_date>200407</Udef_publish_date>
+<Udef_publisher_location>北京, 中國 [Beijing, China]</Udef_publisher_location>
+<Udef_book_code>7800601897</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=139701" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2004</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>本文緒論針對當代佛教文學研究的不足所在，回顧近現代學術史，提出加強佛經翻譯文學整理的主張，論文主題便是對這種見解的時間。全書共分六章︰第一章從文學角度對中古漢譯佛經進行分類概說。第二章對佛經文學題材作專題研究。第三章主要揭示佛經文學的民間成份及其宗教特性。第四章敘事分析轉向佛經文學的形式研究。第五章探討佛經翻譯言論與中國古代文學理論的關系。第六章影響研究是中古譯經文學研究的自然歸結。</Paragraph>
+<MetaTags>
+<Udef_author>吳海勇</Udef_author>
+<Udef_keyword>譯經</Udef_keyword><Udef_keyword>the translation of sutra</Udef_keyword><Udef_keyword>佛教文學</Udef_keyword><Udef_keyword>buddhist literature</Udef_keyword>
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398858">
+<corpus>全部書目</corpus>
+<title>中國小說史略</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1998</time_orig_str>
+<year_for_grouping>1998</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>魯迅; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=60981" target="_blank">魯迅</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>260</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.guji.com.cn/gj/" target="_blank">上海古籍出版社</a>
+</Udef_publisher>
+<Udef_publish_date>1998</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398858" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1998</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>魯迅</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160135">
+<corpus>全部書目</corpus>
+<title>中國古小說與佛教因果觀念=Chinese Ancient Novel and Buddhist Creed of "Wherefore And Therefore"</title>
+<compilation_name>廣東技術師範學院學報=Journal of Guangdong Polytechnic Normal University</compilation_name>
+<compilation_vol>n3</compilation_vol>
+<time_orig_str>2006</time_orig_str>
+<year_for_grouping>2006</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>廣州</geo_level3>
+<book_code>1672402X (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>項裕榮; Xiang, Yu-rong; 朱蘇權; Zhu, Su-quan; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; Buddhism; 古小說; Ancient Novels; 因果; wherefore and therefore; 志怪小說; ZhiGuai Novels; 魏晉小說; Novels in The WeiJin dynasty; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=54872" target="_blank">項裕榮 (著)=Xiang, Yu-rong (au.)</a>
+</Udef_author1>
+<Udef_author2>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=33792" target="_blank">朱蘇權 (著)=Zhu, Su-quan (au.)</a>
+</Udef_author2>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=1080" target="_blank">廣東技術師範學院學報=Journal of Guangdong Polytechnic Normal University</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n3</Udef_compilation_vol>
+<Udef_compilation_page>59 - 63</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.gdin.edu.cn/" target="_blank">廣東技術師範學院</a>
+</Udef_publisher>
+<Udef_publish_date>2006</Udef_publish_date>
+<Udef_publisher_location>廣州, 中國 [Guangzhou, China]</Udef_publisher_location>
+<Udef_book_code>1672402X (P)</Udef_book_code>
+<Udef_remark>作者單位：廣東技術師範學院</Udef_remark>
+<Udef_tablecontent>一、概述與簡評：因果觀念的傳入與古小說中“志怪”的盛行 59
+二、分類與觀察：古小說中的四種因果類型及其表現形態 60
+三、個案與分析：從幾例古小說看其中因果觀的呈現 62</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://new.big5.oversea.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFD2006&amp;filename=GDMZ200603014&amp;uid=WEEvREcwSlJHSldRa1FhdkJtNEYwbWVTY1EwTXZaT3dLbG9xcTFDOTdjbz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&amp;v=MjkwMjJDVVI3cWZZdVJwRmlEaFdyN09JaW5HZExHNEh0Zk1ySTlFWUlSOGVYMUx1eFlTN0RoMVQzcVRyV00xRnI=" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160135" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2006</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph> 中國古小說中以志怪一類對後代影響最巨。此種小說受到佛教因果觀念的影響非常明顯。一方面佛教因果使得古小說的結構上呈現出“因果分明”的完整性；另一方面，報恩、冥報、殺生、輪迴等四種內容的作品也與佛教因果觀關係密切。這些小說的成熟與發展水準，在內容與形式都為此後中國小說的發展提供了借鑑。
+
+ Of Chinese Ancient novels it is the ZhiGuai Novels that exerts the most substantial influence upon subsequent novels. The Buddhist influence of its doctrine of "wherefore and therefore" upon this kind of novel shows itself so evidently. On one hand there is some structural integrity of "wherefore and therefore" in this kind of novel; on the other hand, there is some affinity between the creed of "wherefore and therefore" and such outputs as "rewarding", "Revenge after Death", "Killing living beings", "Samsara". The ripening and development of these kinds of novels offer examples for Chinese novels of later days both in subject and form.</Paragraph>
+<MetaTags>
+<Udef_author>項裕榮</Udef_author><Udef_author>Xiang, Yu-rong</Udef_author><Udef_author>朱蘇權</Udef_author><Udef_author>Zhu, Su-quan</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>buddhism</Udef_keyword><Udef_keyword>古小說</Udef_keyword><Udef_keyword>ancient novels</Udef_keyword><Udef_keyword>因果</Udef_keyword><Udef_keyword>wherefore and therefore</Udef_keyword><Udef_keyword>志怪小說</Udef_keyword><Udef_keyword>zhiguai novels</Udef_keyword><Udef_keyword>魏晉小說</Udef_keyword><Udef_keyword>novels in the weijin dynasty</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398853">
+<corpus>全部書目</corpus>
+<title>中國哲學史</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>2008</time_orig_str>
+<year_for_grouping>2008</year_for_grouping>
+<geo_level1>臺灣</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>臺北</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>馮友蘭; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=54960" target="_blank">馮友蘭</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>1266</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.cptw.com.tw/default.aspx" target="_blank">臺灣商務印書館</a>
+</Udef_publisher>
+<Udef_publish_date>2008</Udef_publish_date>
+<Udef_publisher_location>臺北, 臺灣 [Taipei, Taiwan]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398853" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2008</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>馮友蘭</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160136">
+<corpus>全部書目</corpus>
+<title>六朝佛教徒對志怪小說興起的作用</title>
+<compilation_name>明清小說研究=The Journal of Ming-Qing Fiction Studies</compilation_name>
+<compilation_vol>n1</compilation_vol>
+<time_orig_str>2001</time_orig_str>
+<year_for_grouping>2001</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>廣州</geo_level3>
+<book_code>10043330</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>朱恒夫; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; 佛; 小說; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=33653" target="_blank">朱恒夫</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank">明清小說研究=The Journal of Ming-Qing Fiction Studies</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n1</Udef_compilation_vol>
+<Udef_compilation_page>108 - 124</Udef_compilation_page>
+<Udef_publisher>江蘇省社會科學院文學研究所</Udef_publisher>
+<Udef_publish_date>2001</Udef_publish_date>
+<Udef_publisher_location>廣州, 中國 [Guangzhou, China]</Udef_publisher_location>
+<Udef_book_code>10043330</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160136" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2001</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>六朝志怪能形成蔚為大觀之態，與佛教有著密切的關系，早為學界共識。魯迅在＜中國小說史略＞第五篇＜六朝之鬼神志怪書＞對此關系作了首次闡述："中國本信巫，秦漢以來，神仙之說盛行，漢末又大暢巫風，而鬼道愈熾;會小乘佛教亦入土中，漸視流傳。凡此皆張皇鬼神，稱道靈異，故自晉迄隋，特多鬼神志怪之書。"他認為興起的原因有二：一是大暢的巫風，二是流傳中土的佛教。</Paragraph>
+<MetaTags>
+<Udef_author>朱恒夫</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398856">
+<corpus>全部書目</corpus>
+<title>六朝志怪小說研究</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1986</time_orig_str>
+<year_for_grouping>1986</year_for_grouping>
+<geo_level1>臺灣</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>臺北</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>周次吉; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=39034" target="_blank">周次吉</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>162</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.wenchin.com.tw/" target="_blank">文津出版社</a>
+</Udef_publisher>
+<Udef_publish_date>1986</Udef_publish_date>
+<Udef_publisher_location>臺北, 臺灣 [Taipei, Taiwan]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398856" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1986</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>周次吉</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398267">
+<corpus>全部書目</corpus>
+<title>少室山房筆叢</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>2001</time_orig_str>
+<year_for_grouping>2001</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code>7806227393</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>胡應麟; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=44649" target="_blank">胡應麟</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>498</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.publishcn.com/" target="_blank">上海書店出版社</a>
+</Udef_publisher>
+<Udef_publish_date>2001</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_book_code>7806227393</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398267" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2001</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>胡應麟</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398857">
+<corpus>全部書目</corpus>
+<title>古小說鉤沉</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1997</time_orig_str>
+<year_for_grouping>1997</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>濟南</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>魯迅; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=60981" target="_blank">魯迅</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>348</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.qlss.com.cn/jsp/zys/index.jsp" target="_blank">齊魯書社</a>
+</Udef_publisher>
+<Udef_publish_date>1997</Udef_publish_date>
+<Udef_publisher_location>濟南, 中國 [Chinan, China]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398857" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1997</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>魯迅</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160139">
+<corpus>全部書目</corpus>
+<title>佛教文化與南朝志怪小說</title>
+<compilation_name>華中理工大學學報（社會科學版）=Journal of Huazhong (Central China) University of Science and Technology (Edition of Social Science)</compilation_name>
+<compilation_vol>n1</compilation_vol>
+<time_orig_str>1998</time_orig_str>
+<year_for_grouping>1998</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>武漢</geo_level3>
+<book_code>10063889</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>張躍生; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; 佛; 小說; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=49659" target="_blank">張躍生</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank">華中理工大學學報（社會科學版）=Journal of Huazhong (Central China) University of Science and Technology (Edition of Social Science)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n1</Udef_compilation_vol>
+<Udef_publisher>
+<a href="http://www.hust.edu.cn/" target="_blank">華中理工大學</a>
+</Udef_publisher>
+<Udef_publish_date>1998</Udef_publish_date>
+<Udef_publisher_location>武漢, 中國 [Wuhan, China]</Udef_publisher_location>
+<Udef_book_code>10063889</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160139" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1998</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>本文据《搜神后记》、《幽明录》、《宣验记》、《冥祥记》，析理了佛教文化与南朝志怪小说之交涉，及其对后世小说的影响。</Paragraph>
+<MetaTags>
+<Udef_author>張躍生</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_159529">
+<corpus>全部書目</corpus>
+<title>佛教故事 -- 中國五朝志怪小說的一個敘事源頭</title>
+<compilation_name>中國文化研究=Chinese Culture Research</compilation_name>
+<compilation_vol>n1</compilation_vol>
+<time_orig_str>2001</time_orig_str>
+<year_for_grouping>2001</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>北京</geo_level3>
+<book_code>10053247 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>張進; 普慧; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教故事; 佛教; 佛; 小說; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=49367" target="_blank">張進</a>
+</Udef_author1>
+<Udef_author2>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=72593" target="_blank">普慧</a>
+</Udef_author2>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=201" target="_blank">中國文化研究=Chinese Culture Research</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n1</Udef_compilation_vol>
+<Udef_compilation_page>110 - 114</Udef_compilation_page>
+<Udef_publisher>北京語言文化大學</Udef_publisher>
+<Udef_publish_date>2001</Udef_publish_date>
+<Udef_publisher_location>北京, 中國 [Beijing, China]</Udef_publisher_location>
+<Udef_book_code>10053247 (P)</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=159529" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2001</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>張進</Udef_author><Udef_author>普慧</Udef_author>
+<Udef_keyword>佛教故事</Udef_keyword><Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_159517">
+<corpus>全部書目</corpus>
+<title>佛教對六朝志怪小說的影響=Influence of Buddhism on the Zhiguai Stories in the Six Dynasties</title>
+<compilation_name>復旦學報 (社會科學版)=Fudan Journal (Social Sciences Edition)</compilation_name>
+<compilation_vol>n2</compilation_vol>
+<time_orig_str>2002</time_orig_str>
+<year_for_grouping>2002</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code>02570289 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>普慧; Shih, Pu-hui; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>志怪小說; Zhiguai stories; 人生觀和道德觀; philosophy and morality; 時空觀; view of space time; 敘事方式; way of narration; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=72593" target="_blank">普慧 (著)=Shih, Pu-hui (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=559" target="_blank">復旦學報 (社會科學版)=Fudan Journal (Social Sciences Edition)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n2</Udef_compilation_vol>
+<Udef_compilation_page>126 - 132</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.fdwkxb.fudan.edu.cn/CN/volumn/home.shtml" target="_blank">復旦學報編輯委員會</a>
+</Udef_publisher>
+<Udef_publish_date>2002</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_book_code>02570289 (P)</Udef_book_code>
+<Udef_remark>作者簡介：普慧(1959-) ,本名張弘,男,陝西榆林人,陝西師範大學文學院副院長、文學博士、教授,四川</Udef_remark>
+<Udef_tablecontent>一.人生觀和道德觀
+二.時空觀
+三.情節、敘述人
+四.奇特的想像
+參考文獻</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFD2002&amp;filename=FDDX200202020&amp;uid=WEEvREcwSlJHSldRa1Fhb09jT0lPdmtobTVXU0NRaEkzWEkyMW1zUWlsQT0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&amp;v=MDM4OTc3M09JeW5QZHJHNEh0UE1yWTlIWklSOGVYMUx1eFlTN0RoMVQzcVRyV00xRnJDVVJMT2VadVpxRnkzaFU=" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=159517" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2002</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教傳入中國后 ,除了在義理上大力宣傳以外 ,還更多地利用佛教典籍中大量的故事、寓言、譬喻、史詩等通俗易懂的形式 ,使佛教進一步走入廣大的百姓中間。佛教的這些生動形式不僅為六朝正在興起的志怪小說提供了豐富的素材、題材、語詞等 ,尤為重要的是 ,它們還在人生觀、道德觀、時空觀、小說的情節、敘事方式以及奇特的想象等方面 ,對六朝志怪小說產生了深刻的影響。如果拋開其宗教內容的話 ,可以說 ,佛教中的這些形式 ,是對中國文學的一大禮贈。
+
+[Abstract]
+After it was introduced into China, Buddhism not only propagandized its religious doctrines, but also reached the Chinese people through easily understandable popular stories, fables, analogies and epics in Buddhist works. These lively forms in Buddhism supplied plenty of materials and phraseology to the Zhiguai Stories which were springing up in the Six Dynasties. What's more, they exerted great influence on the Zhiguai Stories in such respects as philosophy, morality, views of space-time, story plots, ways of narration and fantastic imagination. Regardless of their religious content, these forms in Buddhist works were really a good present to Chinese literaure.
+
+</Paragraph>
+<MetaTags>
+<Udef_author>普慧</Udef_author><Udef_author>Shih, Pu-hui</Udef_author>
+<Udef_keyword>志怪小說</Udef_keyword><Udef_keyword>zhiguai stories</Udef_keyword><Udef_keyword>人生觀和道德觀</Udef_keyword><Udef_keyword>philosophy and morality</Udef_keyword><Udef_keyword>時空觀</Udef_keyword><Udef_keyword>view of space time</Udef_keyword><Udef_keyword>敘事方式</Udef_keyword><Udef_keyword>way of narration</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160142">
+<corpus>全部書目</corpus>
+<title>佛教對於六朝文學的影響</title>
+<compilation_name>開封師院學報=Kai Feng Shi Yuan Xue Bao</compilation_name>
+<compilation_vol>n1</compilation_vol>
+<time_orig_str>1964</time_orig_str>
+<year_for_grouping>1964</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>開封</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李嘉言; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; 佛; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=37429" target="_blank">李嘉言</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank">開封師院學報=Kai Feng Shi Yuan Xue Bao</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n1</Udef_compilation_vol>
+<Udef_publisher>
+<a href="http://www.henu.edu.cn" target="_blank">河南大學</a>
+</Udef_publisher>
+<Udef_publish_date>1964</Udef_publish_date>
+<Udef_publisher_location>開封, 中國 [Kaifeng, China]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160142" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1964</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>李嘉言</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_267003">
+<corpus>全部書目</corpus>
+<title>佛教與中國文學</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1988</time_orig_str>
+<year_for_grouping>1988</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code>7208001170 (平); 9577700128 (精)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>孫昌武; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>變文; Bianwen; Buddhist Stories Retold; 譯經; The Translation of Sutra; 詩歌; 散文; 俗講; a Type of Popular Lecture Delivered to Explain Bud; Sujiang; 佛教教義; Buddhist Doctrines; Buddhist Teachings; 佛教; 佛; 小說; 佛教文學; Buddhist Literature; 中國佛教; Chinese Buddhism; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=45503" target="_blank">孫昌武</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>384</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.spph.com.cn" target="_blank">上海人民出版社</a>
+</Udef_publisher>
+<Udef_publish_date>1988</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_book_code>7208001170 (平); 9577700128 (精)</Udef_book_code>
+<Udef_tablecontent>一、漢譯佛典及其文學價值
+1.佛典的文學性質
+2.佛典翻譯與譯經文體
+3.佛典的文學表現
+二、佛教與中國文人
+1.魏晉南北朝的佛教與文人
+2.隋唐五代的佛教與文人
+3.宋至晚清的佛教與文人
+三、佛教與中國文學創作
+1.散文
+2.詩歌
+3.小說
+4.戲曲
+5.俗講與變文
+6.寶卷
+四、佛教與中國文學思想
+1.六朝佛教教義與文學創作新觀念
+2.言，意關系問題
+3."境界"理論
+4.以禪喻詩
+</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=267003" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1988</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>孫昌武</Udef_author>
+<Udef_keyword>變文</Udef_keyword><Udef_keyword>bianwen</Udef_keyword><Udef_keyword>buddhist stories retold</Udef_keyword><Udef_keyword>譯經</Udef_keyword><Udef_keyword>the translation of sutra</Udef_keyword><Udef_keyword>詩歌</Udef_keyword><Udef_keyword>散文</Udef_keyword><Udef_keyword>俗講</Udef_keyword><Udef_keyword>a type of popular lecture delivered to explain bud</Udef_keyword><Udef_keyword>sujiang</Udef_keyword><Udef_keyword>佛教教義</Udef_keyword><Udef_keyword>buddhist doctrines</Udef_keyword><Udef_keyword>buddhist teachings</Udef_keyword><Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword><Udef_keyword>佛教文學</Udef_keyword><Udef_keyword>buddhist literature</Udef_keyword><Udef_keyword>中國佛教</Udef_keyword><Udef_keyword>chinese buddhism</Udef_keyword>
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160144">
+<corpus>全部書目</corpus>
+<title>佛經故事與漢魏六朝仙道小說=Buddhist stories and Fairyland novels of Han-Wei Liu Dynasty</title>
+<compilation_name>巢湖學院學報=Journal of Chaohu College</compilation_name>
+<compilation_vol>v6 n2 (總號=n65)</compilation_vol>
+<time_orig_str>2004</time_orig_str>
+<year_for_grouping>2004</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>巢湖</geo_level3>
+<book_code>16722868 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>何紅艷; He, Hong-yan; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; Buddhism; 道教; Taoism; 故事; story; 小說; novel; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=34945" target="_blank">何紅艷 (著)=He, Hong-yan (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=916" target="_blank">巢湖學院學報=Journal of Chaohu College</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>v6 n2 (總號=n65)</Udef_compilation_vol>
+<Udef_compilation_page>49 - 54</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.chtc.edu.cn/index.aspx" target="_blank">巢湖學院</a>
+</Udef_publisher>
+<Udef_publish_date>2004</Udef_publish_date>
+<Udef_publisher_location>巢湖, 中國 [Chaohu, China]</Udef_publisher_location>
+<Udef_book_code>16722868 (P)</Udef_book_code>
+<Udef_remark>作者單位：蘇州大學人文學院中文系</Udef_remark>
+<Udef_tablecontent>一、佛經神通描寫之吸納 50
+二、對佛經地獄觀念之借用 52
+三、對佛經故事題材的襲用 52
+四、佛經故事的情節借用 53</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://cnki.sris.com.tw/kcms/detail/detail.aspx?recid=&amp;FileName=CHXY200402011&amp;DbName=CJFD2004&amp;DbCode=CJFD&amp;uid=VlFyLzd0cFAyM2RPNUphWU5hb1dhSWVkenRaRFQxeDFCR1BnK3JsRkluckNXOUxu" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160144" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2004</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教自兩漢之際傳入中土，隨著漢譯佛典的傳譯，其中的佛經故事亦隨之傳播。作為本土宗教的道教，亦適時發展，從道經內容來看，襲用佛經比比皆是。作為傳播本教的多錄自民間傳說，因此，本文通過大量的例句，說明佛經故事對六朝仙道小說題材創作的影響。 
+
+Buddhism got into China in Han Dynasty. With it developed and translated widely, the Buddhism's story also had been known by everybody who wrote the fiction. Many of the fiction came from the Taoism that was the Chinese native religion. This article have told the facts with many examples to show the novels of Liu chao influence by Buddhism. </Paragraph>
+<MetaTags>
+<Udef_author>何紅艷</Udef_author><Udef_author>He, Hong-yan</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>buddhism</Udef_keyword><Udef_keyword>道教</Udef_keyword><Udef_keyword>taoism</Udef_keyword><Udef_keyword>故事</Udef_keyword><Udef_keyword>story</Udef_keyword><Udef_keyword>小說</Udef_keyword><Udef_keyword>novel</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160133">
+<corpus>全部書目</corpus>
+<title>佛經敘事對中古志怪小說文體特徵的滲入與衝擊=Permutation and Pounding the Narration in Buddhist Scripture Had on the Style of mid-ancient Zhiguai Story</title>
+<compilation_name>天水師範學院學報=Journal of Tianshui Normal University</compilation_name>
+<compilation_vol>n3</compilation_vol>
+<time_orig_str>2005</time_orig_str>
+<year_for_grouping>2005</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>甘肅</geo_level3>
+<book_code>16711351 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>張二平; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛; 小說; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=48659" target="_blank">張二平</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=428" target="_blank">天水師範學院學報=Journal of Tianshui Normal University</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n3</Udef_compilation_vol>
+<Udef_compilation_page>12 - 15</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.tsnc.edu.cn" target="_blank">天水師範學院</a>
+</Udef_publisher>
+<Udef_publish_date>2005</Udef_publish_date>
+<Udef_publisher_location>甘肅, 中國 [Gansu, China]</Udef_publisher_location>
+<Udef_book_code>16711351 (P)</Udef_book_code>
+<Udef_tablecontent>一、中古志怪小說文體特徵中的敘事型態 12
+二、佛經故事在中古小說中的演變 13
+三、佛經敘事在中古志怪小說中的滲透 14
+</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160133" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2005</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教文化在中土的深入傳播,佛經故事虛構性與敘事性在中土敘事傳統中的滲入,使得孕育在神話敘事與歷史敘事母體中的中古志怪故事開始走向了小說文體的成熟。 
+
+The article researches the influencements that narration in Buddhist Scripture had on the style of writing of the mid-ancient Zhiguai stories while Buddhism spread to China in the mid-ancient time. </Paragraph>
+<MetaTags>
+<Udef_author>張二平</Udef_author>
+<Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_357014">
+<corpus>全部書目</corpus>
+<title>佛學與隋唐社會</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>200208</time_orig_str>
+<year_for_grouping>2002</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>石家莊</geo_level3>
+<book_code>7202030500</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>張國剛; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>隋代佛教; Sui Buddhism; 唐代佛教; Tang Buddhism; 中國佛教史; Chinese Buddhist History; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=49230" target="_blank">張國剛</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>380</Udef_compilation_page>
+<Udef_publisher>河北人民出版社</Udef_publisher>
+<Udef_publish_date>200208</Udef_publish_date>
+<Udef_publisher_location>石家莊, 中國 [Shihchiachuang, China]</Udef_publisher_location>
+<Udef_book_code>7202030500</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=357014" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_seriesname>中國傳統學術與社會叢書</Udef_seriesname>
+<Udef_publicationyear>2002</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>本書從佛學學術史的角度論述佛教與隋唐社會生活各個層面的關係與影響。書中不僅對於復雜的佛教宗派譜係與要旨做了深入淺出的介紹，而且對於佛教與世俗王權的糾葛、寺院的清規和僧侶的戒律，民眾佛教信仰的實態和佛教的世俗化與本土化的道路，以及佛教對於社會生活和文化的影響，都做了較為精到的闡述，從而使讀者對義理佛學與世俗佛教在隋唐時代的基本狀況獲得概括的了解。 </Paragraph>
+<MetaTags>
+<Udef_author>張國剛</Udef_author>
+<Udef_keyword>隋代佛教</Udef_keyword><Udef_keyword>sui buddhism</Udef_keyword><Udef_keyword>唐代佛教</Udef_keyword><Udef_keyword>tang buddhism</Udef_keyword><Udef_keyword>中國佛教史</Udef_keyword><Udef_keyword>chinese buddhist history</Udef_keyword>
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398851">
+<corpus>全部書目</corpus>
+<title>兩晉南北朝史</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>2005</time_orig_str>
+<year_for_grouping>2005</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code>7532540685</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>呂思勉; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=76257" target="_blank">呂思勉</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>1374</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.guji.com.cn/gj/" target="_blank">上海古籍出版社</a>
+</Udef_publisher>
+<Udef_publish_date>2005</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_book_code>7532540685</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398851" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2005</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>呂思勉</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398859">
+<corpus>全部書目</corpus>
+<title>唐前志怪小说史</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1984</time_orig_str>
+<year_for_grouping>1984</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2>香港</geo_level2>
+<geo_level3>新界</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李劍國; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=37484" target="_blank">李劍國</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>487</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.nkup.com.cn/" target="_blank">南開大學出版社</a>
+</Udef_publisher>
+<Udef_publish_date>1984</Udef_publish_date>
+<Udef_publisher_location>新界, 香港, 中國 [New Territories, Hong Kong, China]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398859" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1984</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>李劍國</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160146">
+<corpus>全部書目</corpus>
+<title>動物精怪故事的演變與佛教文化的影響</title>
+<compilation_name>中國文學研究=Research of Chinese Literature</compilation_name>
+<compilation_vol>n4</compilation_vol>
+<time_orig_str>1994</time_orig_str>
+<year_for_grouping>1994</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>長沙</geo_level3>
+<book_code>10037535 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>朱迪光; Zhu, Di-guang; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; 佛; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=33666" target="_blank">朱迪光 (著)=Zhu, Di-guang (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=202" target="_blank">中國文學研究=Research of Chinese Literature</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n4</Udef_compilation_vol>
+<Udef_compilation_page>14 - 18</Udef_compilation_page>
+<Udef_publisher>湖南師範大學文學院</Udef_publisher>
+<Udef_publish_date>1994</Udef_publish_date>
+<Udef_publisher_location>長沙, 中國 [Changsha, China]</Udef_publisher_location>
+<Udef_book_code>10037535 (P)</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://tr.oversea.cnki.net/kcms/detail/detail.aspx?DbCode=CJFV&amp;dbname=CJFD9495&amp;filename=ZWXY199404003&amp;uid=WEEvREcwSlJHSldRa1FhcTdWa2JLS2NxUE1nODk3WnhkOGgxT2N0akI2QT0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160146" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1994</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>朱迪光</Udef_author><Udef_author>Zhu, Di-guang</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160149">
+<corpus>全部書目</corpus>
+<title>從《搜神記》看志怪小說之怪=On Mystery of Ghost Stories Seen from Stories of lmmortals</title>
+<compilation_name>青海師專學報(教育科學版)=Qinghai shizhuan xuebao(Education Science Edition)</compilation_name>
+<compilation_vol>n4</compilation_vol>
+<time_orig_str>2003</time_orig_str>
+<year_for_grouping>2003</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>西寧</geo_level3>
+<book_code>10070117 (P); 10070117 (E)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>武波; Wu, Bo; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>志怪小說; ghost stories; 工具崇拜; worship; 審美趣味; artistic taste; 個體生命; individual life; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=41545" target="_blank">武波 (著)=Wu, Bo (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=832" target="_blank">青海師專學報(教育科學版)=Qinghai shizhuan xuebao(Education Science Edition)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n4</Udef_compilation_vol>
+<Udef_compilation_page>23 - 25</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.qhmu.edu.cn/" target="_blank">青海師專學報編輯部</a>
+</Udef_publisher>
+<Udef_publish_date>2003</Udef_publish_date>
+<Udef_publisher_location>西寧, 中國 [Xining, China]</Udef_publisher_location>
+<Udef_book_code>10070117 (P); 10070117 (E)</Udef_book_code>
+<Udef_remark>作者單位：青海廣播電視大學導學中心</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://cnki.sris.com.tw/kcms/detail/detail.aspx?recid=&amp;FileName=QHSX200304007&amp;DbName=CJFD2003&amp;DbCode=CJFD&amp;uid=VzFYSmFZWUsxTmJ6S25aWXpwUys1NVFXTGFSSTdMdHgySGwwR2VIVGJCWmQ3STZy" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160149" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2003</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>以《搜神記》為代表的志怪小說所誌之怪大體有三個方面的內容：自然之怪、死生之怪和神鬼之怪，其創作前提是「人鬼乃皆實有」。對「怪」的描述，有原始人類的工具崇拜心理，帶有一定的功利色彩，但更多體現的是六朝人雍容寬厚的審美趣味和對個體生命的珍視。
+
+The mystery of Ghost Stories which takes Stories of lmmortals as a typical example lies in three aspects: mystery of nature, mystery of life and death and mystery of gods and ghosts. The creative prereguisite of Ghost Stories are that both human beings and ghosts are from reality. The description of "mystery" includes the will of people in primitive society to worship gods, which, to some degree, indicates utilitarianism, but show more of decent artistic taste of six dynasties and appreciation of individual life.</Paragraph>
+<MetaTags>
+<Udef_author>武波</Udef_author><Udef_author>Wu, Bo</Udef_author>
+<Udef_keyword>志怪小說</Udef_keyword><Udef_keyword>ghost stories</Udef_keyword><Udef_keyword>工具崇拜</Udef_keyword><Udef_keyword>worship</Udef_keyword><Udef_keyword>審美趣味</Udef_keyword><Udef_keyword>artistic taste</Udef_keyword><Udef_keyword>個體生命</Udef_keyword><Udef_keyword>individual life</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160152">
+<corpus>全部書目</corpus>
+<title>漢魏六朝志怪中的佛教懲勸</title>
+<compilation_name>聊城大學學報 (社會科學版)=Journal of Liaocheng University (Social Sciences Edition)</compilation_name>
+<compilation_vol>n4</compilation_vol>
+<time_orig_str>1998</time_orig_str>
+<year_for_grouping>1998</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>山東</geo_level3>
+<book_code>16721217 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>王連儒; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=29339" target="_blank">王連儒</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=936" target="_blank">聊城大學學報 (社會科學版)=Journal of Liaocheng University (Social Sciences Edition)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n4</Udef_compilation_vol>
+<Udef_compilation_page>79 - 83</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.lcu.edu.cn/" target="_blank">聊城大學</a>
+</Udef_publisher>
+<Udef_publish_date>1998</Udef_publish_date>
+<Udef_publisher_location>山東, 中國 [Shandong, China]</Udef_publisher_location>
+<Udef_book_code>16721217 (P)</Udef_book_code>
+<Udef_tablecontent>一、宗教托喻與志怪經變 79
+二、地域輪迴與宗教懲勸 80
+三、僧伽幻術與宗教流播 82</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://big5.oversea.cnki.net/kcms/detail/detail.aspx?filename=VOUS199804019&amp;DBName=cjfqtotal&amp;dbcode=cjfq&amp;uid=WEEvREcwSlJHSldRa1FhcEFLUmViSGYrbVlUbFpJdFp6Y05ZcWxaRU9Gcz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160152" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1998</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>佛教對志怪小說的影響，早在漢魏六朝的一些志怪小說中便已顯露出來。佛教對漢魏六朝志怪小說的影響主要分三種類型：一是佛經譬喻中精變故事對志怪小說題材來源的影響；二是佛經地獄輪迴觀念與中國傳統善惡報應觀念的融合在志怪小說中的表現；三是僧伽幻術所寄托的空幻思想對志怪小說意象與理念的滲透。三種形式相互作用，從而構成漢魏六朝志怪小說的基本的宗教精神。</Paragraph>
+<MetaTags>
+<Udef_author>王連儒</Udef_author>
+
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_300742">
+<corpus>全部書目</corpus>
+<title>漢魏兩晉南北朝佛教史</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>199807</time_orig_str>
+<year_for_grouping>1998</year_for_grouping>
+<geo_level1>臺灣</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>臺北市</geo_level3>
+<book_code>9570503742</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>湯用彤; Tang, Yong-tong; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>漢代佛教; Han Buddhism; 魏晉南北朝佛教; 中國佛教史; Chinese Buddhist History; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=54085" target="_blank">湯用彤 (著)=Tang, Yong-tong (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>904</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.commercialpress.com.tw/web66/askr/Introduce?_fcmID=855317" target="_blank">臺灣商務印書館</a>
+</Udef_publisher>
+<Udef_publish_date>199807</Udef_publish_date>
+<Udef_publisher_location>臺北市, 臺灣 [Taipei shih, Taiwan]</Udef_publisher_location>
+<Udef_book_code>9570503742</Udef_book_code>
+<Udef_remark>1.1998年臺二版二刷。2.1991年二版一刷</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=300742" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1998</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>《漢魏兩晉南北朝佛教史》是一部敘述佛教在漢代傳入中國，并在魏晉南北朝時期的發展的佛教史著作。關于它的撰述緣起，作者在書未的跋中有這樣的說明：“刐幼承庭訓，早覽乙部。先父雨三公教人，雖諄諄于立自行之端，而啟發愚蒙，則常述前言往行以相告誡。刐稍長，寄心于玄遠之學，居桓愛讀內典。顧亦頗喜疏尋往古思想之脈絡，宗派之變遷。十余年來，教學南北，嘗以中國佛教史授學者。講義積年，匯成卷帙。自知于佛默應體會，有志未逮，語文史地，所知甚少。故陳述膚淺，詳略失序，百無一當。惟今值國變﹝指抗戰爆發﹞，戎馬生郊，乃一其一部勉付梓人。所謂考証之學可濟時艱，然敝帚自珍，愿以多年研究所得作一結束。惟翼他日國勢昌隆，海內義安，學者由讀此編，而于中國佛教史繼續述作。“簡而言之，此書乃是作者積十余年教學與研究的成果，而勒成的一部力作。
+
+《漢魏兩晉南北朝佛教史》條理清晰，資料宏富，論述必据事實，故自問世以來，馳譽海內外，成為湯用刐全部著述中影響最為巨大一部名著。凡是研究中國佛教史、佛教哲學史的人莫不視之為塊寶。以致今為止，在積聚漢魏兩晉南北朝佛教史料方面，還沒有別的著作能夠超越它。</Paragraph>
+<MetaTags>
+<Udef_author>湯用彤</Udef_author><Udef_author>Tang, Yong-tong</Udef_author>
+<Udef_keyword>漢代佛教</Udef_keyword><Udef_keyword>han buddhism</Udef_keyword><Udef_keyword>魏晉南北朝佛教</Udef_keyword><Udef_keyword>中國佛教史</Udef_keyword><Udef_keyword>chinese buddhist history</Udef_keyword>
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_366463">
+<corpus>全部書目</corpus>
+<title>漢譯佛典與六朝小說</title>
+<compilation_name>中國文學研究=Research of Chinese Literature</compilation_name>
+<compilation_vol>n4</compilation_vol>
+<time_orig_str>1999</time_orig_str>
+<year_for_grouping>1999</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>長沙</geo_level3>
+<book_code>10037535 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李鵬飛; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛典文學; 道教小說; 情節結構; 譯經文體; 敘述藝術; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=37651" target="_blank">李鵬飛</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=202" target="_blank">中國文學研究=Research of Chinese Literature</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n4</Udef_compilation_vol>
+<Udef_publisher>湖南師範大學文學院</Udef_publisher>
+<Udef_publish_date>1999</Udef_publish_date>
+<Udef_publisher_location>長沙, 中國 [Changsha, China]</Udef_publisher_location>
+<Udef_book_code>10037535 (P)</Udef_book_code>
+<Udef_remark>出處:中國期刊網－文史哲輯專欄目錄 
+</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://tr.oversea.cnki.net/kcms/detail/detail.aspx?DbCode=CJFV&amp;dbname=CJFD9899&amp;filename=ZWXY199904008&amp;uid=WEEvREcwSlJHSldRa1FhcTdWa2JLS2NxUGE4Z1k5YjhvdmFFUGVlZm1ZOD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=366463" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1999</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>本文主要論述漢譯佛典在語詞、觀念、情節與文體等方面對六朝小說的影響，並對佛道二教從論爭走向融合的趨勢體現於小說中的 
+情形作了簡要描述，旨在為佛教文學與中國古代小說的比較研究提供若干事實依據。 
+</Paragraph>
+<MetaTags>
+<Udef_author>李鵬飛</Udef_author>
+<Udef_keyword>佛典文學</Udef_keyword><Udef_keyword>道教小說</Udef_keyword><Udef_keyword>情節結構</Udef_keyword><Udef_keyword>譯經文體</Udef_keyword><Udef_keyword>敘述藝術</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160153">
+<corpus>全部書目</corpus>
+<title>論佛教文化影響下古代小說的三大功能</title>
+<compilation_name>社科縱橫=Social Sciences Review</compilation_name>
+<compilation_vol>n1</compilation_vol>
+<time_orig_str>2000</time_orig_str>
+<year_for_grouping>2000</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>蘭州</geo_level3>
+<book_code>10079106 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>劉書成; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; 佛; 小說; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=59315" target="_blank">劉書成</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=527" target="_blank">社科縱橫=Social Sciences Review</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n1</Udef_compilation_vol>
+<Udef_compilation_page>45 - 48</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://skzh.chinajournal.net.cn/" target="_blank">甘肅省社會科學界聯合會</a>
+</Udef_publisher>
+<Udef_publish_date>2000</Udef_publish_date>
+<Udef_publisher_location>蘭州, 中國 [Lanzhou, China]</Udef_publisher_location>
+<Udef_book_code>10079106 (P)</Udef_book_code>
+<Udef_tablecontent>一、循環果報、因果圓滿的敘事功能 45
+二、神道設教、道德滿足的教化功能 46
+三、鬼神手法、形象鮮明的表意功能 47
+</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160153" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2000</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>在佛教文化的影響下 ,中國古代小說的藝術形態具有結構上因果完整、內容上突出教化、情節上真幻交織的特點 ,而這三個特點相應形成了古代小說循環果報、因果圓滿的敘事功能 ;神道設教、道德滿足的教化功能 ;鬼神手法、形象鮮明的表意功能 </Paragraph>
+<MetaTags>
+<Udef_author>劉書成</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword><Udef_keyword>小說</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_159175">
+<corpus>全部書目</corpus>
+<title>論佛教與魏晉六朝文學=On Buddhism and Wei Jin and Six Dynasties' Literature</title>
+<compilation_name>南陽師範學院學報=Journal of Nanyang Normal University</compilation_name>
+<compilation_vol>v3 n10</compilation_vol>
+<time_orig_str>200410</time_orig_str>
+<year_for_grouping>2004</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>南陽</geo_level3>
+<book_code>16716132 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>屈桂梅; Qu, Gui-mei; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>佛教; Buddhism; 道教; Taoism; 玄學; metaphysics; 魏晉六朝; Wei'Jin and Six Dynasties; 詩; poems; 賦; Fu; 文; prose; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=39568" target="_blank">屈桂梅 (著)=Qu, Gui-mei (au.)</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=850" target="_blank">南陽師範學院學報=Journal of Nanyang Normal University</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>v3 n10</Udef_compilation_vol>
+<Udef_compilation_page>57 - 62</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.nynu.edu.cn/" target="_blank">南陽師範學院</a>
+</Udef_publisher>
+<Udef_publish_date>200410</Udef_publish_date>
+<Udef_publisher_location>南陽, 中國 [Nanyang, China]</Udef_publisher_location>
+<Udef_book_code>16716132 (P)</Udef_book_code>
+<Udef_remark>作者單位：南京師範大學文學院</Udef_remark>
+<Udef_tablecontent>一、中國文化對佛教的認同和吸收 57
+二、魏晉六朝文學中的佛教要旨 58
+</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://new.big5.oversea.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFD2004&amp;filename=NYSF200410015&amp;uid=WEEvREcwSlJHSldRa1FhcTdnTnhYaDVQVWF6aTdQV1YwMjBGVkliRWNrZz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&amp;v=Mjg0MTBoMVQzcVRyV00xRnJDVVI3cWZZK1puRnlubVZiN1BLelRZYUxHNEh0WE5yNDlFWVlSOGVYMUx1eFlTN0Q=" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=159175" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2004</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph> 佛教於漢末傳入中國之初，曾被視為方術，只是作為中國傳統道教的附庸而在民間流傳。至晉時，因談虛無，與玄學融合，廣為中土上流人士所接受。劉宋以后以至整個南朝時期，由於皇帝的喜好和大力提倡、廣開佛寺、組織大規模的講經和譯經，甚至身體力行、捨身入佛等，都使佛教在中土滋長尤甚，以致其發展遠遠超出中國本土的道教而成為中國又一大教，為中國文化的發展注入了新的因素。縱觀這一時期的佛教，其在中國的發展尚處於初期，但是，隨著佛教在中土民間的廣泛流傳，以及對上層階級甚至是皇帝所產生巨大的影響，它就必然以不可阻擋之勢滲入到文人階層的日常交往與創作活動中，而在詩、賦、文中有所表現(小說因出現較晚，此不多論)。筆者試圖從佛教與魏晉六朝文人與文學的關系這一角度來加以論述，而實際上這也正代表了佛教這一外來事物對中國文化的深層浸染和逐步征服以至最終被接受的過程。
+
+ When Buddhism was transmitted in the last phase Of Han Dynasty, it was regarded as necromancers' skills, which ever Was un-known or only learned about but wasn't believed in by people. It was spread among the people as the dependency of Taoism. Until Dong Jin Dynasty, because of talking about nihility, it was reconciled with metaphysics and widely received by high scholars, who made use of it to compromise Confucianism and Buddhism. From Liu Song Dynasty to Southern Dynasties, because many emperors strongly advocated Buddhism, generally built Buddhism temples, organized on a large scale in translating Buddhist scripture and expounding the texts of Buddhism, even practiced by themselves, gave their lives for Buddhism and so on… All the factors resulted in Buddhism growing so fast in China that it farther going beyond Chinese Taoism and at last becoming Chinese another big religious sect. Making a comprehensive survey of this period’s Buddhism, the development of it was still in a first step. But with Buddhism spread and related with high scholars’ even emperors, it inevitably was bound to infiltrate high scholars’ usual acquaintance and writing, which was expressed in poems, fu and prose. Here writer try to argue Buddhism’s transmission and Wei Jin and Six Dynasties’ high scholars and literature with it. (Because novels come into later, we don’t talk about it.) In fact, this represented the process of Buddhism infusing and conquering on Chinese culture and in the end being received.
+
+</Paragraph>
+<MetaTags>
+<Udef_author>屈桂梅</Udef_author><Udef_author>Qu, Gui-mei</Udef_author>
+<Udef_keyword>佛教</Udef_keyword><Udef_keyword>buddhism</Udef_keyword><Udef_keyword>道教</Udef_keyword><Udef_keyword>taoism</Udef_keyword><Udef_keyword>玄學</Udef_keyword><Udef_keyword>metaphysics</Udef_keyword><Udef_keyword>魏晉六朝</Udef_keyword><Udef_keyword>wei'jin and six dynasties</Udef_keyword><Udef_keyword>詩</Udef_keyword><Udef_keyword>poems</Udef_keyword><Udef_keyword>賦</Udef_keyword><Udef_keyword>fu</Udef_keyword><Udef_keyword>文</Udef_keyword><Udef_keyword>prose</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398862">
+<corpus>全部書目</corpus>
+<title>論魏晉志怪小說與佛教</title>
+<compilation_name>南通大學學報 (社會科學版)=Journal of Nantong University (Social Sciences Edition)</compilation_name>
+<compilation_vol>n2</compilation_vol>
+<time_orig_str>1994</time_orig_str>
+<year_for_grouping>1994</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>江蘇</geo_level3>
+<book_code>16732359 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>姜光斗; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=43446" target="_blank">姜光斗</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=847" target="_blank">南通大學學報 (社會科學版)=Journal of Nantong University (Social Sciences Edition)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n2</Udef_compilation_vol>
+<Udef_publisher>
+<a href="http://www.ntgs.com.cn/" target="_blank">南通師範學院</a>
+</Udef_publisher>
+<Udef_publish_date>1994</Udef_publish_date>
+<Udef_publisher_location>江蘇, 中國 [Chiangsu, China]</Udef_publisher_location>
+<Udef_book_code>16732359 (P)</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&amp;dbname=CJFD9495&amp;filename=NTSX402.001&amp;uid=WEEvREcwSlJHSldRa1FhcEE0QVN2S3BqNlU1Q0NtSWxEdmsrTkc2N1ZnMD0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&amp;v=MDAyNDhITS9NcjQ0cUY1NE9mZ2c1emhBVTRqaDRPWDZUckgwM2ViT2RSTHVkWmVkckZpM21XZz09S3puWWRyZTQ=" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398862" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1994</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>姜光斗</Udef_author>
+
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160156">
+<corpus>全部書目</corpus>
+<title>論魏晉南北朝士族宗室的宣佛志怪小說創作</title>
+<compilation_name>青島大學師範學院學報=Journal of Teachers College Qingdao University</compilation_name>
+<compilation_vol>v16 n1</compilation_vol>
+<time_orig_str>199903</time_orig_str>
+<year_for_grouping>1999</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>山東</geo_level3>
+<book_code>10064133 (P); 10064133 (E)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李希運; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>志怪小說; 宣佛; 魏晉南北朝; 中國哲學史研究; 佛教信仰; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=36753" target="_blank">李希運</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=829" target="_blank">青島大學師範學院學報=Journal of Teachers College Qingdao University</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>v16 n1</Udef_compilation_vol>
+<Udef_compilation_page>71 - 72</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.sf.qdu.edu.cn/sfxy/index.asp" target="_blank">青島大學師範學院</a>
+</Udef_publisher>
+<Udef_publish_date>199903</Udef_publish_date>
+<Udef_publisher_location>山東, 中國 [Shandong, China]</Udef_publisher_location>
+<Udef_book_code>10064133 (P); 10064133 (E)</Udef_book_code>
+<Udef_remark>全文下載:中國期刊網－文史哲輯專欄目錄</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&amp;filename=QDDS199901018&amp;dbname=CJFD9899&amp;uid=WEEvREcwSlJHSldRa1FhdXNzY2Z1UlNiWXVqOStLMDhkWnJ0UXFYOFludz0%3D%249A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160156" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1999</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>魏晉南北朝時期，既有僧侶佛徒編撰僧人之傳記以弘教者，亦有土族乃至帝王宗室編撰宣佛志模小說，「記經像之顯效，明應驗之實有，以震聳世俗，使生敬信」，用來宣佛揚教。這些宣佛志怪小說，主要有上人編撰之《觀世音應驗記》三種、《冥樣記》、《補續冥樣記》、《冤魂志》，王室宗族編撰之《宣驗記》等。本文將對這批宣佛志怪小說的創作作一探討。自東晉以來，特別是由於《法華經》以及後來《觀無量壽經》、《華嚴經》等的傳譯，觀音信仰在我國廣泛流行開來，由此便產生出許多觀音「救苦救難」的故事，在民眾和土大夫階層中廣為傳播。</Paragraph>
+<MetaTags>
+<Udef_author>李希運</Udef_author>
+<Udef_keyword>志怪小說</Udef_keyword><Udef_keyword>宣佛</Udef_keyword><Udef_keyword>魏晉南北朝</Udef_keyword><Udef_keyword>中國哲學史研究</Udef_keyword><Udef_keyword>佛教信仰</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160158">
+<corpus>全部書目</corpus>
+<title>論魏晉南北朝佛教志怪的傳布</title>
+<compilation_name>山東理工大學學報(社會科學版)</compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>1999</time_orig_str>
+<year_for_grouping>1999</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>山東</geo_level3>
+<book_code>16720040</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李希運; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>魏晉南北朝佛教; Northern and Southern Dynastries Buddhism; 佛教; 佛; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=36753" target="_blank">李希運</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank">山東理工大學學報(社會科學版)</a>
+</Udef_compilation_name>
+<Udef_compilation_page>74 - 75</Udef_compilation_page>
+<Udef_publisher>山東理工大學</Udef_publisher>
+<Udef_publish_date>1999</Udef_publish_date>
+<Udef_publisher_location>山東, 中國 [Shandong, China]</Udef_publisher_location>
+<Udef_book_code>16720040</Udef_book_code>
+<Udef_remark>1.原刊名《淄博學院學報（社會科學版）》。</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160158" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1999</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>李希運</Udef_author>
+<Udef_keyword>魏晉南北朝佛教</Udef_keyword><Udef_keyword>northern and southern dynastries buddhism</Udef_keyword><Udef_keyword>佛教</Udef_keyword><Udef_keyword>佛</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_367167">
+<corpus>全部書目</corpus>
+<title>論魏晉南北朝志怪小說的宣佛思想傾向</title>
+<compilation_name>東方論壇=Orient Forum</compilation_name>
+<compilation_vol>n3</compilation_vol>
+<time_orig_str>1999</time_orig_str>
+<year_for_grouping>1999</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>山東</geo_level3>
+<book_code>10057110 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>李希運; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords>魏晉南北朝; 志怪小說; 宣佛; 思想傾向; </Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=36753" target="_blank">李希運</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=506" target="_blank">東方論壇=Orient Forum</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n3</Udef_compilation_vol>
+<Udef_compilation_page>24 - 26, 23</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.qdu.edu.cn/" target="_blank">青島大學</a>
+</Udef_publisher>
+<Udef_publish_date>1999</Udef_publish_date>
+<Udef_publisher_location>山東, 中國 [Shandong, China]</Udef_publisher_location>
+<Udef_book_code>10057110 (P)</Udef_book_code>
+<Udef_remark>全文下載:中國期刊網－文史哲輯專欄目錄
+</Udef_remark>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://cnki.sris.com.tw/kcms/detail/detail.aspx?filename=DFLT199903005&amp;DBName=cjfqtotal&amp;dbcode=cjfq&amp;uid=V0FzNDN6aWlRRjA3RzFndFFZNTZCYTRWR1c1TlJ5c3NQK2FsbXB1OWVKQmtlU2tn" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=367167" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1999</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>魏晉南北朝的志怪小說，帶有明顯宣佛思想傾向的就有10多部，這些作品從不同側面集中反映了真佛的實有、佛經佛像的靈驗、精神不滅、生死輪回、因果報應、地獄觀、佛法勝於道巫等，從而構成了此時期宣佛志怪小說的特有思想內容。</Paragraph>
+<MetaTags>
+<Udef_author>李希運</Udef_author>
+<Udef_keyword>魏晉南北朝</Udef_keyword><Udef_keyword>志怪小說</Udef_keyword><Udef_keyword>宣佛</Udef_keyword><Udef_keyword>思想傾向</Udef_keyword>
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398854">
+<corpus>全部書目</corpus>
+<title>魏晉文學與中原文化</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>2004</time_orig_str>
+<year_for_grouping>2004</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>北京</geo_level3>
+<book_code>7800602613</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>衛紹生; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=76259" target="_blank">衛紹生</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>416</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.book001.com/edition/tc/intro.asp" target="_blank">學苑出版社</a>
+</Udef_publisher>
+<Udef_publish_date>2004</Udef_publish_date>
+<Udef_publisher_location>北京, 中國 [Beijing, China]</Udef_publisher_location>
+<Udef_book_code>7800602613</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398854" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2004</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>衛紹生</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398852">
+<corpus>全部書目</corpus>
+<title>魏晉南北朝史</title>
+<compilation_name></compilation_name>
+<compilation_vol></compilation_vol>
+<time_orig_str>2003</time_orig_str>
+<year_for_grouping>2003</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>上海</geo_level3>
+<book_code></book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>王仲荦; </Udef_author>
+<Udef_doctypes>書籍=Book; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=76258" target="_blank">王仲荦</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=" target="_blank"></a>
+</Udef_compilation_name>
+<Udef_compilation_page>994</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.spph.com.cn/people/index.asp" target="_blank">上海人民出版社</a>
+</Udef_publisher>
+<Udef_publish_date>2003</Udef_publish_date>
+<Udef_publisher_location>上海, 中國 [Shanghai, China]</Udef_publisher_location>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>無全文</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398852" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2003</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>王仲荦</Udef_author>
+
+<Udef_doctype>書籍=Book</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_160134">
+<corpus>全部書目</corpus>
+<title>釋氏輔教之書 -- 六朝志怪小說的敘事新風</title>
+<compilation_name>西南民族大學學報(人文社科版)=Journal of Southwest University for Nationalities(Humanities and Social Science)</compilation_name>
+<compilation_vol>n10</compilation_vol>
+<time_orig_str>2005</time_orig_str>
+<year_for_grouping>2005</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>成都</geo_level3>
+<book_code>10043926 (P)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>劉惠卿; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=59436" target="_blank">劉惠卿</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=596" target="_blank">西南民族大學學報(人文社科版)=Journal of Southwest University for Nationalities(Humanities and Social Science)</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n10</Udef_compilation_vol>
+<Udef_compilation_page>173 - 177</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://222.210.17.171/xb/Index.html" target="_blank">西南民族大學</a>
+</Udef_publisher>
+<Udef_publish_date>2005</Udef_publish_date>
+<Udef_publisher_location>成都, 中國 [Chengdu, China]</Udef_publisher_location>
+<Udef_book_code>10043926 (P)</Udef_book_code>
+<Udef_tablecontent>一、佛教民眾化運動中的文人佛教徒創作 167
+二、"史官之末事"的傳統 168
+三、"釋氏輔教之書"的敘事新風 169
+</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://big5.oversea.cnki.net/kcms/detail/detail.aspx?filename=XNZS200510044&amp;DBName=cjfqtotal&amp;dbcode=cjfq&amp;uid=WEEvREcwSlJHSldRa1Fhb09pSnNvTGJFUHQxaXdqdmVyYlVCMWdYYTRnbz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=160134" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>2005</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph>作為六朝志怪小說的一大子類,南北朝時期大量涌現的“釋氏輔教之書”,與此前志怪小說相比,其敘事風格具有迥然不同的特征,具體表現在所表現的人物、所采用的敘事筆法、敘事視角等方面呈現新變的態勢。這一方面與熱鬧的唐前佛教民眾化運動有關,與作者的佛教徒身份和宣佛意圖有關,另一方面則由小說“史官之末”的傳統所決定。 
+</Paragraph>
+<MetaTags>
+<Udef_author>劉惠卿</Udef_author>
+
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+<document filename="DLBS_398863">
+<corpus>全部書目</corpus>
+<title>釋道「轉世」「謫世」觀念與中國古代小說結構</title>
+<compilation_name>文學遺產=Literary Heritage</compilation_name>
+<compilation_vol>n4</compilation_vol>
+<time_orig_str>1997</time_orig_str>
+<year_for_grouping>1997</year_for_grouping>
+<geo_level1>中國</geo_level1>
+<geo_level2></geo_level2>
+<geo_level3>北京</geo_level3>
+<book_code>02575914 (P); 02575914 (E)</book_code>
+<doc_source>DLBS</doc_source>
+<xml_metadata>
+<Udef_author>孫遜; </Udef_author>
+<Udef_doctypes>期刊論文=Journal Article; </Udef_doctypes>
+<Udef_biliography_language>中文=Chinese; </Udef_biliography_language>
+<Udef_keywords></Udef_keywords>
+<Udef_read>未閱讀</Udef_read>
+<Udef_note></Udef_note>
+<Udef_author1>
+<a href="https://buddhism.lib.ntu.edu.tw/author/authorinfo.jsp?ID=71958" target="_blank">孫遜</a>
+</Udef_author1>
+<Udef_compilation_name>
+<a href="https://buddhism.lib.ntu.edu.tw/journal/journaldetail.jsp?seq=450" target="_blank">文學遺產=Literary Heritage</a>
+</Udef_compilation_name>
+<Udef_compilation_vol>n4</Udef_compilation_vol>
+<Udef_compilation_page>69 - 77</Udef_compilation_page>
+<Udef_publisher>
+<a href="http://www.literature.org.cn/yjs/fwxz.aspx" target="_blank">中國社會科學院文學所</a>
+</Udef_publisher>
+<Udef_publish_date>1997</Udef_publish_date>
+<Udef_publisher_location>北京, 中國 [Beijing, China]</Udef_publisher_location>
+<Udef_book_code>02575914 (P); 02575914 (E)</Udef_book_code>
+<Udef_tablecontent>無目次</Udef_tablecontent>
+<Udef_fulltextSrc>
+<a href="http://cnki.sris.com.tw/kcms/detail/detail.aspx?dbCode=cjfd&amp;QueryID=224&amp;CurRec=10&amp;filename=WXYC199704009&amp;dbname=CJFD9697&amp;uid=TElONHRlT3EwcjFwU3Ric0FJcTlNSDRDUm4yUzlsZDE5QWxZb2dOak9rMUc4UEhL" target="_blank">全文網址</a>
+</Udef_fulltextSrc>
+<Udef_doi>無DOI</Udef_doi>
+<Udef_refSrc>
+<a href="https://buddhism.lib.ntu.edu.tw/search/search_detail.jsp?seq=398863" target="_blank">原書目網址</a>
+</Udef_refSrc>
+<Udef_publicationyear>1997</Udef_publicationyear>
+</xml_metadata>
+<doc_content>
+<Paragraph></Paragraph>
+<MetaTags>
+<Udef_author>孫遜</Udef_author>
+
+<Udef_doctype>期刊論文=Journal Article</Udef_doctype>
+<Udef_docclass>中文=Chinese</Udef_docclass>
+
+
+</MetaTags>
+</doc_content>
+</document>
+</documents>
+</ThdlPrototypeExport>
