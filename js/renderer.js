@@ -161,9 +161,11 @@ function renderData(foldername){
     let content = "";
     data.forEach(function(item, index){
         if(item.doculib.folder.includes(foldername)){
-
             const folderSelector = document.querySelector('#folderSelector');
             let folderOption = "<option value=''>請選擇欲加入的資料夾</option>";
+            if(currentFolder == '垃圾桶'){
+                folderOption += `<option value='全部書目'>全部書目</option>`
+            }
             folder.forEach(function(folderItem){
                 folderOption += `<option value='${folderItem}'>${folderItem}</option>`;
             })
@@ -203,8 +205,8 @@ function renderData(foldername){
                     <td auto-edit="true">${item.xml_metadata.Udef_publish_date.substring(0,4)}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_compilation_name.text}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_keywords}</td>
-                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.topic[foldername])}</td>
-                    <td data-editable="true" class="folderLevel">${arrToStr(item.doculib.tag[foldername])}</td>
+                    <td data-editable="true" class="folderLevel">${item.doculib.topic[foldername]}</td>
+                    <td data-editable="true" class="folderLevel">${item.doculib.tag[foldername]}</td>
                     <td class="folderLevel"><input type="checkbox" name='important' value="重要" ${importantChecked}></td>
                     <td class="folderLevel-hide">${folderContent}</td>
                     <td>
