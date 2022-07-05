@@ -292,18 +292,53 @@
 
         <!-- DocuLib Guide Modal -->
         <div class="modal fade" id="guideModal" data-bs-keyboard="false" tabindex="-1">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">DocuLib Guide</h5>
                 </div>
-                <div class="modal-body"><br>
-                    <p class="text-center">
-                        DocuLib 是一個新型態的書目管理應用工具。<br>
-                        使用流程：匯入書目資料、書目資料加值、建立書目資料庫。<br>
-                        關閉前請務必點擊下載。<br>
-                        點選右上角使用引導再次開啟。
-                    </p>
+                <div class="modal-body">
+                    <p>
+                        <span class="modal-h6">DocuLib</span> 是一個書目管理應用工具，除協助學術研究者書目資料的蒐集、彙整、加值等管理需求外，也關注書目間隱含的脈絡與趨勢關係，提供資料整體的鳥瞰式分析與觀察視角。<br>
+                        本工具大致可以分成四個使用階段，分別為書目資料匯入、書目資料清理與加值、書目應用、書目資料匯出。
+                    </p><br>
+                    
+                    <h6 class="modal-h6">書目資料匯入階段</h6>
+                    <p>
+                        本工具提供以下兩種批次匯入方式，請點擊「匯入書目資料」按鈕。<br>
+                        <ul>
+                            <li>匯入 DocuLib Json 檔案：開啟既有的書目資料。</li>
+                            <li>自臺大佛學數位圖書館批次匯入：進入臺大佛圖頁面，選取所需書目、領取書目匯入序號。</li>
+                        </ul>
+                        初次使用本工具者，請使用「自臺大佛學數位圖書館批次匯入」；<br>
+                        已有 DocuLib Json 檔案者，請使用「匯入 DocuLib Json 檔案」。<br>
+                        若有其他資料來源需求，請點擊「新增書目」按鈕，手動建立書目資料。
+                    </p><br>
+
+                    <h6 class="modal-h6">書目資料清理與加值階段</h6>
+                    <p>
+                        <ul>
+                            <li>書目歸檔：</li>
+                                1. 自左側「歸檔資料夾」區塊，創建、刪除、編輯資料夾。<br>
+                                2. 自右側「書目資料」區塊，勾選欲操作的書目，將其移入或移出資料夾。<br>
+                            <li>書目資料編輯：</li>
+                                1. 雙擊欲修改的資料欄位，當欄位外圍出現黑色框線、內部出現文本游標時，即進入編輯模式。<br>
+                                2. 編輯完成，請點擊「Save」按鈕，以保存當次編輯進度。
+                        </ul>
+                    </p><br>
+
+                    <h6 class="modal-h6">書目應用階段</h6>
+                    <p>
+                        點擊書目資料區塊下方「建立個人資料庫」按鈕，依照指示登入 DocuSky 系統，即進入書目應用階段。<br>
+                        本工具介接 DocuSky 數位人文學術研究平臺，自動建立個人書目資料庫，藉以提供微觀與宏觀的資訊檢索策略。
+                    </p><br>
+
+                    <h6 class="modal-h6">書目資料匯出階段</h6>
+                    <p>
+                        關閉本工具視窗前，請務必點擊「下載 DocuLib Json」按鈕，以保存當次的書目資料編輯進度。
+                    </p><br>
+
+                    <p>點擊右上方「使用引導」按鈕，再次開啟此說明視窗。</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">關閉</button>

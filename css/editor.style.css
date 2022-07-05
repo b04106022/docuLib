@@ -1,6 +1,10 @@
 .right-aligned{
     float: right;
 }
+.modal-h6{
+    font-weight: bold;
+    font-size: 17px;
+}
 .hide {
     display: none;
 }
