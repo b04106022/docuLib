@@ -73,6 +73,7 @@ function addDataToFolder(){
                 }
             })
         }
+        saveToJson(); 
         renderFolder();
         renderData(currentFolder);
     }
@@ -115,6 +116,7 @@ function deleteData(){
     }else{
         alert("請選取欲操作的書目");
     }
+    saveToJson(); 
     renderFolder();
     renderData(currentFolder);
 }
@@ -227,6 +229,7 @@ function jsonFile(event) {
             }
         }
     }
+    localStorage.setItem('userData', JSON.stringify([data, folder]));
     alert('匯入完成，回到全部書目列表');
     $('#importJsonModal').modal('hide');
     renderFolder();
@@ -247,10 +250,22 @@ function checkDupData(temp_data){
     }
     // check if user is importing duplicate bibs
     if(dupArray.length > 0){
-        displayDupBibInfo(dupArray, 1);
+        let j = 0;
         for(let i=0; i<temp_data.length; i++){
             if(!pushed.includes(i)){
-                if(confirm('書目「' + temp_data[i].title + '」已存在，請確認是否仍要匯入')){
+
+                msg = '書目「' + temp_data[i].title + '」已存在。\n下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？\n\n';
+                msg += `文獻題名：${dupArray[j].title}\n`;
+                msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
+                msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
+                msg += `出處題名：${dupArray[j].xml_metadata.Udef_publisher.text}\n`;
+                msg += `關鍵字：${dupArray[j].xml_metadata.Udef_keywords}\n`;
+                msg += `摘要：${dupArray[j].doc_content.Paragraph}\n`;
+                msg += `筆記：${dupArray[j].doculib.note}\n`;
+                msg += `資料夾：${arrToStr(dupArray[j].doculib.folder)}`;
+                j++;
+                
+                if(confirm(msg)){
                     let suffix = getFilenameSuffix(temp_data[i].filename);
                     temp_data[i].filename += suffix;
                     data.push(temp_data[i]);
@@ -287,6 +302,7 @@ function dlbs(dlbs){
     }else{
         checkDupData(temp_data);
     }
+    localStorage.setItem('userData', JSON.stringify([data, folder]));
     alert('匯入完成，回到全部書目列表');
     $('#ImportDLBSModal').modal('hide');
     renderFolder();
@@ -332,11 +348,23 @@ $('#u_title').change(function(){
 });
 function checkUserBib(u_title){
     let dupArray = [];
+    let j = 0;
     data.forEach(function(item, index){
         if(item.title == u_title){
             dupArray.push(item);
-            alert("書目「" + u_title + "」已存在，請確認是否仍需匯入");
-            displayDupBibInfo(dupArray, 0);
+
+            msg = '書目「' + u_title + '」已存在，請確認是否仍要匯入\n\n';
+            msg += `文獻題名：${dupArray[j].title}\n`;
+            msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
+            msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
+            msg += `出處題名：${dupArray[j].xml_metadata.Udef_publisher.text}\n`;
+            msg += `關鍵字：${dupArray[j].xml_metadata.Udef_keywords}\n`;
+            msg += `摘要：${dupArray[j].doc_content.Paragraph}\n`;
+            msg += `筆記：${dupArray[j].doculib.note}\n`;
+            msg += `資料夾：${arrToStr(dupArray[j].doculib.folder)}`;
+            j++;
+
+            alert(msg);
         }
     })
 }
@@ -348,67 +376,6 @@ function checkAddBibModal(){
         $('#addBibModal2').modal('show');
     }
 }
-// Show duplicate bibliography details
-/* 
-1. dupArray records all duplicate bibliography objects.
-    e.g., [dupBib0, dupBib1]
-2. mode represents the method of opening a web page.
-    0: using window.open (The page will be loaded completely after the alert)
-    1: using link
-*/
-function displayDupBibInfo(dupArray, mode){
-    let infoHTML = '<p>下為已存在 DocuLib 書目的詳細資訊：</p>';
-    dupArray.forEach(function(item){
-        infoHTML +=`<table>
-        <tr>
-            <td style="width:80px">文獻題名：</td>
-            <td>${item.title}</td>
-        </tr>
-        <tr>
-            <td>　　作者：</td>
-            <td>${item.xml_metadata.Udef_author}</td>
-        </tr>
-        <tr>
-            <td>出版日期：</td>
-            <td>${item.xml_metadata.Udef_publish_date}</td>
-        </tr>
-        <tr>
-            <td>出處題名：</td>
-            <td>${item.xml_metadata.Udef_compilation_name.text}</td>
-        </tr>
-        <tr>
-            <td>　關鍵字：</td>
-            <td>${item.xml_metadata.Udef_keywords}</td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">　　摘要：</td>
-            <td>${item.doc_content.Paragraph}</td>
-        </tr>
-        <tr>
-            <td style="vertical-align:top">　　筆記：</td>
-            <td>${item.doculib.note}</td>
-        </tr>
-        <tr>
-            <td>　資料夾：</td>
-            <td>${arrToStr(item.doculib.folder)}</td>
-        </tr>
-        </table><br>
-        `
-    });
-    localStorage.setItem("dupInfo", infoHTML);
-
-    let dupUrl = 'dupBibInfo.html';
-    if(mode){
-        var a = document.createElement('a');
-        a.href = dupUrl;
-        a.target = '_blank';
-        a.click();
-    }else{
-        let windowFeatures  = 'top=30, left=450, height=600, width=620, resizable=1, scrollbars=1, status=1, toolbar=0, location=1';
-        window.open(dupUrl, 'dupInfo', windowFeatures);
-    }
-}
-
 // add user bib to Data
 function addBibByUser(){
     let userDataNumber = 'user_' + getUserDataNumber();
@@ -498,6 +465,7 @@ function addBibByUser(){
     clearAddBibModal();
     $('#addBibModal2').modal('hide');
     alert("書目已匯入，回到全部書目列表");
+    saveToJson(); 
     renderFolder();
     renderData('全部書目');
 }
@@ -667,6 +635,7 @@ function saveToJson(){
             data[item].xml_metadata.Udef_remarkcontent = document.getElementById("remarkcontent_"+item).value;
         }
     })
+    localStorage.setItem('userData', JSON.stringify([data, folder]));
 }
 function downloadJson(){
     saveToJson();

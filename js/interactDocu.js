@@ -79,9 +79,13 @@ function failUploadFunc(){
 	alert("上傳失敗，已將 DocuXML 下載至本機");
 }
 function now(){
-	let date = (new Date()).getFullYear()+"."+(new Date()).getMonth()+"."+(new Date()).getDate();
-	let hour = (new Date()).getHours();
+    let year = (new Date()).getFullYear();
+    let month = parseInt((new Date()).getMonth())+1;
+    let date = (new Date()).getDate();
+    let ymd = `${year}.${month}.${date}`;
+    
+    let hour = (new Date()).getHours();
 	let minute = (new Date()).getMinutes();
 	let second = (new Date()).getSeconds();
-    return `${date}_${hour}.${minute}.${second}`;
+    return `${ymd}_${hour}.${minute}.${second}`;
 }

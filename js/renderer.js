@@ -14,16 +14,26 @@ let trArray = [];
 let counter = {};
 
 $(document).ready(function(){
+    if(localStorage.hasOwnProperty("userData")){
+        let userData = JSON.parse(localStorage.getItem('userData'));
+        data = userData[0];
+        folder = userData[1];
+    }
+
+    let url = new URL(window.location.href);
+    let params = url.searchParams;
+    if(params.has('source') && params.has('id')){
+        if(params.get('source')=='dlbs' && params.get('id')!=''){
+            let id = params.get('id');
+            var dlbs = 'https://buddhism.lib.ntu.edu.tw/ExportToDocuLib?dlbs=' + id + '&callback=dlbs';
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = dlbs;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+    }
+
     doculibInitialize();
-    // if(localStorage.hasOwnProperty("userData")){
-    //     let userData = JSON.parse(localStorage.getItem('userData'))
-    //     data = userData[0];
-    //     folder = userData[1];
-    //     doculibInitialize();
-    // }else{
-    //     jsonUrl = 'https://b04106022.github.io/docuLib/UserJsonFiles/workshop16.json'
-    //     getUserJsonData(jsonUrl);
-    // }
 })
 window.addEventListener("beforeunload", function(e) {
     e.preventDefault(); // firefox
@@ -55,6 +65,9 @@ function doculibInitialize(){
             document.getElementById(e.target.value).classList.toggle("hide");
         }
     })
+
+    renderData('全部書目');
+    renderFolder();
 }
 
 function toggleMenu(){
@@ -125,7 +138,7 @@ function renderFolder(){
     trashCount.textContent = counter["垃圾桶"];
     let folderListContent = "";
     folder.forEach(function(folderName){
-        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
+        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="saveToJson(); renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
         <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"> <button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;
