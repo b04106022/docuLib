@@ -230,7 +230,7 @@ function jsonFile(event) {
         }
     }
     localStorage.setItem('userData', JSON.stringify([data, folder]));
-    alert('匯入完成，回到全部書目列表');
+    // alert('匯入完成，回到全部書目列表');
     $('#importJsonModal').modal('hide');
     renderFolder();
     renderData('全部書目')
@@ -252,12 +252,32 @@ function checkDupData(temp_data){
     // check if user is importing duplicate bibs
     if(dupArray.length > 0){
         // generatae dup table
+        let dupTableHtml = '';
+
+        let j = 0;
+        for(let i=0; i<temp_data.length; i++){
+            if(!pushed.includes(i)){
+                msg = '<td colspan=2>書目「' + temp_data[i].title + '」已存在。<br>下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？<br><br></td></tr>';
+                msg  = `<tr><td class='td-title'>　文獻題名：</td><td>${dupArray[j].title}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　作者：</td><td>${dupArray[j].xml_metadata.Udef_author}</td></tr>`;
+                msg += `<tr><td class='td-title'>　出版日期：</td><td>${dupArray[j].xml_metadata.Udef_publish_date}</td></tr>`;
+                msg += `<tr><td class='td-title'>　出處題名：</td><td>${dupArray[j].xml_metadata.Udef_publisher.text}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　關鍵字：</td><td>${dupArray[j].xml_metadata.Udef_keywords}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　摘要：</td><td>${dupArray[j].doc_content.Paragraph}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　筆記：</td><td>${dupArray[j].doculib.note}</td></tr>`;
+                msg += `<tr class='tr-border-bottom'><td class='td-title'>　　資料夾：</td><td>${arrToStr(dupArray[j].doculib.folder)}</td></tr>`;
+                j++;
+        
+                dupTableHtml += `<tr><td rowspan=8 width=4% class='td-border-right center'><input value=${i} type="checkbox" name='c'></td>`;
+                dupTableHtml += msg;
+            }
+        }
+
         var newwin = window.open("dupBibs.html");
         newwin.onload = () => {
             newwin.data = data;
             newwin.temp_data = temp_data;
-            newwin.dupArray = dupArray;
-            newwin.pushed = pushed;
+            newwin.dupTableHtml = dupTableHtml;
         };
 
         // let j = 0;
@@ -312,7 +332,7 @@ function dlbs(dlbs){
         checkDupData(temp_data);
     }
     localStorage.setItem('userData', JSON.stringify([data, folder]));
-    alert('匯入完成，回到全部書目列表');
+    // alert('匯入完成，回到全部書目列表');
     $('#ImportDLBSModal').modal('hide');
     renderFolder();
     renderData('全部書目')
