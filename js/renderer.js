@@ -61,8 +61,13 @@ function doculibInitialize(){
         }
         // collapse or expand details
         if(e.target.nodeName == 'BUTTON'){
-            console.log('click')
             document.getElementById(e.target.value).classList.toggle("hide");
+            if(document.getElementById(e.target.value).classList == ''){
+                e.target.innerText = '-';
+            }else{
+                e.target.innerText = '+';
+
+            }
         }
     })
 
@@ -138,7 +143,7 @@ function renderFolder(){
     trashCount.textContent = counter["垃圾桶"];
     let folderListContent = "";
     folder.forEach(function(folderName){
-        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3" onclick="saveToJson(); renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
+        folderListContent += `<a class="context-menu-one list-group-item list-group-item-action list-group-item-light p-3 cursor" onclick="saveToJson(); renderData('${folderName}')"><i class="fas fa-folder fa-lg"></i> ${folderName}(<span>${counter[folderName]}</span>)</a>
         <a id="edit${folderName}" class="list-group-item list-group-item-action list-group-item-light p-3 hide"><input id="new${folderName}" type="text" size=15 placeholder="新資料夾名稱"> <button class="btn btn-light" onclick="checkEditFolder('${folderName}');">修改</button></a>`;
     });
     folderList.innerHTML = folderListContent;

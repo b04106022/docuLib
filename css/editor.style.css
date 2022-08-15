@@ -20,6 +20,9 @@
 .margin-auto{
     margin: auto;
 }
+.cursor{
+    cursor: pointer;
+ }
 
 #logo{
     text-decoration: none;

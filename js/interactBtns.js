@@ -239,6 +239,7 @@ function checkDupData(temp_data){
     // record the duplicate bibs & import bibs that are not duplicate
     let dupArray = [];
     let pushed = [];
+
     for(let i=0; i<temp_data.length; i++){
         if(data.some(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title)){ 
             let result = data.filter(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title);
@@ -250,29 +251,37 @@ function checkDupData(temp_data){
     }
     // check if user is importing duplicate bibs
     if(dupArray.length > 0){
-        let j = 0;
-        for(let i=0; i<temp_data.length; i++){
-            if(!pushed.includes(i)){
+        // generatae dup table
+        var newwin = window.open("dupBibs.html");
+        newwin.onload = () => {
+            newwin.data = data;
+            newwin.temp_data = temp_data;
+            newwin.dupArray = dupArray;
+            newwin.pushed = pushed;
+        };
 
-                msg = '書目「' + temp_data[i].title + '」已存在。\n下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？\n\n';
-                msg += `文獻題名：${dupArray[j].title}\n`;
-                msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
-                msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
-                msg += `出處題名：${dupArray[j].xml_metadata.Udef_publisher.text}\n`;
-                msg += `關鍵字：${dupArray[j].xml_metadata.Udef_keywords}\n`;
-                msg += `摘要：${dupArray[j].doc_content.Paragraph}\n`;
-                msg += `筆記：${dupArray[j].doculib.note}\n`;
-                msg += `資料夾：${arrToStr(dupArray[j].doculib.folder)}`;
-                j++;
+        // let j = 0;
+        // for(let i=0; i<temp_data.length; i++){
+        //     if(!pushed.includes(i)){
+        //         msg = '書目「' + temp_data[i].title + '」已存在。\n下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？\n\n';
+        //         msg += `文獻題名：${dupArray[j].title}\n`;
+        //         msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
+        //         msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
+        //         msg += `出處題名：${dupArray[j].xml_metadata.Udef_publisher.text}\n`;
+        //         msg += `關鍵字：${dupArray[j].xml_metadata.Udef_keywords}\n`;
+        //         msg += `摘要：${dupArray[j].doc_content.Paragraph}\n`;
+        //         msg += `筆記：${dupArray[j].doculib.note}\n`;
+        //         msg += `資料夾：${arrToStr(dupArray[j].doculib.folder)}`;
+        //         j++;
                 
-                if(confirm(msg)){
-                    let suffix = getFilenameSuffix(temp_data[i].filename);
-                    temp_data[i].filename += suffix;
-                    data.push(temp_data[i]);
-                    // console.log(temp_data[i])
-                }
-            }
-        }
+        //         if(confirm(msg)){
+        //             let suffix = getFilenameSuffix(temp_data[i].filename);
+        //             temp_data[i].filename += suffix;
+        //             data.push(temp_data[i]);
+        //             // console.log(temp_data[i])
+        //         }
+        //     }
+        // }
     }
 }
 function getFilenameSuffix(filename){
@@ -353,7 +362,7 @@ function checkUserBib(u_title){
         if(item.title == u_title){
             dupArray.push(item);
 
-            msg = '書目「' + u_title + '」已存在，請確認是否仍要匯入\n\n';
+            msg = '書目「' + u_title + '」已存在。\n下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？\n\n';
             msg += `文獻題名：${dupArray[j].title}\n`;
             msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
             msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
@@ -465,9 +474,9 @@ function addBibByUser(){
     clearAddBibModal();
     $('#addBibModal2').modal('hide');
     alert("書目已匯入，回到全部書目列表");
-    saveToJson(); 
     renderFolder();
     renderData('全部書目');
+    saveToJson(); 
 }
 function getUserDataNumber(){
     let number = 0;

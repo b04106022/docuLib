@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        p{
+            width: 80%;
+            margin: auto;
+        }
+        table{
+            width: 80%;
+            margin: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .td-title{
+            white-space: nowrap;
+            vertical-align: top;
+        }
+        .center{
+            text-align: center;
+        }
+        .td-border-right{
+            border-right: 1px solid black;
+        }
+        .tr-border-bottom{
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p>以下書目，請確認是否仍要匯入。仍要匯入請勾選。</p>
+    <table id="dupTable">
+    </table>
+
+    <button type="submit">匯入</button>
+    <script src="js/dupBibHandler.js"></script>         
+</body>
+</html>
