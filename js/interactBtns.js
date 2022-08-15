@@ -257,9 +257,9 @@ function checkDupData(temp_data){
         let j = 0;
         for(let i=0; i<temp_data.length; i++){
             if(!pushed.includes(i)){
-                dupTableHtml += `<tr><td rowspan=9 width=4% class='td-border-right center'><input value=${i} type="checkbox" name='c'></td>`;
+                dupTableHtml += `<tr><td rowspan=9 width=4% class='td-border-right center'><input value=${i} type="checkbox" name='c'></td>
+                                 <td colspan=2>書目「` + temp_data[i].title + `」已存在。<br>下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？<br><br></td></tr>`;
 
-                msg = '<td colspan=2>書目「' + temp_data[i].title + '」已存在。<br>下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？<br><br></td></tr>';
                 msg  = `<tr><td class='td-title'>　文獻題名：</td><td>${dupArray[j].title}</td></tr>`;
                 msg += `<tr><td class='td-title'>　　　作者：</td><td>${dupArray[j].xml_metadata.Udef_author}</td></tr>`;
                 msg += `<tr><td class='td-title'>　出版日期：</td><td>${dupArray[j].xml_metadata.Udef_publish_date}</td></tr>`;
