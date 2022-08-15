@@ -20,7 +20,7 @@ $(document).ready(function(){
 //     //     }
     // }
 
-    $('#dupTable').html(tableHtml);
+    $('#dupTable').html(dupTableHtml);
 });
 
 // $('#dupTable').html(tableHtml);
