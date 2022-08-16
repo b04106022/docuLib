@@ -24,6 +24,14 @@
     cursor: pointer;
  }
 
+th{
+    text-align: center;
+}
+select{
+    padding: 1px;   
+}
+
+
 #logo{
     text-decoration: none;
     color: black;
@@ -32,17 +40,17 @@
     width:auto;
     display: inline;
 }
-#table {
+#table{
     width: 100%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
 } 
-#table td, th {
+#table td, th{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
-#table tr:nth-child(even) {
+#table tr:nth-child(even){
     background-color: #eeeeee;
 }
 #table p{
@@ -53,7 +61,7 @@
     border: none;
     background-color: #eee;
 }
-#table p textarea {
+#table p textarea{
     flex: 1;
     border: 1px #dddddd solid;
     background-color: #eee;
@@ -67,14 +75,25 @@
 	box-sizing: border-box;
 	width: 100%;
 }
-
 #u_read{
     width: 183px;
 }
 
-th{
+#dupTable{
+    width: 85%;
+    margin: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.td-title{
+    width: 10px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+.dup-border-right{
+    border-right: 1px solid black;
     text-align: center;
 }
-select {
-    padding: 1px;   
+.dup-border-bottom{
+    border-bottom: 1px solid black;
 }

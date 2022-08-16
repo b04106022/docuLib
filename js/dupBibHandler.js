@@ -5,6 +5,7 @@ $(document).ready(function(){
 // $('#dupTable').html(tableHtml);
 
 $('button').click(function(){
+    console.log('click');
     console.log(getCheckedboxArray());
 });
 function getCheckedboxArray(){

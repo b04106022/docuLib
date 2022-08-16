@@ -144,7 +144,7 @@
                         <p class="text-center">請選擇匯入方式</p>
                         <p class="text-center">
                             <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importJsonModal" data-bs-dismiss="modal">　匯入 MetaLib Json 檔案　</a><br><br>
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ImportDLBSModal" data-bs-dismiss="modal">自臺大佛學數位圖書館批次匯入</a>
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importDLBSModal" data-bs-dismiss="modal">自臺大佛學數位圖書館批次匯入</a>
                         </p>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
             </div>
         </div>
         <!-- Import from DLBS Modal -->
-        <div class="modal fade" id="ImportDLBSModal" tabindex="-1">
+        <div class="modal fade" id="importDLBSModal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -184,9 +184,34 @@
                             3. 勾選欲匯入的書目<br>
                             4. 點擊「書目匯出」按鈕<br>
                             5. 點擊「匯出至 MetaLib」按鈕<br>
-                            6. 查核重複書目<br>
+                            6. 重複書目匯入確認<br>
                             7. 完成匯入！
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dup Bibs Modal -->
+        <div class="modal fade" id="dupBibsModal" data-bs-backdrop="static" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">重複書目匯入確認</h5>
+                    </div>
+                    <div class="modal-body margin-auto"><br>
+                        <p>系統偵測到以下書目可能已存在於 MetaLib 中。<br>
+                           下為已存在書目詳情，請確認是否仍欲匯入：<br>
+                           <ul>
+                              <li>若欲匯入，請選取仍欲匯入書目，並點擊下方「確認」按鈕。</li>
+                              <li>若無欲匯入書目，請點擊下方「取消」按鈕。<br>取消匯入重複書目，不會影響未重複書目的匯入。</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <table id="dupTable">
+                    </table><br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="addDupData()">確認</button>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
-        p{
+        p, ul{
             width: 80%;
             margin: auto;
         }
@@ -17,12 +17,24 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
-        .td-title{
-            white-space: nowrap;
-            vertical-align: top;
+        button{
+            background-color: #4CAF50; /* Green */
+            border: none;
+            border-radius: 4px;
+            color: white;
+            padding: 5px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
         }
         .center{
             text-align: center;
+        }
+        .td-title{
+            white-space: nowrap;
+            vertical-align: top;
         }
         .td-border-right{
             border-right: 1px solid black;
@@ -33,11 +45,21 @@
     </style>
 </head>
 <body>
-    <p>以下書目，請確認是否仍要匯入。仍要匯入請勾選。</p>
+    <br>
+    <p>系統偵測到以下書目可能已存在於 MetaLib 中。<br>
+       下為已存在於 MetaLib 的書目詳情，請確認是否仍欲匯入書目。<br><br>
+       <ul>
+        <li>若欲匯入，請選取仍要匯入的書目，並點擊「匯入」按鈕。</li>
+        <li>若無欲匯入書目，請關閉視窗即可。</li>
+       </ul>
+    </p><br>
+
     <table id="dupTable">
     </table>
 
-    <button type="submit">匯入</button>
+    <div class="center">
+        <button class='btn' type="submit">匯入</button>
+    </div>
     <script src="js/dupBibHandler.js"></script>         
 </body>
 </html>

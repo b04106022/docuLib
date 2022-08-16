@@ -42,7 +42,7 @@ function editFolderName(){
 
 function addDataToFolder(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray();
+    let checkedboxArray = getCheckedboxArray('c');
     const folderSelector = document.querySelector('#folderSelector');
     if(checkedboxArray.length == 0 &&　folderSelector.value == ""){
         alert("請選取欲操作的書目與資料夾");
@@ -80,7 +80,7 @@ function addDataToFolder(){
 }
 function deleteData(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray();
+    let checkedboxArray = getCheckedboxArray('c');
     if(checkedboxArray.length > 0){
         if(currentFolder == "全部書目"){
             let alertBib = "";
@@ -127,9 +127,9 @@ function check_all(obj, cName){
         checkboxs[i].checked = obj.checked;
     }
 }
-function getCheckedboxArray(){
+function getCheckedboxArray(name){
     let checkedboxArray = [];
-    let checkboxs = document.getElementsByName('c');
+    let checkboxs = document.getElementsByName(name);
     for(let i=0; i<checkboxs.length; i++){
         if(checkboxs[i].checked){
             checkedboxArray.push(checkboxs[i].value);
@@ -237,64 +237,39 @@ function jsonFile(event) {
 }
 function checkDupData(temp_data){
     // record the duplicate bibs & import bibs that are not duplicate
-    let dupArray = [];
-    let pushed = [];
-
+    let dupDict = {};
     for(let i=0; i<temp_data.length; i++){
         if(data.some(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title)){ 
             let result = data.filter(el => el.filename === temp_data[i].filename || el.title === temp_data[i].title);
-            dupArray.push(...result);
+            dupDict[i] = result;
         }else{
             data.push(temp_data[i]);
-            pushed.push(i)
         }
     }
+
     // check if user is importing duplicate bibs
-    if(dupArray.length > 0){
-        // generatae dup table
-        let dupTableHtml = '';
+    let keys = Object.keys(dupDict);
+    if(keys.length > 0){
+        let dupTableHtml = "";
+        for(let i=0; i<keys.length; i++){
+            dupTableHtml += `<tr><td rowspan='${9+(dupDict[i].length-1)*8}' width=5% class='dup-border-right center'><input value=${i} type="checkbox" name='dup_c'></td>
+                             <td colspan='2' class="line-height-30px dup-border-bottom">　${i+1}. ${temp_data[i].title}<br></td></tr>`;
 
-        let j = 0;
-        for(let i=0; i<temp_data.length; i++){
-            if(!pushed.includes(i)){
-                dupTableHtml += `<tr><td rowspan=9 width=4% class='td-border-right center'><input value=${i} type="checkbox" name='c'></td>
-                                 <td colspan=2>書目「` + temp_data[i].title + `」已存在。<br>下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？<br><br></td></tr>`;
+            for(let j=0; j<dupDict[i].length; j++){
+                msg  = `<tr><td class='td-title'>　文獻題名：</td><td>${dupDict[i][j].title}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　作者：</td><td>${dupDict[i][j].xml_metadata.Udef_author}</td></tr>`;
+                msg += `<tr><td class='td-title'>　出版日期：</td><td>${dupDict[i][j].xml_metadata.Udef_publish_date}</td></tr>`;
+                msg += `<tr><td class='td-title'>　出處題名：</td><td>${dupDict[i][j].xml_metadata.Udef_publisher.text}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　關鍵字：</td><td>${dupDict[i][j].xml_metadata.Udef_keywords}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　摘要：</td><td>${dupDict[i][j].doc_content.Paragraph}</td></tr>`;
+                msg += `<tr><td class='td-title'>　　　筆記：</td><td>${dupDict[i][j].doculib.note}</td></tr>`;
+                msg += `<tr class='dup-border-bottom'><td class='td-title'>　　資料夾：</td><td>${arrToStr(dupDict[i][j].doculib.folder)}</td></tr>`;
 
-                msg  = `<tr><td class='td-title'>　文獻題名：</td><td>${dupArray[j].title}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　作者：</td><td>${dupArray[j].xml_metadata.Udef_author}</td></tr>`;
-                msg += `<tr><td class='td-title'>　出版日期：</td><td>${dupArray[j].xml_metadata.Udef_publish_date}</td></tr>`;
-                msg += `<tr><td class='td-title'>　出處題名：</td><td>${dupArray[j].xml_metadata.Udef_publisher.text}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　關鍵字：</td><td>${dupArray[j].xml_metadata.Udef_keywords}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　摘要：</td><td>${dupArray[j].doc_content.Paragraph}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　筆記：</td><td>${dupArray[j].doculib.note}</td></tr>`;
-                msg += `<tr class='tr-border-bottom'><td class='td-title'>　　資料夾：</td><td>${arrToStr(dupArray[j].doculib.folder)}</td></tr>`;
-                j++;
-        
                 dupTableHtml += msg;
-                console.log(dupTableHtml)
             }
         }
-
-        var newwin = window.open("dupBibs.html");
-        newwin.onload = () => {
-            newwin.data = data;
-            newwin.temp_data = temp_data;
-            newwin.dupTableHtml = dupTableHtml;
-        };
-
-        // let j = 0;
-        // for(let i=0; i<temp_data.length; i++){
-        //     if(!pushed.includes(i)){
-        //         msg = '書目「' + temp_data[i].title + '」已存在。\n下為已存在於 MetaLib 的書目詳情，請確認是否仍要匯入？\n\n';
-        //         msg += `文獻題名：${dupArray[j].title}\n`;
-        //         msg += `作者：${dupArray[j].xml_metadata.Udef_author}\n`;
-        //         msg += `出版日期：${dupArray[j].xml_metadata.Udef_publish_date}\n`;
-        //         msg += `出處題名：${dupArray[j].xml_metadata.Udef_publisher.text}\n`;
-        //         msg += `關鍵字：${dupArray[j].xml_metadata.Udef_keywords}\n`;
-        //         msg += `摘要：${dupArray[j].doc_content.Paragraph}\n`;
-        //         msg += `筆記：${dupArray[j].doculib.note}\n`;
-        //         msg += `資料夾：${arrToStr(dupArray[j].doculib.folder)}`;
-        //         j++;
+        $('#dupTable').html(dupTableHtml);
+        $('#dupBibsModal').modal('show');
                 
         //         if(confirm(msg)){
         //             let suffix = getFilenameSuffix(temp_data[i].filename);
@@ -305,6 +280,9 @@ function checkDupData(temp_data){
         //     }
         // }
     }
+}
+function addDupData(){
+    console.log(getCheckedboxArray('dup_c'))
 }
 function getFilenameSuffix(filename){
     let suffix = 'd';
@@ -335,7 +313,7 @@ function dlbs(dlbs){
     }
     localStorage.setItem('userData', JSON.stringify([data, folder]));
     // alert('匯入完成，回到全部書目列表');
-    $('#ImportDLBSModal').modal('hide');
+    $('#importDLBSModal').modal('hide');
     renderFolder();
     renderData('全部書目')
 }
@@ -680,7 +658,7 @@ function downloadJson(){
 
 function jsonToCsv(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray();
+    let checkedboxArray = getCheckedboxArray('c');
     if(checkedboxArray.length == 0){
         checkedboxArray = getTrArray(currentFolder);
     }
@@ -737,7 +715,7 @@ function downloadXML(){
 }
 function jsonToDocuXML(){
     saveToJson();
-    let checkedboxArray = getCheckedboxArray();
+    let checkedboxArray = getCheckedboxArray('c');
     if(checkedboxArray.length == 0){
         checkedboxArray = getTrArray(currentFolder);
     }
