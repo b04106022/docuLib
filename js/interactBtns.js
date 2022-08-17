@@ -273,14 +273,6 @@ function checkDupData(temp_data){
         }
         $('#dupTable').html(dupTableHtml);
         $('#dupBibsModal').modal('show');   
-        //         if(confirm(msg)){
-        //             let suffix = getFilenameSuffix(temp_data[i].filename);
-        //             temp_data[i].filename += suffix;
-        //             data.push(temp_data[i]);
-        //             // console.log(temp_data[i])
-        //         }
-        //     }
-        // }
     }else{
         temp_data = [];
         alert('匯入完成，回到全部書目列表');
@@ -290,10 +282,13 @@ function checkDupData(temp_data){
 function importDupData(){
     let dupArray = getCheckedboxArray('dup_c');
     for(let i=0; i<dupArray.length; i++){
-        let suffix = getFilenameSuffix(temp_data[i].filename);
-        temp_data[i].filename += suffix;
+        if(temp_data[i].filename.startsWith('user_')){
+            temp_data[i].filename = 'user_' + getUserDataNumber();
+        }else{
+            let suffix = getFilenameSuffix(temp_data[i].filename);
+            temp_data[i].filename += suffix;
+        }
         data.push(temp_data[i]);
-        console.log(temp_data[i].filename);
     }
     temp_data = [];
     $('#dupBibsModal').modal('hide');
