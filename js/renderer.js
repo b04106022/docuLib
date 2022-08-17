@@ -114,6 +114,7 @@ $(function(){
                     }
                     renderFolder();
                     renderData('全部書目');
+                    saveToJson();
                     alert(delFolder + " 已刪除，回到全部書目列表");
                 }
             }  
