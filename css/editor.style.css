@@ -5,7 +5,7 @@
     font-weight: bold;
     font-size: 17px;
 }
-.hide {
+.hide{
     display: none;
 }
 .ml-12{
@@ -20,12 +20,11 @@
 .margin-auto{
     margin: auto;
 }
+.center{
+    text-align: center;
+}
 .cursor{
     cursor: pointer;
- }
-
-th{
-    text-align: center;
 }
 select{
     padding: 1px;   
@@ -44,10 +43,14 @@ select{
     width: 100%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
-} 
-#table td, th{
+}
+#table th{
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
+    padding: 8px;
+}
+#table td{
+    border: 1px solid #dddddd;
     padding: 8px;
 }
 #table tr:nth-child(even){
@@ -77,6 +80,11 @@ select{
 }
 #u_read{
     width: 183px;
+}
+#msg{
+    color:red;
+    font-size:16px;
+    font-weight:bold;
 }
 
 #dupTable{

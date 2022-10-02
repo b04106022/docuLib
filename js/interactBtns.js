@@ -255,18 +255,18 @@ function checkDupData(temp_data){
     if(keys.length > 0){
         let dupTableHtml = "";
         for(let i=0; i<keys.length; i++){
-            dupTableHtml += `<tr><td rowspan='${9+(dupDict[keys[i]].length-1)*8}' width=5% class='dup-border-right center'><input value=${i} type="checkbox" name='dup_c'></td>
-                             <td colspan='2' class="line-height-30px dup-border-bottom">　${i+1}. ${temp_data[i].title}<br></td></tr>`;
+            dupTableHtml += `<tr><td rowspan='${9+(dupDict[keys[i]].length-1)*8}' width=5% class='dup-border-right'><input value=${i} type="checkbox" name='dup_c'></td>
+                             <td class='line-height-30px dup-border-right dup-border-bottom'>新匯書目</td><td colspan='2' class="line-height-30px dup-border-bottom">　${temp_data[keys[i]].title}<br></td></tr>`;
 
             for(let j=0; j<dupDict[keys[i]].length; j++){
-                msg  = `<tr><td class='td-title'>　文獻題名：</td><td>${dupDict[keys[i]][j].title}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　作者：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_author}</td></tr>`;
-                msg += `<tr><td class='td-title'>　出版日期：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_publish_date}</td></tr>`;
-                msg += `<tr><td class='td-title'>　出處題名：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_publisher.text}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　關鍵字：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_keywords}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　摘要：</td><td>${dupDict[keys[i]][j].doc_content.Paragraph}</td></tr>`;
-                msg += `<tr><td class='td-title'>　　　筆記：</td><td>${dupDict[keys[i]][j].doculib.note}</td></tr>`;
-                msg += `<tr class='dup-border-bottom'><td class='td-title'>　　資料夾：</td><td>${arrToStr(dupDict[keys[i]][j].doculib.folder)}</td></tr>`;
+                msg  = `<tr><td></td><td class='td-title'>　文獻題名：</td><td>${dupDict[keys[i]][j].title}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　　　作者：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_author}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　出版日期：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_publish_date}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　出處題名：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_publisher.text}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　　關鍵字：</td><td>${dupDict[keys[i]][j].xml_metadata.Udef_keywords}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　　　摘要：</td><td>${dupDict[keys[i]][j].doc_content.Paragraph}</td></tr>`;
+                msg += `<tr><td></td><td class='td-title'>　　　筆記：</td><td>${dupDict[keys[i]][j].doculib.note}</td></tr>`;
+                msg += `<tr class='dup-border-bottom'><td></td><td class='td-title'>　　資料夾：</td><td>${arrToStr(dupDict[keys[i]][j].doculib.folder)}</td></tr>`;
 
                 dupTableHtml += msg;
             }
@@ -279,16 +279,26 @@ function checkDupData(temp_data){
         localStorage.setItem('userData', JSON.stringify([data, folder]));
     }
 }
+function checkDupBibLen(){
+    let dupArray = getCheckedboxArray('dup_c');
+    if(dupArray.length==0){
+        alert('請先選擇欲再次匯入的書目');
+    }else{
+        importDupData();
+    }
+}
 function importDupData(){
     let dupArray = getCheckedboxArray('dup_c');
+    console.log(dupArray)
+    console.log(temp_data)
     for(let i=0; i<dupArray.length; i++){
-        if(temp_data[i].filename.startsWith('user_')){
-            temp_data[i].filename = 'user_' + getUserDataNumber();
+        if(temp_data[dupArray[i]].filename.startsWith('user_')){
+            temp_data[dupArray[i]].filename = 'user_' + getUserDataNumber();
         }else{
             let suffix = getFilenameSuffix(temp_data[i].filename);
-            temp_data[i].filename += suffix;
+            temp_data[dupArray[i]].filename += suffix;
         }
-        data.push(temp_data[i]);
+        data.push(temp_data[dupArray[i]]);
     }
     temp_data = [];
     $('#dupBibsModal').modal('hide');
@@ -345,6 +355,11 @@ function cleanDLBSData(data){
             item.xml_metadata.Udef_author6 = {};
         }
 
+        // Udef_Udef_fulltextSrc.a
+        if(item.xml_metadata.Udef_fulltextSrc.a.startsWith('/FULLTEXT/')){
+            item.xml_metadata.Udef_fulltextSrc.a = 'http://buddhism.lib.ntu.edu.tw/' + item.xml_metadata.Udef_fulltextSrc.a;
+        }
+
         // topic, tag, important
         item.doculib.topic = {};
         item.doculib.tag = {};
@@ -355,7 +370,7 @@ function cleanDLBSData(data){
 
 // check addBibModal: dup or null
 $('#u_title').change(function(){
-    checkUserBib($('#u_title').val());
+    checkUserBib($('#u_title').val().trim());
 });
 function checkUserBib(u_title){
     if(data.some(el => el.title === u_title)){ 
@@ -405,7 +420,7 @@ function addBibByUser(){
 
     let userDataObj = {
         "filename": userDataNumber,
-        "title": $('#u_title').val(),
+        "title": $('#u_title').val().trim(),
         "doc_source": "User Imported",
         "xml_metadata": {
             "Udef_refSrc": {

@@ -33,6 +33,10 @@ $(document).ready(function(){
         }
     }
 
+    if(data.length==0){
+        $('#guideModal').modal('show');
+    }
+
     doculibInitialize();
 })
 window.addEventListener("beforeunload", function(e) {
@@ -41,8 +45,6 @@ window.addEventListener("beforeunload", function(e) {
 });
 
 function doculibInitialize(){
-    $('#guideModal').modal('show');
-    
     const tbody = document.querySelector('#tbody');
     let previousCell = null;
     tbody.addEventListener('click', function(e){
@@ -124,16 +126,18 @@ $(function(){
 
 // render folderlist in addBibModal
 function renderFolderList(){
-    let checkboxHtml = ''
+    let checkboxHtml = '';
     if(folder.length > 0){
         folder.forEach(function(folderName){
-            checkboxHtml += `<input type="checkbox" name="importFolder" value="${folderName}"> ${folderName}<br>`
+            checkboxHtml += `<input type="checkbox" id="checkedBtn" onclick="return false;" checked> 全部書目<br>`;
+            checkboxHtml += `<input type="checkbox" name="importFolder" value="${folderName}"> ${folderName}<br>`;
         })
-        $('#u_folder_p').html('匯入資料夾<br>' + checkboxHtml)
+        $('#u_folder_p').html('放入資料夾<br>' + checkboxHtml);
     }else{
-        $('#u_folder_p').html('')
+        $('#u_folder_p').html('');
     }
 }
+
 
 function renderFolder(){
     counter = getCounter();
@@ -218,7 +222,7 @@ function renderData(foldername){
             // Metatags: author, keyword, topic, social tagging, doctypes, docclass
             content += `
                 <tr id="${index}">
-                    <td><input type="checkbox" name='c' value="${index}"></td>
+                    <td class="center"><input type="checkbox" name='c' value="${index}"></td>
                     <td data-editable="true">${item.title}</td>
                     <td data-editable="true">${item.xml_metadata.Udef_author}</td>
                     <td auto-edit="true">${item.xml_metadata.Udef_publish_date.substring(0,4)}</td>
@@ -228,13 +232,13 @@ function renderData(foldername){
                     <td data-editable="true" class="folderLevel">${item.doculib.tag[foldername]}</td>
                     <td class="folderLevel"><input type="checkbox" name='important' value="重要" ${importantChecked}></td>
                     <td class="folderLevel-hide">${folderContent}</td>
-                    <td>
+                    <td class="center">
                     <select>
                         ${readOption}
                     <select>
                     </td>
-                    <td><a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#noteModal" id='noteBtn' onclick="renderNoteData('${index}')">edit</a>
-                    </td>
+                    <td class="center"><a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#noteModal" id='noteBtn' onclick="renderNoteData('${index}')">edit</a>
+                    </td class="center">
                     <td><button class="btn btn-light" value="hiddenRow_${index}">+</button></td>
                 </tr>
                 <tr class="hide" id="hiddenRow_${index}">
